@@ -3,10 +3,5 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    public List<Card> cards;
-
-    public Deck()
-    {
-        cards = new List<Card>(40);
-    }
+    public List<GameObject> cards;
 }

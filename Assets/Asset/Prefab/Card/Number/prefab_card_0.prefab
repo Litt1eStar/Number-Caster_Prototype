@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3669502265252730272}
-  - component: {fileID: 1260983549009950917}
+  - component: {fileID: -3178930117981841856}
   m_Layer: 0
   m_Name: prefab_card_0
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 4331617606647844255}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1260983549009950917
+--- !u!114 &-3178930117981841856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
