@@ -28,4 +28,8 @@ public class Deck : MonoBehaviour
         }
     }
 
+    public void SendCardTo(Player target, Card cardToSend)
+    {
+
+    }
 }
