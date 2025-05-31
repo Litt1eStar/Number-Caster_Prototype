@@ -36,6 +36,8 @@ public class DeckLayoutManagement : MonoBehaviour
     {
         Transform deckTransform = side == PlayerSide.Player1 ? player1_deckPosition : player2_deckPosition;
         working_cards = side == PlayerSide.Player1 ? cards_player01 : cards_player02;
+        card.GetComponent<Card>().SetOwner(side);
+
         card.transform.SetParent(deckTransform);
         card.transform.localRotation = Quaternion.identity;
         working_cards.Add(card.transform);
