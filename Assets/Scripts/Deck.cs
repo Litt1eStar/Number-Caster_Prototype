@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,8 +29,9 @@ public class Deck : MonoBehaviour
         }
     }
 
-    public void SendCardTo(Player target, Card cardToSend)
+    public GameObject DrawCard()
     {
-
+        Debug.Log("Drawn card from deck.");
+        return null;
     }
 }

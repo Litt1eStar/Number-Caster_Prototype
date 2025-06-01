@@ -1,17 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine.UIElements;
 using System.Collections;
 using DG.Tweening;
 public class DeckLayoutManagement : MonoBehaviour
 {
+    [SerializeField] private Deck deck;
+
     public float cardSpacing = 0.5f;    
     public float animationSpeed = 5.0f;
     public float rotateSpeed = 10f;
     public float xGap = 0.05f;
 
-    public PlayerSide side; //for test
+    public Turn side; //for test
 
     public Transform player1_deckPosition;
 
@@ -20,8 +20,7 @@ public class DeckLayoutManagement : MonoBehaviour
 
     public GameObject newCard;
     
-    private List<Transform> cards_player01 = new List<Transform>();
-    private List<Transform> working_cards = new List<Transform>();
+    private List<Transform> handOfPlayer = new List<Transform>();
 
     public Camera mainCamera;
     private Transform draggedCard;
@@ -31,19 +30,48 @@ public class DeckLayoutManagement : MonoBehaviour
 
     private void Start()
     {
-        side = PlayerSide.Player1;
+        side = Turn.Player1;
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject m_newCard = Instantiate(newCard);
-            AddCard(m_newCard);
+            DrawCard(Turn.Player1, deck);
+ /*           GameObject m_newCard = Instantiate(newCard);
+            AddCard(m_newCard);*/
         }
         HandleDragAndDrop();
         UpdateCardPositions();
     }
+    public void DrawCard(Turn sender, Deck deckOfSender)
+    {
+        Transform destination = sender == Turn.Player1 ? player1_deckPosition : null; //null for now, can be set to Player2's deck position later
+        GameObject drawedCard = deckOfSender.DrawCard();
+        if (drawedCard != null)
+        {
+            AddCard(drawedCard);
+        }
+    }
+    public void AddCard(GameObject card)
+    {
+        card.GetComponent<Card>().SetOwner(side);
+        card.transform.SetParent(player1_deckPosition);
 
+        card.transform.DOLocalRotate(new Vector3(0, 0, 180), rotateSpeed).SetEase(Ease.OutQuart);
+
+        handOfPlayer.Add(card.transform);
+        UpdateCardPositions();
+    }
+
+
+    public void RemoveCard(GameObject card)
+    {
+        if (handOfPlayer.Contains(card.transform))
+        {
+            handOfPlayer.Remove(card.transform);
+            Destroy(card);
+        }
+    }
     void HandleDragAndDrop()
     {
         if(Input.GetMouseButtonDown(0) && draggedCard == null)
@@ -81,10 +109,10 @@ public class DeckLayoutManagement : MonoBehaviour
         {
             Transform hitCard = hit.collider.transform;
 
-            if (working_cards.Contains(hitCard))
+            if (handOfPlayer.Contains(hitCard))
             {
                 draggedCard = hitCard;
-                draggedCardOriginalIndex = working_cards.IndexOf(draggedCard);
+                draggedCardOriginalIndex = handOfPlayer.IndexOf(draggedCard);
                 draggedCardOriginalPosition = draggedCard.localPosition;
 
                 Vector3 liftedPos = draggedCardOriginalPosition;
@@ -116,7 +144,7 @@ public class DeckLayoutManagement : MonoBehaviour
     {
         if(insertIndex != draggedCardOriginalIndex)
         {
-            SwapCard(working_cards, draggedCard, draggedCardOriginalIndex, insertIndex);
+            SwapCard(handOfPlayer, draggedCard, draggedCardOriginalIndex, insertIndex);
 
             Debug.Log($"Card moved from index {draggedCardOriginalIndex} to {insertIndex}.");
         }
@@ -138,7 +166,7 @@ public class DeckLayoutManagement : MonoBehaviour
         //Otherwise, loop to working card to compare z position of dragged card with other cards
         //And update insert index accordingly
         //Finally, clamp insert index to be within the range of 0 to working_cards.Count - 1
-        if(working_cards.Count <= 1)
+        if(handOfPlayer.Count <= 1)
         {
             insertIndex = 0; 
             return;
@@ -147,9 +175,9 @@ public class DeckLayoutManagement : MonoBehaviour
         float dragZ = draggedCard.localPosition.z;
         insertIndex = 0;
 
-        for (int i = 0; i < working_cards.Count; i++)
+        for (int i = 0; i < handOfPlayer.Count; i++)
         {
-            if (working_cards[i] == draggedCard) continue;
+            if (handOfPlayer[i] == draggedCard) continue;
             Vector3 targetPos = CalculateTargetPosition(i);
             if(dragZ > targetPos.z)
             {
@@ -157,11 +185,11 @@ public class DeckLayoutManagement : MonoBehaviour
             }
         }
 
-        insertIndex = Mathf.Clamp(insertIndex, 0, working_cards.Count - 1);
+        insertIndex = Mathf.Clamp(insertIndex, 0, handOfPlayer.Count - 1);
     }
     Vector3 CalculateTargetPosition(int index)
     {
-        float totalWidth = (working_cards.Count - 1) * cardSpacing;
+        float totalWidth = (handOfPlayer.Count - 1) * cardSpacing;
         float startZ = -totalWidth / 2;
         float xOffset = index * xGap;
 
@@ -169,59 +197,24 @@ public class DeckLayoutManagement : MonoBehaviour
     }
     void UpdateCardPositions()
     {
-        float totalWidth = (working_cards.Count - 1) * cardSpacing;
+        float totalWidth = (handOfPlayer.Count - 1) * cardSpacing;
         float startX = -totalWidth / 2;
 
-        for (int i = 0; i < working_cards.Count; i++)
+        for (int i = 0; i < handOfPlayer.Count; i++)
         {
-            if (working_cards[i] == draggedCard) continue;
+            if (handOfPlayer[i] == draggedCard) continue;
 
             Vector3 targetPos = CalculateTargetPosition(i);
 
-            working_cards[i].localPosition = Vector3.Lerp(working_cards[i].localPosition, targetPos, Time.deltaTime * animationSpeed);
-            if (working_cards[i] != draggedCard)
+            handOfPlayer[i].localPosition = Vector3.Lerp(handOfPlayer[i].localPosition, targetPos, Time.deltaTime * animationSpeed);
+            if (handOfPlayer[i] != draggedCard)
             {
-                working_cards[i].SetSiblingIndex(i);
+                handOfPlayer[i].SetSiblingIndex(i);
             }
         }
     }
 
-    public void AddCard(GameObject card)
-    {   
-        card.GetComponent<Card>().SetOwner(side);
-        card.transform.SetParent(player1_deckPosition);
 
-        card.transform.DOLocalRotate(new Vector3(0, 0, 180), rotateSpeed).SetEase(Ease.OutQuart);
 
-        working_cards.Add(card.transform);
-        UpdateCardPositions();
-    }
-
-    IEnumerator RotateCard(Transform cardTransform)
-    {
-        Quaternion startRotation = cardTransform.rotation;
-        Quaternion targetRotation = side == PlayerSide.Player1 ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
-        float elapsed = 0f;
-        float duration = 1f;
-
-        while(elapsed < duration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / duration;
-            cardTransform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
-            yield return null;
-        }
-
-        cardTransform.localRotation = targetRotation;
-    }
-
-    public void RemoveCard(GameObject card)
-    {
-        if (working_cards.Contains(card.transform))
-        {
-            working_cards.Remove(card.transform);
-            Destroy(card);
-        }
-    }
 
 }

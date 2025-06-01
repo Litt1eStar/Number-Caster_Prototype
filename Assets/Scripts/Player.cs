@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum PlayerSide
+public enum Turn
 {
     Player1,
     Player2 
@@ -8,5 +8,5 @@ public enum PlayerSide
 public class Player : MonoBehaviour
 {
     public Transform handParent;
-    public PlayerSide playerSide;
+    public Turn playerSide;
 }
