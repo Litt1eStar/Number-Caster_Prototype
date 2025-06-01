@@ -6,8 +6,9 @@ public class Deck : MonoBehaviour
 {
     public List<GameObject> cards;
     public Transform deckParent;
-
     [SerializeField] private float cardSpacing = 0.04f;
+
+    private Queue<GameObject> deckQueue = new Queue<GameObject>();   
 
     Vector3 pos;
 
@@ -26,12 +27,16 @@ public class Deck : MonoBehaviour
             cardObj.transform.rotation = Quaternion.Euler(0, 0, 90);
             cardObj.transform.position = pos + new Vector3(0, cardSpacing, 0);
             pos = cardObj.transform.position;
+
+            deckQueue.Enqueue(cardObj);
         }
     }
 
     public GameObject DrawCard()
     {
-        Debug.Log("Drawn card from deck.");
-        return null;
+        if(deckQueue.Count <= 0) return null;
+
+        GameObject drawnCard = deckQueue.Dequeue();
+        return drawnCard;
     }
 }
