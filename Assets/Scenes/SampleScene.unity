@@ -778,11 +778,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardSpacing: 1
   animationSpeed: 5
-  yGap: 0.05
+  xGap: 0.05
   side: 0
   player1_deckPosition: {fileID: 378565211}
   player2_deckPosition: {fileID: 309905784}
+  dragHeight: 1
+  cardLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   newCard: {fileID: 4909887123431069279, guid: 952e75ae62b321241925fcf9d1e9f961, type: 3}
+  mainCamera: {fileID: 1400754184}
 --- !u!4 &1027425581
 Transform:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5907098768859944296}
   - component: {fileID: 779483027753325485}
+  - component: {fileID: 87450460376890737}
   m_Layer: 0
   m_Name: prefab_card_4
   m_TagString: Untagged
@@ -45,6 +46,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453443a4cf99f0d4cb6ce7ecc1ff6284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: 0
+--- !u!65 &87450460376890737
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889963029689645481}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12, y: 2.88, z: 2.09}
+  m_Center: {x: 0.02, y: 0, z: 0}
 --- !u!1001 &5016083239042133252
 PrefabInstance:
   m_ObjectHideFlags: 0
