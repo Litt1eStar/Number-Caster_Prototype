@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
-
+using System.Collections;
+using DG.Tweening;
 public class DeckLayoutManagement : MonoBehaviour
 {
     public float cardSpacing = 0.5f;    
     public float animationSpeed = 5.0f;
+    public float rotateSpeed = 10f;
     public float xGap = 0.05f;
 
     public PlayerSide side; //for test
@@ -188,10 +190,29 @@ public class DeckLayoutManagement : MonoBehaviour
     {   
         card.GetComponent<Card>().SetOwner(side);
         card.transform.SetParent(player1_deckPosition);
-        card.transform.localRotation = Quaternion.identity;
+
+        card.transform.DOLocalRotate(new Vector3(0, 0, 180), rotateSpeed).SetEase(Ease.OutQuart);
 
         working_cards.Add(card.transform);
         UpdateCardPositions();
+    }
+
+    IEnumerator RotateCard(Transform cardTransform)
+    {
+        Quaternion startRotation = cardTransform.rotation;
+        Quaternion targetRotation = side == PlayerSide.Player1 ? Quaternion.Euler(0, 180, 0) : Quaternion.Euler(0, 0, 0);
+        float elapsed = 0f;
+        float duration = 1f;
+
+        while(elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            cardTransform.rotation = Quaternion.Lerp(startRotation, targetRotation, t);
+            yield return null;
+        }
+
+        cardTransform.localRotation = targetRotation;
     }
 
     public void RemoveCard(GameObject card)

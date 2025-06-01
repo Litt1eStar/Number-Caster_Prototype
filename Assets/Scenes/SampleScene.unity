@@ -777,7 +777,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardSpacing: 1
-  animationSpeed: 5
+  animationSpeed: 3
+  rotateSpeed: 0.75
   xGap: 0.05
   side: 0
   player1_deckPosition: {fileID: 378565211}
