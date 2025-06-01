@@ -781,7 +781,6 @@ MonoBehaviour:
   xGap: 0.05
   side: 0
   player1_deckPosition: {fileID: 378565211}
-  player2_deckPosition: {fileID: 309905784}
   dragHeight: 1
   cardLayerMask:
     serializedVersion: 2

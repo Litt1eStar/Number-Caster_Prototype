@@ -65,6 +65,12 @@ public class DeckLayoutManagement : MonoBehaviour
 
     void StartDrag()
     {
+        //If player click on a card, start dragging it
+        //To drag a card, we need to find the card under the mouse cursor 
+        //using raycast to achieve this action
+        //If the card is found, we keep a reference of position and index of the card
+        //Then lift it up
+
         Vector3 mousePos = Input.mousePosition;
         Ray ray = mainCamera.ScreenPointToRay(mousePos);
         RaycastHit hit;
@@ -89,6 +95,10 @@ public class DeckLayoutManagement : MonoBehaviour
     }
     void ContinueDrag()
     {
+        //If we are dragging a card, we need to update its position
+        //We will use the mouse position to calculate the new position of the card
+        //and set x position to make card appear on top of other cards
+        //Then calculate the insert index based on the position of dragged card
         Vector3 mousePos = Input.mousePosition; 
         mousePos.z = mainCamera.WorldToScreenPoint(draggedCard.position).z;
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
@@ -97,15 +107,14 @@ public class DeckLayoutManagement : MonoBehaviour
         localPos.x = 0.03f;
 
         draggedCard.localPosition = localPos;
-        draggedCard.SetAsFirstSibling();
+
         CalculateInsertIndex();
     }
     void EndDrag()
     {
         if(insertIndex != draggedCardOriginalIndex)
         {
-            working_cards.RemoveAt(draggedCardOriginalIndex);
-            working_cards.Insert(insertIndex, draggedCard);
+            SwapCard(working_cards, draggedCard, draggedCardOriginalIndex, insertIndex);
 
             Debug.Log($"Card moved from index {draggedCardOriginalIndex} to {insertIndex}.");
         }
@@ -115,8 +124,18 @@ public class DeckLayoutManagement : MonoBehaviour
         insertIndex = -1;
     }
 
+    void SwapCard(List<Transform> container, Transform objToInsert, int from, int to)
+    {
+        container.RemoveAt(from);
+        container.Insert(to, objToInsert);
+    }
     void CalculateInsertIndex()
     {
+        //If amount of card on hand <= 1
+        //Then we can insert at index 0
+        //Otherwise, loop to working card to compare z position of dragged card with other cards
+        //And update insert index accordingly
+        //Finally, clamp insert index to be within the range of 0 to working_cards.Count - 1
         if(working_cards.Count <= 1)
         {
             insertIndex = 0; 
