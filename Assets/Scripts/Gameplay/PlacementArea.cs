@@ -59,7 +59,6 @@ public class PlacementArea : MonoBehaviour
         {
             ActionManager.Instance.EnterPlacementArea();
             isEnter = true;
-            Debug.Log("Enter Placement Area");
         }
     }
 
@@ -69,7 +68,6 @@ public class PlacementArea : MonoBehaviour
         {
             ActionManager.Instance.ExitPlacementArea();
             isEnter = false;
-            Debug.Log("Exit Placement Area");
         }
     }
 
@@ -108,7 +106,8 @@ public class PlacementArea : MonoBehaviour
     {
         if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
         {
-
+            //Cap Value of result
+            //Use result to Attack Enemy
         }
     }
 
@@ -116,7 +115,8 @@ public class PlacementArea : MonoBehaviour
     {
         if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
         {
-
+            //Cap Value of result
+            //Use result to Create Shield for Player
         }
     }
 }
