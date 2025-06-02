@@ -33,23 +33,25 @@ public class DeckLayoutManagement : MonoBehaviour
     }
     void Update()
     {
+        //FOR TESTING PURPOSE
         if (Input.GetKeyDown(KeyCode.Space))
         {
             DrawCard(Turn.Player1, deck);
- /*           GameObject m_newCard = Instantiate(newCard);
-            AddCard(m_newCard);*/
         }
+
         HandleDragAndDrop();
         UpdateCardPositions();
     }
+    void HandleDragAndDrop()
+    {
+        if (Input.GetMouseButtonDown(0) && draggedCard == null) StartDrag();
+        if (Input.GetMouseButton(0) && draggedCard != null) ContinueDrag();
+        if (Input.GetMouseButtonUp(0) && draggedCard != null) EndDrag();   
+    }
     public void DrawCard(Turn sender, Deck deckOfSender)
     {
-        Transform destination = sender == Turn.Player1 ? player1_deckPosition : null; //null for now, can be set to Player2's deck position later
         GameObject drawedCard = deckOfSender.DrawCard();
-        if (drawedCard != null)
-        {
-            AddCard(drawedCard);
-        }
+        if (drawedCard != null) AddCard(drawedCard);
     }
     public void AddCard(GameObject card)
     {
@@ -72,26 +74,7 @@ public class DeckLayoutManagement : MonoBehaviour
             UpdateCardPositions();
         }
     }
-    void HandleDragAndDrop()
-    {
-        if(Input.GetMouseButtonDown(0) && draggedCard == null)
-        {
-            //StartDrag
-            StartDrag();
-        }
-
-        if(Input.GetMouseButton(0) && draggedCard != null)
-        {
-            //ContinueDrag
-            ContinueDrag();
-        }
-
-        if(Input.GetMouseButtonUp(0) && draggedCard != null)
-        {
-            //EndDrag
-            EndDrag();
-        }
-    }
+    
 
     void StartDrag()
     {
@@ -111,6 +94,7 @@ public class DeckLayoutManagement : MonoBehaviour
 
             if (handOfPlayer.Contains(hitCard))
             {
+                //Set state when start drag
                 draggedCard = hitCard;
                 draggedCardOriginalIndex = handOfPlayer.IndexOf(draggedCard);
                 draggedCardOriginalPosition = draggedCard.localPosition;
@@ -129,6 +113,7 @@ public class DeckLayoutManagement : MonoBehaviour
         //We will use the mouse position to calculate the new position of the card
         //and set x position to make card appear on top of other cards
         //Then calculate the insert index based on the position of dragged card
+
         Vector3 mousePos = Input.mousePosition; 
         mousePos.z = mainCamera.WorldToScreenPoint(draggedCard.position).z;
         Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
@@ -145,24 +130,19 @@ public class DeckLayoutManagement : MonoBehaviour
         switch (ActionManager.Instance.isInPlacementArea)
         {
             case true:
-                if(placementArea.IsReturnCardBackToHand(draggedCard))
+                if (placementArea.IsReturnCardBackToHand(draggedCard))
                 {
                     AnimateCardBackToHand();
                     Debug.Log("Card returned to hand - placement area full");
                     return;
                 }
 
-                Transform temp = draggedCard;
-                RemoveCard(draggedCard.gameObject);
-                placementArea.AddCard(temp);
-                Debug.Log("Placed card on Placement Area");
+                SendCardToPlacementArea();
                 break;
             case false:
                 if (insertIndex != draggedCardOriginalIndex)
                 {
                     SwapCard(handOfPlayer, draggedCard, draggedCardOriginalIndex, insertIndex);
-
-                    Debug.Log($"Card moved from index {draggedCardOriginalIndex} to {insertIndex}.");
                 }
                 else
                 {
@@ -172,9 +152,17 @@ public class DeckLayoutManagement : MonoBehaviour
                 break;
         }
 
+        //Clear drag state after placing the card
         draggedCard = null;
         draggedCardOriginalIndex = -1;
         insertIndex = -1;
+    }
+
+    private void SendCardToPlacementArea()
+    {
+        Transform temp = draggedCard;
+        RemoveCard(draggedCard.gameObject);
+        placementArea.AddCard(temp);
     }
 
     void AnimateCardBackToHand()
@@ -227,7 +215,7 @@ public class DeckLayoutManagement : MonoBehaviour
         for (int i = 0; i < handOfPlayer.Count; i++)
         {
             if (handOfPlayer[i] == draggedCard) continue;
-            Vector3 targetPos = CalculateTargetPosition(i);
+            Vector3 targetPos = DeckHelper.CalculateTargetPosition(i, handOfPlayer, cardSpacing, xGap);
             if(dragZ > targetPos.z)
             {
                 insertIndex = i + 1;
@@ -236,24 +224,13 @@ public class DeckLayoutManagement : MonoBehaviour
 
         insertIndex = Mathf.Clamp(insertIndex, 0, handOfPlayer.Count - 1);
     }
-    Vector3 CalculateTargetPosition(int index)
-    {
-        float totalWidth = (handOfPlayer.Count - 1) * cardSpacing;
-        float startZ = -totalWidth / 2;
-        float xOffset = index * xGap;
-
-        return new Vector3(-xOffset, 0f, startZ + index * cardSpacing);
-    }
     void UpdateCardPositions()
     {
-        float totalWidth = (handOfPlayer.Count - 1) * cardSpacing;
-        float startX = -totalWidth / 2;
-
         for (int i = 0; i < handOfPlayer.Count; i++)
         {
             if (handOfPlayer[i] == draggedCard) continue;
 
-            Vector3 targetPos = CalculateTargetPosition(i);
+            Vector3 targetPos = DeckHelper.CalculateTargetPosition(i, handOfPlayer, cardSpacing, xGap);
 
             handOfPlayer[i].localPosition = Vector3.Lerp(handOfPlayer[i].localPosition, targetPos, Time.deltaTime * animationSpeed);
             if (handOfPlayer[i] != draggedCard)

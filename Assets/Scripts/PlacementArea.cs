@@ -71,18 +71,9 @@ public class PlacementArea : MonoBehaviour
     {
         for (int i = 0; i < cardOnBoards.Count; i++)
         {
-            Vector3 targetPos = CalculateTargetPosition(i);
+            Vector3 targetPos = DeckHelper.CalculateTargetPosition(i, cardOnBoards, cardSpacing, xGap);
             cardOnBoards[i].localPosition = Vector3.Lerp(cardOnBoards[i].localPosition, targetPos, Time.deltaTime * animationSpeed);
         }
-    }
-
-    Vector3 CalculateTargetPosition(int index)
-    {
-        float totalWidth = (cardOnBoards.Count - 1) * cardSpacing;
-        float startZ = -totalWidth / 2;
-        float xOffset = index * xGap;
-
-        return new Vector3(-xOffset, 0f, startZ + index * cardSpacing);
     }
 
     public bool IsReturnCardBackToHand(Transform newCard)
