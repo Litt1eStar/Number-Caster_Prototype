@@ -7,6 +7,14 @@ public static class BoardCalculation
     public static int CalculateBoardValue(Queue<char> cards)
     {
         EquationParser(cards, out List<string> terms, out List<char> operators);
+        List<int> values = new List<int>();
+
+        foreach (var term in terms)
+        {
+            int value = Convert.ToInt32(term, 16);
+            values.Add(value);
+        }
+
         int result = 0;
         return result;
     }
