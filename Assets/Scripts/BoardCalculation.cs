@@ -15,7 +15,24 @@ public static class BoardCalculation
             values.Add(value);
         }
 
-        int result = 0;
+        int result = values[0];
+        if(operators.Count > 0)
+        {
+            for (int i = 0; i < operators.Count; i++)
+            {
+                switch (operators[i])
+                {
+                    case '+':
+                        result += values[i + 1];
+                        break;
+                    case '*':
+                        result *= values[i + 1];
+                        break;
+                }
+            }
+        }
+
+        Debug.Log(result);
         return result;
     }
 
