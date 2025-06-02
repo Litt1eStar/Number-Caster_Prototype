@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] private PlayerSide owner;
-
+    [SerializeField] private Turn owner;
+    public CardSO cardData;
     private bool isOnTop = false;
-    public void SetOwner(PlayerSide newOwner)
+    public void SetOwner(Turn newOwner)
     {
         owner = newOwner;
         FlipCard();
@@ -13,7 +13,7 @@ public class Card : MonoBehaviour
 
     public void FlipCard()
     {
-        if (owner == PlayerSide.Player1 && !isOnTop)
+        if (owner == Turn.Player1 && !isOnTop)
         {
             this.transform.localRotation = Quaternion.Euler(0, 180, 0);
             isOnTop = true;

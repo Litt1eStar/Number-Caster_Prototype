@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5691487893310355538}
   - component: {fileID: 5745993917180811828}
-  m_Layer: 0
+  - component: {fileID: -4576892456063569719}
+  m_Layer: 6
   m_Name: prefab_card_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,6 +46,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453443a4cf99f0d4cb6ce7ecc1ff6284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: 0
+  cardData: {fileID: 11400000, guid: 4f413ec61f7c13141b074af8214bcb05, type: 2}
+--- !u!65 &-4576892456063569719
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787815915942669150}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.12, y: 2.88, z: 2.09}
+  m_Center: {x: 0.02, y: 0, z: 0}
 --- !u!1001 &4246771412463463257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67,19 +91,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.49999994
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.50000006
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.50000006
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.49999997
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -87,15 +111,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
       propertyPath: m_Name
       value: m_card_E
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 713e0ffcff41938468d1d50c04b3deaa, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
