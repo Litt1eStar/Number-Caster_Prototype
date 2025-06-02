@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: 0
+  cardData: {fileID: 11400000, guid: 34c1a2bd5a86d8040a2e968a74980d22, type: 2}
 --- !u!65 &9111695209995199234
 BoxCollider:
   m_ObjectHideFlags: 0

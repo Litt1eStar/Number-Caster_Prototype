@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class PlacementArea : MonoBehaviour
 {
-    private bool isEnter = false;
+    public int maxCards = 3;
+
     public float cardSpacing = 0.5f;
     public float animationSpeed = 5.0f;
-    public float rotateSpeed = 10f;
     public float xGap = 0.05f;
     public Transform placementParent;
 
     private List<Transform> cardOnBoards = new List<Transform>();
+    private Queue<char> cardQueue = new Queue<char>();
+    private bool isEnter = false;
 
+    private int c = 0;
     private void Update()
     {
         UpdateCardPositions();
@@ -20,12 +23,28 @@ public class PlacementArea : MonoBehaviour
     public void AddCard(Transform newCard)
     {
         if (newCard != null) 
-        { 
-            cardOnBoards.Add(newCard);
-            newCard.SetParent(placementParent);
+        {
+            Card card = newCard.GetComponent<Card>();
+            if (c >= maxCards && card.cardData.CardType == CardType.Operator)
+            {
+                //Reach to maximum cards, can't add more number
+                //need to add operator card to use more number cards
+                c = 0;
+            }
+            else if(card.cardData.CardType == CardType.Number && c < maxCards)
+            {
+                cardQueue.Enqueue(card.cardData.cardValue);
+                c++;
+            }
 
-            Debug.Log("Add new Card to Placement Area");
+            AddCardToBoard(newCard);
         }
+    }
+
+    private void AddCardToBoard(Transform newCard)
+    {
+        cardOnBoards.Add(newCard);
+        newCard.SetParent(placementParent);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -64,5 +83,17 @@ public class PlacementArea : MonoBehaviour
         float xOffset = index * xGap;
 
         return new Vector3(-xOffset, 0f, startZ + index * cardSpacing);
+    }
+
+    public bool IsReturnCardBackToHand(Transform newCard)
+    {
+        Card card = newCard.GetComponent<Card>();
+        if (c >= maxCards && card.cardData.CardType == CardType.Number)
+        {
+            Debug.Log($"Cannot place number card: {c}/{maxCards} slots filled");
+            return true;
+        }
+
+        return false;
     }
 }

@@ -255,9 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d23b843cdda484bacabb41a7b4a313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxCards: 3
   cardSpacing: 2.5
   animationSpeed: 5
-  rotateSpeed: 10
   xGap: 0.05
   placementParent: {fileID: 624225839}
 --- !u!1 &119473397

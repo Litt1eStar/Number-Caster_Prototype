@@ -145,6 +145,13 @@ public class DeckLayoutManagement : MonoBehaviour
         switch (ActionManager.Instance.isInPlacementArea)
         {
             case true:
+                if(placementArea.IsReturnCardBackToHand(draggedCard))
+                {
+                    AnimateCardBackToHand();
+                    Debug.Log("Card returned to hand - placement area full");
+                    return;
+                }
+
                 Transform temp = draggedCard;
                 RemoveCard(draggedCard.gameObject);
                 placementArea.AddCard(temp);
@@ -157,6 +164,11 @@ public class DeckLayoutManagement : MonoBehaviour
 
                     Debug.Log($"Card moved from index {draggedCardOriginalIndex} to {insertIndex}.");
                 }
+                else
+                {
+                    AnimateCardBackToHand();
+                    return;
+                }
                 break;
         }
 
@@ -164,6 +176,32 @@ public class DeckLayoutManagement : MonoBehaviour
         draggedCardOriginalIndex = -1;
         insertIndex = -1;
     }
+
+    void AnimateCardBackToHand()
+    {
+        if (draggedCard == null) return;
+
+        Transform cardToAnimate = draggedCard;
+        Vector3 originalPos = draggedCardOriginalPosition;
+
+        // Animate the card back to its original position
+        cardToAnimate.DOLocalMove(originalPos, 0.3f)
+            .SetEase(Ease.OutBack)
+            .OnComplete(() =>
+            {
+                // Reset drag state after animation completes
+                draggedCard = null;
+                draggedCardOriginalIndex = -1;
+                insertIndex = -1;
+
+                // Update hand positions to ensure proper layout
+                UpdateCardPositions();
+            });
+
+        // Optional: Add a slight bounce effect or scale animation
+        cardToAnimate.DOPunchScale(Vector3.one * 0.1f, 0.2f, 1, 0.5f);
+    }
+
 
     void SwapCard(List<Transform> container, Transform objToInsert, int from, int to)
     {
