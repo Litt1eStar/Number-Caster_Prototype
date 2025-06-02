@@ -137,10 +137,10 @@ public class DeckLayoutManagement : MonoBehaviour
                     return;
                 }
                 
-                if(DeckHelper.IsOperatorCard(draggedCard.GetComponent<Card>()) && placementArea.IsPreviousCardOperator())
+                if(DeckHelper.IsOperatorCard(draggedCard.GetComponent<Card>()) && (placementArea.IsPreviousCardOperator() || placementArea.IsBoardEmpty()))
                 {
                     AnimateCardBackToHand();
-                    Debug.LogWarning("Latest card is Operator so you cannot place another Operator card here.");
+                    Debug.LogWarning("Cannot place another Operator card here.");
                     return;
                 }
 

@@ -92,4 +92,6 @@ public class PlacementArea : MonoBehaviour
         Card lastCard = cardOnBoards[cardOnBoards.Count - 1].GetComponent<Card>();
         return lastCard.cardData.CardType == CardType.Operator;
     }   
+
+    public bool IsBoardEmpty() => cardOnBoards.Count == 0;
 }
