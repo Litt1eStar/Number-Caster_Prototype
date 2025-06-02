@@ -25,24 +25,21 @@ public class PlacementArea : MonoBehaviour
         if (newCard != null) 
         {
             Card card = newCard.GetComponent<Card>();
-            if (c >= maxCards && card.cardData.CardType == CardType.Operator)
-            {
-                //Reach to maximum cards, can't add more number
-                //need to add operator card to use more number cards
-                c = 0;
-            }
-            else if(card.cardData.CardType == CardType.Number && c < maxCards)
-            {
-                cardQueue.Enqueue(card.cardData.cardValue);
-                c++;
-            }
 
-            AddCardToBoard(newCard);
+            bool isReachLimit = c >= maxCards;
+
+            if (DeckHelper.IsOperatorCard(card)) c = 0;
+            if (isReachLimit && DeckHelper.IsOperatorCard(card)) c = 0;
+            else if(DeckHelper.IsNumberCard(card) && !isReachLimit) c++;
+           
+            AddCardToBoard(newCard, card);
         }
     }
 
-    private void AddCardToBoard(Transform newCard)
+    private void AddCardToBoard(Transform newCard, Card card)
     {
+        cardQueue.Enqueue(card.cardData.cardValue);
+
         cardOnBoards.Add(newCard);
         newCard.SetParent(placementParent);
     }
@@ -87,4 +84,12 @@ public class PlacementArea : MonoBehaviour
 
         return false;
     }
+
+    public bool IsPreviousCardOperator()
+    {
+        if (cardOnBoards.Count == 0) return false;
+
+        Card lastCard = cardOnBoards[cardOnBoards.Count - 1].GetComponent<Card>();
+        return lastCard.cardData.CardType == CardType.Operator;
+    }   
 }

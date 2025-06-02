@@ -133,7 +133,14 @@ public class DeckLayoutManagement : MonoBehaviour
                 if (placementArea.IsReturnCardBackToHand(draggedCard))
                 {
                     AnimateCardBackToHand();
-                    Debug.Log("Card returned to hand - placement area full");
+                    Debug.LogWarning("Card returned to hand - placement area full");
+                    return;
+                }
+                
+                if(DeckHelper.IsOperatorCard(draggedCard.GetComponent<Card>()) && placementArea.IsPreviousCardOperator())
+                {
+                    AnimateCardBackToHand();
+                    Debug.LogWarning("Latest card is Operator so you cannot place another Operator card here.");
                     return;
                 }
 

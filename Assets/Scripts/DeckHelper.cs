@@ -11,4 +11,8 @@ public static class DeckHelper
 
         return new Vector3(-xOffset, 0f, startZ + index * cardSpacing);
     }
+
+    public static bool IsOperatorCard(Card card) => card.cardData.CardType == CardType.Operator;
+    public static bool IsNumberCard(Card card) => card.cardData.CardType == CardType.Number;
+
 }
