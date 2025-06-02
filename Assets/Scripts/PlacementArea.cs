@@ -10,6 +10,7 @@ public class PlacementArea : MonoBehaviour
     public float animationSpeed = 5.0f;
     public float xGap = 0.05f;
     public Transform placementParent;
+    public BoardUI boardUI;    
 
     private List<Transform> cardOnBoards = new List<Transform>();
     private Queue<char> cardQueue = new Queue<char>();
@@ -19,6 +20,14 @@ public class PlacementArea : MonoBehaviour
     private void Update()
     {
         UpdateCardPositions();
+        if (!IsBoardEmpty())
+        {
+            boardUI.ShowButton();
+        }
+        else
+        {
+            boardUI.HideButton();
+        }
     }
     public void AddCard(Transform newCard)
     {
@@ -94,4 +103,14 @@ public class PlacementArea : MonoBehaviour
     }   
 
     public bool IsBoardEmpty() => cardOnBoards.Count == 0;
+
+    public void OnClickAttackButton()
+    {
+
+    }
+
+    public void OnClickProtectButton()
+    {
+
+    }
 }
