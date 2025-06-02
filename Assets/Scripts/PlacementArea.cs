@@ -106,11 +106,11 @@ public class PlacementArea : MonoBehaviour
 
     public void OnClickAttackButton()
     {
-
+        int processedDamage = BoardCalculation.CalculateBoardValue(cardQueue);
     }
 
     public void OnClickProtectButton()
     {
-
+        int processedProtection = BoardCalculation.CalculateBoardValue(cardQueue);
     }
 }
