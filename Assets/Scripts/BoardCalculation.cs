@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class BoardCalculation
 {
-    public static int CalculateBoardValue(Queue<char> cards)
+    public static bool CalculateBoardValue(Queue<char> cards, out int result)
     {
         EquationParser(cards, out List<string> terms, out List<char> operators);
         List<int> values = new List<int>();
@@ -15,7 +15,7 @@ public static class BoardCalculation
             values.Add(value);
         }
 
-        int result = values[0];
+        result = values[0];
         if(operators.Count > 0)
         {
             for (int i = 0; i < operators.Count; i++)
@@ -33,7 +33,7 @@ public static class BoardCalculation
         }
 
         Debug.Log(result);
-        return result;
+        return true;
     }
 
     private static void EquationParser(Queue<char> cards, out List<string> terms, out List<char> operators)
