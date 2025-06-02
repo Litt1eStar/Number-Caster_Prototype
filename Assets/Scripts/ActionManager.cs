@@ -5,7 +5,7 @@ public class ActionManager : MonoBehaviour
     public static ActionManager Instance { get { return _instance; } }
     private static ActionManager _instance;
 
-    private bool isInPlacementArea = false;
+    public bool isInPlacementArea { get; private set; } = false;
 
     private void Awake()
     {

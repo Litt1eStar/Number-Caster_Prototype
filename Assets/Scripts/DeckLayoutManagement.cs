@@ -12,13 +12,12 @@ public class DeckLayoutManagement : MonoBehaviour
     public float xGap = 0.05f;
 
     public Turn side; //for test
+    public PlacementArea placementArea;
 
     public Transform player1_deckPosition;
 
     public float dragHeight = 1.0f;
     public LayerMask cardLayerMask = -1;
-
-    public GameObject newCard;
     
     private List<Transform> handOfPlayer = new List<Transform>();
 
@@ -69,7 +68,8 @@ public class DeckLayoutManagement : MonoBehaviour
         if (handOfPlayer.Contains(card.transform))
         {
             handOfPlayer.Remove(card.transform);
-            Destroy(card);
+            card.transform.SetParent(null);
+            UpdateCardPositions();
         }
     }
     void HandleDragAndDrop()
@@ -142,11 +142,22 @@ public class DeckLayoutManagement : MonoBehaviour
     }
     void EndDrag()
     {
-        if(insertIndex != draggedCardOriginalIndex)
+        switch (ActionManager.Instance.isInPlacementArea)
         {
-            SwapCard(handOfPlayer, draggedCard, draggedCardOriginalIndex, insertIndex);
+            case true:
+                Transform temp = draggedCard;
+                RemoveCard(draggedCard.gameObject);
+                placementArea.AddCard(temp);
+                Debug.Log("Placed card on Placement Area");
+                break;
+            case false:
+                if (insertIndex != draggedCardOriginalIndex)
+                {
+                    SwapCard(handOfPlayer, draggedCard, draggedCardOriginalIndex, insertIndex);
 
-            Debug.Log($"Card moved from index {draggedCardOriginalIndex} to {insertIndex}.");
+                    Debug.Log($"Card moved from index {draggedCardOriginalIndex} to {insertIndex}.");
+                }
+                break;
         }
 
         draggedCard = null;
