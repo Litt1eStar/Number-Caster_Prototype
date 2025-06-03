@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlacementArea : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class PlacementArea : MonoBehaviour
 
     public float cardSpacing = 0.5f;
     public float animationSpeed = 5.0f;
+    public float sendCardToUsedAreaAnimationSpeed = 10.0f;
     public float xGap = 0.05f;
     public Transform placementParent;
+    public Transform usedCardParent;
     public BoardUI boardUI;    
 
     private List<Transform> cardOnBoards = new List<Transform>();
@@ -17,6 +20,7 @@ public class PlacementArea : MonoBehaviour
     private bool isEnter = false;
 
     private int c = 0;
+    private float usedCardAreaYPosition = 0.0f;
     private void Update()
     {
         UpdateCardPositions();
@@ -106,6 +110,8 @@ public class PlacementArea : MonoBehaviour
     {
         if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
         {
+            //Send card on board to used card area
+            SendCardToUsedArea();
             //Cap Value of result
             //Use result to Attack Enemy
         }
@@ -115,8 +121,28 @@ public class PlacementArea : MonoBehaviour
     {
         if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
         {
+            //Send card on board to used card area
+            SendCardToUsedArea();
             //Cap Value of result
             //Use result to Create Shield for Player
         }
+    }
+
+    private void SendCardToUsedArea()
+    {
+        float yOffset = 0.01f;
+
+        foreach (Transform card in cardOnBoards)
+        {
+            card.SetParent(usedCardParent);
+
+            Vector3 targetPosition = new Vector3(0, usedCardAreaYPosition, 0);
+            card.DOLocalMove(targetPosition, sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
+            usedCardAreaYPosition += yOffset;
+        }
+
+        cardOnBoards.Clear();
+        cardQueue.Clear();
+        c = 0;
     }
 }
