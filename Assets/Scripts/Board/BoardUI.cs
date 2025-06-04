@@ -57,13 +57,13 @@ public class BoardUI : MonoBehaviour
 
         Sequence resultSequence = DOTween.Sequence();
 
-        resultSequence.Append(resultTextContainer.transform.DOLocalMove(originalPosition, fadeDuration).SetEase(Ease.OutBounce));
+        resultSequence.Append(resultTextContainer.transform.DOLocalMove(originalPosition, fadeDuration).SetEase(Ease.OutFlash));
         resultSequence.Join(resultCanvasGroup.DOFade(1f, fadeDuration).SetEase(Ease.OutQuad));
 
         resultSequence.AppendInterval(shownDuration);
 
         resultSequence.Append(resultTextContainer.transform.DOLocalMove(hiddenPosition, fadeDuration * 0.7f).SetEase(Ease.InQuad));
-        resultSequence.Join(resultCanvasGroup.DOFade(0f, fadeDuration * 0.7f).SetEase(Ease.InQuad));
+        resultSequence.Join(resultCanvasGroup.DOFade(0f, fadeDuration).SetEase(Ease.InQuad));
 
         resultSequence.OnComplete(() => resultTextContainer.SetActive(false));
     }
