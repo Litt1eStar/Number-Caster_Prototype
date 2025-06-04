@@ -114,7 +114,7 @@ public class PlacementArea : MonoBehaviour
             //Cap Value of result
             int cappedValue = ValueCapper.CapValue(result);
             //Use result to Attack Enemy
-            Debug.Log(cappedValue);
+            boardUI.ShowResult(result, cappedValue);
         }
     }
 
@@ -127,7 +127,7 @@ public class PlacementArea : MonoBehaviour
             //Cap Value of result
             int cappedValue = ValueCapper.CapValue(result);
             //Use result to Create Shield for Player
-            Debug.Log(cappedValue);
+            boardUI.ShowResult(result, cappedValue);
         }
     }
 
