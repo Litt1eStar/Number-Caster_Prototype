@@ -8,7 +8,7 @@ public class Deck : MonoBehaviour
     public Transform deckParent;
     [SerializeField] private float cardSpacing = 0.04f;
 
-    private Queue<GameObject> deckQueue = new Queue<GameObject>();   
+    private Stack<GameObject> deckStack = new Stack<GameObject>();   
 
     Vector3 pos;
 
@@ -28,15 +28,15 @@ public class Deck : MonoBehaviour
             cardObj.transform.position = pos + new Vector3(0, cardSpacing, 0);
             pos = cardObj.transform.position;
 
-            deckQueue.Enqueue(cardObj);
+            deckStack.Push(cardObj);
         }
     }
 
     public GameObject DrawCard()
     {
-        if(deckQueue.Count <= 0) return null;
+        if(deckStack.Count <= 0) return null;
 
-        GameObject drawnCard = deckQueue.Dequeue();
+        GameObject drawnCard = deckStack.Pop();
         return drawnCard;
     }
 }

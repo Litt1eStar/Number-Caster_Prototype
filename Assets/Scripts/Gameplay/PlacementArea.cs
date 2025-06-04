@@ -105,7 +105,6 @@ public class PlacementArea : MonoBehaviour
     }   
 
     public bool IsBoardEmpty() => cardOnBoards.Count == 0;
-
     public void OnClickAttackButton()
     {
         if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
