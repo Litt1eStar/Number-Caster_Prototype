@@ -107,6 +107,12 @@ public class PlacementArea : MonoBehaviour
     public bool IsBoardEmpty() => cardOnBoards.Count == 0;
     public void OnClickAttackButton()
     {
+        if (IsLatestCardOperator())
+        {
+            //Give some feedback to player that they cannot use this button
+            return;
+        }
+
         if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
         {
             //Send card on board to used card area
@@ -120,7 +126,13 @@ public class PlacementArea : MonoBehaviour
 
     public void OnClickProtectButton()
     {
-        if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
+        if (IsLatestCardOperator())
+        {
+            //Give some feedback to player that they cannot use this button
+            return;
+        }
+
+        if (BoardCalculation.CalculateBoardValue(cardQueue, out int result))
         {
             //Send card on board to used card area
             SendCardToUsedArea();
@@ -147,5 +159,15 @@ public class PlacementArea : MonoBehaviour
         cardOnBoards.Clear();
         cardQueue.Clear();
         c = 0;
+    }
+
+    public bool IsLatestCardOperator()
+    {
+        if(cardOnBoards.Count <= 0) return false;
+
+        Transform lastCard = cardOnBoards[cardOnBoards.Count - 1];
+        Card card = lastCard.GetComponent<Card>();
+        
+        return card.cardData.CardType == CardType.Operator;
     }
 }
