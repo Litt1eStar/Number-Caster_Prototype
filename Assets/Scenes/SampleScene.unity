@@ -242,8 +242,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.77, y: 20, z: 9.999999}
-  m_Center: {x: 0, y: 10, z: 0}
+  m_Size: {x: 12.12, y: 20, z: 9.999999}
+  m_Center: {x: -3.24, y: 10, z: 0}
 --- !u!114 &67568927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +264,7 @@ MonoBehaviour:
   placementParent: {fileID: 624225839}
   usedCardParent: {fileID: 1036891690}
   boardUI: {fileID: 785026508}
+  usedCardAreaYPosition: 0
 --- !u!1 &115693665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,6 +1520,7 @@ MonoBehaviour:
   side: 0
   placementArea: {fileID: 67568927}
   player1_deckPosition: {fileID: 378565211}
+  usedCardParent: {fileID: 1036891690}
   dragHeight: 1
   cardLayerMask:
     serializedVersion: 2

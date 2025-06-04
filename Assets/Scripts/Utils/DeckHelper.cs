@@ -14,5 +14,5 @@ public static class DeckHelper
 
     public static bool IsOperatorCard(Card card) => card.cardData.CardType == CardType.Operator;
     public static bool IsNumberCard(Card card) => card.cardData.CardType == CardType.Number;
-
+    public static bool ValidCardTypeOnBoard(Card card) => card.cardData.CardType == CardType.Number || card.cardData.CardType == CardType.Operator; 
 }

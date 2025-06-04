@@ -15,6 +15,7 @@ public class DeckLayoutManagement : MonoBehaviour
     public PlacementArea placementArea;
 
     public Transform player1_deckPosition;
+    public Transform usedCardParent;
 
     public float dragHeight = 1.0f;
     public LayerMask cardLayerMask = -1;
@@ -136,15 +137,24 @@ public class DeckLayoutManagement : MonoBehaviour
                     Debug.LogWarning("Card returned to hand - placement area full");
                     return;
                 }
-                
-                if(DeckHelper.IsOperatorCard(draggedCard.GetComponent<Card>()) && (placementArea.IsPreviousCardOperator() || placementArea.IsBoardEmpty()))
+
+                Card card = draggedCard.GetComponent<Card>();
+                if (DeckHelper.IsOperatorCard(card) && (placementArea.IsPreviousCardOperator() || placementArea.IsBoardEmpty()))
                 {
                     AnimateCardBackToHand();
                     Debug.LogWarning("Cannot place another Operator card here.");
                     return;
                 }
 
-                SendCardToPlacementArea();
+                if (card.cardData.CardType == CardType.Skill)
+                {
+                    UseSkillCard(card);
+                    SendCardToUsedArea(draggedCard);
+                }
+                else if (DeckHelper.ValidCardTypeOnBoard(card))
+                {
+                    SendCardToPlacementArea();
+                }
                 break;
             case false:
                 if (insertIndex != draggedCardOriginalIndex)
@@ -160,11 +170,20 @@ public class DeckLayoutManagement : MonoBehaviour
         }
 
         //Clear drag state after placing the card
+        ClearDraggedCardState();
+    }
+
+    private void ClearDraggedCardState()
+    {
         draggedCard = null;
         draggedCardOriginalIndex = -1;
         insertIndex = -1;
     }
 
+    private void UseSkillCard(Card card)
+    {
+        Debug.Log("Use skill card");
+    }
     private void SendCardToPlacementArea()
     {
         Transform temp = draggedCard;
@@ -245,6 +264,20 @@ public class DeckLayoutManagement : MonoBehaviour
                 handOfPlayer[i].SetSiblingIndex(i);
             }
         }
+    }
+
+    public void SendCardToUsedArea(Transform card)
+    {
+        float yOffset = 0.01f;
+
+        RemoveCard(card.gameObject);
+        card.SetParent(placementArea.usedCardParent);
+
+        Vector3 targetPosition = new Vector3(0, placementArea.usedCardAreaYPosition, 0);
+        card.DOLocalMove(targetPosition, placementArea.sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
+        placementArea.usedCardAreaYPosition += yOffset;
+
+        ClearDraggedCardState();
     }
 
 

@@ -20,7 +20,7 @@ public class PlacementArea : MonoBehaviour
     private bool isEnter = false;
 
     private int c = 0;
-    private float usedCardAreaYPosition = 0.0f;
+    public float usedCardAreaYPosition = 0.0f;
     private void Update()
     {
         UpdateCardPositions();
