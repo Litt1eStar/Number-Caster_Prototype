@@ -1982,6 +1982,7 @@ MonoBehaviour:
   boardUI: {fileID: 785026508}
   player1_deckPosition: {fileID: 378565211}
   usedCardParent: {fileID: 1036891690}
+  hoverCardOffset: {x: 0, y: 0, z: 0}
   dragHeight: 1
   cardLayerMask:
     serializedVersion: 2

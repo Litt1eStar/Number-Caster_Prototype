@@ -17,7 +17,7 @@ public class DeckLayoutManagement : MonoBehaviour
 
     public Transform player1_deckPosition;
     public Transform usedCardParent;
-
+    public Vector3 hoverCardOffset;
     public float dragHeight = 1.0f;
     public LayerMask cardLayerMask = -1;
     
@@ -25,12 +25,15 @@ public class DeckLayoutManagement : MonoBehaviour
 
     public Camera mainCamera;
     private Transform draggedCard;
+    private Transform currentHoveredCard = null;
+    private Vector3 hoveredCardOriginalPosition;
     private int draggedCardOriginalIndex;
     private Vector3 draggedCardOriginalPosition;
     private int insertIndex = -1;
 
     private Card shownCard = null;
-    private bool isCardDetailShown = false; 
+    private bool isCardDetailShown = false;
+    private bool isCardHovered = false;
 
     private void Start()
     {
@@ -44,10 +47,71 @@ public class DeckLayoutManagement : MonoBehaviour
             DrawCard(Turn.Player1, deck);
         }
 
+        HandleMouseHoverOnCard();
         HandleRightClick();
         HandleDragAndDrop();
         UpdateCardPositions();
     }
+    private void HandleMouseHoverOnCard()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cardLayerMask))
+        {
+            Transform hitCard = hit.collider.transform;
+
+            if (handOfPlayer.Contains(hitCard) && draggedCard == null)
+            {
+                //Set state when start drag
+                if(currentHoveredCard != hitCard)
+                {
+                    if (currentHoveredCard != null)
+                    {
+                        //Reset previous hovered card
+                        ResetHoveredCard();
+                    }
+
+                    currentHoveredCard = hitCard;
+                    hoveredCardOriginalPosition = hitCard.localPosition;
+                    AnimateHoveredCard(hitCard);
+                    isCardHovered = true;
+                }
+
+            }
+        }
+        else
+        {
+            if(currentHoveredCard != null)
+            {
+                ResetHoveredCard();
+            }
+        }
+    }
+
+    private void ResetHoveredCard()
+    {
+        if (currentHoveredCard != null)
+        {
+            // Kill any existing tweens
+            currentHoveredCard.DOKill();
+
+            // Animate back to original position
+            currentHoveredCard.DOLocalMove(hoveredCardOriginalPosition, 0.2f)
+                .SetEase(Ease.OutQuad)
+                .SetId("hover_reset");
+
+            // Reset scale
+            currentHoveredCard.DOScale(Vector3.one, 0.2f)
+                .SetEase(Ease.OutQuad)
+                .SetId("scale_reset");
+
+            currentHoveredCard = null;
+            isCardHovered = false;
+        }
+    }
+
     private void HandleDragAndDrop()
     {
         if (Input.GetMouseButtonDown(0) && draggedCard == null) StartDrag();
@@ -104,8 +168,20 @@ public class DeckLayoutManagement : MonoBehaviour
             UpdateCardPositions();
         }
     }
-    
+    private void AnimateHoveredCard(Transform cardToAnimate)
+    {
+        cardToAnimate.DOKill();
 
+        Vector3 targetPos = hoveredCardOriginalPosition + hoverCardOffset;
+        cardToAnimate.DOLocalMove(targetPos, 0.3f)
+            .SetEase(Ease.OutBack)
+            .SetId("hover_animation");
+
+        // Optional: Add a subtle scale effect
+        cardToAnimate.DOScale(Vector3.one * 1.1f, 0.3f)
+            .SetEase(Ease.OutBack)
+            .SetId("hover_scale");
+    }
     void StartDrag()
     {
         //If player click on a card, start dragging it
