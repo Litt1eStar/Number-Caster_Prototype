@@ -1,6 +1,7 @@
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoardUI : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private CanvasGroup resultCanvasGroup;
     [SerializeField] private TextMeshProUGUI t_rawValue;
     [SerializeField] private TextMeshProUGUI t_cappedValue;
+
+    [SerializeField] private GameObject cardDetailContainer;
+    [SerializeField] private CanvasGroup cardDetailCanvasGroup;
+    [SerializeField] private Image cardImage;
+    [SerializeField] private TextMeshProUGUI t_cardName;
+    [SerializeField] private TextMeshProUGUI t_cardValue;
+    [SerializeField] private TextMeshProUGUI t_cardLevel;
+    [SerializeField] private TextMeshProUGUI t_cardDescription;
 
     [SerializeField] private float fadeDuration = 0.5f;
     [SerializeField] private float moveDistance = 500f;
@@ -34,6 +43,16 @@ public class BoardUI : MonoBehaviour
             }
         }
         resultCanvasGroup.alpha = 0f;
+
+        if(cardDetailCanvasGroup == null)
+        {
+            cardDetailCanvasGroup = cardDetailContainer.GetComponent<CanvasGroup>();
+            if (cardDetailCanvasGroup == null)
+            {
+                cardDetailCanvasGroup = cardDetailContainer.AddComponent<CanvasGroup>();
+            }
+        }
+        cardDetailCanvasGroup.alpha = 0f;
     }
 
     public void ShowButton()
@@ -67,4 +86,10 @@ public class BoardUI : MonoBehaviour
 
         resultSequence.OnComplete(() => resultTextContainer.SetActive(false));
     }
-}
+
+    public void ShowCardDetail()
+    {
+        Sequence resultSequence = DOTween.Sequence();
+        resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
+    }
+}   

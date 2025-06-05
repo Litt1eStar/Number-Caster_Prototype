@@ -13,6 +13,7 @@ public class DeckLayoutManagement : MonoBehaviour
 
     public Turn side; //for test
     public PlacementArea placementArea;
+    public BoardUI boardUI;
 
     public Transform player1_deckPosition;
     public Transform usedCardParent;
@@ -28,6 +29,8 @@ public class DeckLayoutManagement : MonoBehaviour
     private Vector3 draggedCardOriginalPosition;
     private int insertIndex = -1;
 
+    private Card shownCard = null;
+
     private void Start()
     {
         side = Turn.Player1;
@@ -40,14 +43,33 @@ public class DeckLayoutManagement : MonoBehaviour
             DrawCard(Turn.Player1, deck);
         }
 
+        HandleRightClick();
         HandleDragAndDrop();
         UpdateCardPositions();
     }
-    void HandleDragAndDrop()
+    private void HandleDragAndDrop()
     {
         if (Input.GetMouseButtonDown(0) && draggedCard == null) StartDrag();
         if (Input.GetMouseButton(0) && draggedCard != null) ContinueDrag();
         if (Input.GetMouseButtonUp(0) && draggedCard != null) EndDrag();   
+    }
+
+    private void HandleRightClick()
+    {
+        if(Input.GetMouseButtonDown(1) && draggedCard == null)
+        {
+            //Show card Detail
+            Vector3 mousePos = Input.mousePosition;
+            Ray ray = mainCamera.ScreenPointToRay(mousePos);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, cardLayerMask))
+            {
+                shownCard = hit.collider.transform.GetComponent<Card>();
+                Debug.Log("Right click on card");
+                boardUI.ShowCardDetail();
+            }
+        }
     }
     public void DrawCard(Turn sender, Deck deckOfSender)
     {
