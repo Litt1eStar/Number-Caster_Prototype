@@ -22,6 +22,8 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private float fadeDuration = 0.5f;
     [SerializeField] private float moveDistance = 500f;
     [SerializeField] private float shownDuration = 1.5f;
+
+    public bool onHidingPanel { get; private set; } = false;
     private Vector3 originalPosition;
     private Vector3 hiddenPosition;
     private void Start()
@@ -90,12 +92,27 @@ public class BoardUI : MonoBehaviour
     public void ShowCardDetail(Card shownCard)
     {
         Sequence resultSequence = DOTween.Sequence();
+        cardImage.sprite = shownCard.cardData.cardImage;
+        t_cardName.text = shownCard.cardData.cardName;
+        t_cardValue.text = shownCard.cardData.cardValue.ToString();
+        t_cardLevel.text = shownCard.cardData.cardLevel.ToString();
+        t_cardDescription.text = shownCard.cardData.cardDescription;
         resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
     }
 
     public void HideCardDetail()
     {
         Sequence resultSequence = DOTween.Sequence();
-        resultSequence.Append(cardDetailCanvasGroup.DOFade(0f, fadeDuration)).SetEase(Ease.InFlash);
+        onHidingPanel = true;
+        resultSequence.Append(cardDetailCanvasGroup.DOFade(0f, fadeDuration)).
+            SetEase(Ease.InFlash).OnComplete(() =>
+        {
+            cardImage.sprite = null;
+            t_cardName.text = string.Empty;
+            t_cardValue.text = string.Empty;
+            t_cardLevel.text = string.Empty;
+            t_cardDescription.text = string.Empty;
+            onHidingPanel = false;
+        });
     }
 }   

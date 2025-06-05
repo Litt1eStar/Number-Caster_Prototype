@@ -57,7 +57,7 @@ public class DeckLayoutManagement : MonoBehaviour
 
     private void HandleRightClick()
     {
-        if ((Input.GetMouseButtonDown(1) && draggedCard == null) && !isCardDetailShown)
+        if ((Input.GetMouseButtonDown(1) && draggedCard == null) && !isCardDetailShown && !boardUI.onHidingPanel)
         {
             //Show card Detail
             Vector3 mousePos = Input.mousePosition;
@@ -71,7 +71,7 @@ public class DeckLayoutManagement : MonoBehaviour
                 boardUI.ShowCardDetail(shownCard);
                 isCardDetailShown = true;
             }
-        }else if((Input.GetMouseButtonDown(1) && draggedCard == null) && isCardDetailShown)
+        }else if((Input.GetMouseButtonDown(1) && draggedCard == null) && isCardDetailShown && !boardUI.onHidingPanel)
         {
             shownCard = null;
             boardUI.HideCardDetail();
