@@ -68,11 +68,12 @@ public class DeckLayoutManagement : MonoBehaviour
             {
                 shownCard = hit.collider.transform.GetComponent<Card>();
                 Debug.Log("Right click on card");
-                boardUI.ShowCardDetail();
+                boardUI.ShowCardDetail(shownCard);
                 isCardDetailShown = true;
             }
         }else if((Input.GetMouseButtonDown(1) && draggedCard == null) && isCardDetailShown)
         {
+            shownCard = null;
             boardUI.HideCardDetail();
             isCardDetailShown = false;
         }

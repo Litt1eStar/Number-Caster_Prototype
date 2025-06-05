@@ -87,7 +87,7 @@ public class BoardUI : MonoBehaviour
         resultSequence.OnComplete(() => resultTextContainer.SetActive(false));
     }
 
-    public void ShowCardDetail()
+    public void ShowCardDetail(Card shownCard)
     {
         Sequence resultSequence = DOTween.Sequence();
         resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);

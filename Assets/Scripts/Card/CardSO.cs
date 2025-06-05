@@ -11,6 +11,9 @@ public enum CardType
 public class CardSO : ScriptableObject
 {
     public CardType CardType;
-    public char cardValue;
+    public Sprite cardImage;
     public string cardName;
+    public int cardLevel;
+    public char cardValue;
+    public string cardDescription;
 }
