@@ -93,10 +93,10 @@ public class BoardUI : MonoBehaviour
     {
         Sequence resultSequence = DOTween.Sequence();
         cardImage.sprite = shownCard.cardData.cardImage;
-        t_cardName.text = shownCard.cardData.cardName;
-        t_cardValue.text = shownCard.cardData.cardValue.ToString();
-        t_cardLevel.text = shownCard.cardData.cardLevel.ToString();
-        t_cardDescription.text = shownCard.cardData.cardDescription;
+        t_cardName.text = "Card Name : " + shownCard.cardData.cardName;
+        t_cardValue.text = "Card Value : " + shownCard.cardData.cardValue.ToString();
+        t_cardLevel.text = "Card Level : " + shownCard.cardData.cardLevel.ToString();
+        t_cardDescription.text = "Card Description : " + shownCard.cardData.cardDescription;
         resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
     }
 
