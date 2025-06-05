@@ -30,6 +30,7 @@ public class DeckLayoutManagement : MonoBehaviour
     private int insertIndex = -1;
 
     private Card shownCard = null;
+    private bool isCardDetailShown = false; 
 
     private void Start()
     {
@@ -56,7 +57,7 @@ public class DeckLayoutManagement : MonoBehaviour
 
     private void HandleRightClick()
     {
-        if(Input.GetMouseButtonDown(1) && draggedCard == null)
+        if ((Input.GetMouseButtonDown(1) && draggedCard == null) && !isCardDetailShown)
         {
             //Show card Detail
             Vector3 mousePos = Input.mousePosition;
@@ -68,7 +69,12 @@ public class DeckLayoutManagement : MonoBehaviour
                 shownCard = hit.collider.transform.GetComponent<Card>();
                 Debug.Log("Right click on card");
                 boardUI.ShowCardDetail();
+                isCardDetailShown = true;
             }
+        }else if((Input.GetMouseButtonDown(1) && draggedCard == null) && isCardDetailShown)
+        {
+            boardUI.HideCardDetail();
+            isCardDetailShown = false;
         }
     }
     public void DrawCard(Turn sender, Deck deckOfSender)

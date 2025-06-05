@@ -92,4 +92,10 @@ public class BoardUI : MonoBehaviour
         Sequence resultSequence = DOTween.Sequence();
         resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
     }
+
+    public void HideCardDetail()
+    {
+        Sequence resultSequence = DOTween.Sequence();
+        resultSequence.Append(cardDetailCanvasGroup.DOFade(0f, fadeDuration)).SetEase(Ease.InFlash);
+    }
 }   
