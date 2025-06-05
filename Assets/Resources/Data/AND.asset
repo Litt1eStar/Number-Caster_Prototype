@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: AND
   m_EditorClassIdentifier: 
   CardType: 1
+  cardImage: {fileID: 21300000, guid: 6e6f4c1b7b277a0448e76f988aabda3a, type: 3}
+  cardName: AND
+  cardLevel: 1
   cardValue: 38
-  cardName: 0
+  cardDescription: Operator AND

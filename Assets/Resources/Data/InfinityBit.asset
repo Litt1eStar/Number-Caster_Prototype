@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: InfinityBit
   m_EditorClassIdentifier: 
   CardType: 2
-  cardValue: 48
+  cardImage: {fileID: 21300000, guid: fac737a4255a4d540b38bea8534326e8, type: 3}
   cardName: InfinityBit
+  cardLevel: 1
+  cardValue: 48
+  cardDescription: Infinity Bit

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: D
   m_EditorClassIdentifier: 
   CardType: 0
+  cardImage: {fileID: 21300000, guid: 8f988baaeca77c34d96336c70b3cc8fd, type: 3}
+  cardName: D
+  cardLevel: 1
   cardValue: 68
-  cardName: 0
+  cardDescription: Card Number D

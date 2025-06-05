@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: MULTIPLY
   m_EditorClassIdentifier: 
   CardType: 1
+  cardImage: {fileID: 21300000, guid: f8d134437731cf54ea8fd433c13c05c7, type: 3}
+  cardName: Multiply
+  cardLevel: 1
   cardValue: 42
-  cardName: 0
+  cardDescription: 

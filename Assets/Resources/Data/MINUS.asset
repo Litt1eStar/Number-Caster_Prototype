@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: MINUS
   m_EditorClassIdentifier: 
   CardType: 1
+  cardImage: {fileID: 21300000, guid: 9ac461eeb28b87541a65437a7658b503, type: 3}
+  cardName: MINUS
+  cardLevel: 1
   cardValue: 45
-  cardName: 0
+  cardDescription: Operator MINUS

@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: PLUS
   m_EditorClassIdentifier: 
   CardType: 1
+  cardImage: {fileID: 21300000, guid: e0c6fcc8d5147414cb27a47cb2635211, type: 3}
+  cardName: Plus
+  cardLevel: 0
   cardValue: 43
-  cardName: 0
+  cardDescription: Operator PLUS

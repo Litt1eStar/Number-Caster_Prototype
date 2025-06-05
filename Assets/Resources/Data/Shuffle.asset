@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Shuffle
   m_EditorClassIdentifier: 
   CardType: 2
-  cardValue: 48
+  cardImage: {fileID: 21300000, guid: 747e2269051dd5d48a4b927773a6372e, type: 3}
   cardName: Shuffle
+  cardLevel: 1
+  cardValue: 48
+  cardDescription: Shuffle
