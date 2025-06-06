@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] private Turn owner;
     public CardSO cardData;
+   
+    private Turn owner;
     private bool isOnTop = false;
     public void SetOwner(Turn newOwner)
     {

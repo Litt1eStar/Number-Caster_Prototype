@@ -334,12 +334,12 @@ MonoBehaviour:
   maxCards: 3
   cardSpacing: 2.5
   animationSpeed: 5
-  sendCardToUsedAreaAnimationSpeed: 70
   xGap: 0.05
-  placementParent: {fileID: 624225839}
-  usedCardParent: {fileID: 1036891690}
-  boardUI: {fileID: 785026508}
+  sendCardToUsedAreaAnimationSpeed: 70
   usedCardAreaYPosition: 0
+  placementParent: {fileID: 624225839}
+  boardUI: {fileID: 785026508}
+  usedCardParent: {fileID: 1036891690}
 --- !u!1 &115693665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,11 +1581,11 @@ MonoBehaviour:
   t_cappedValue: {fileID: 270738540}
   cardDetailContainer: {fileID: 1911068627}
   cardDetailCanvasGroup: {fileID: 1911068631}
-  cardImage: {fileID: 33336383}
   t_cardName: {fileID: 496239195}
   t_cardValue: {fileID: 1774093778}
   t_cardLevel: {fileID: 1694067783}
   t_cardDescription: {fileID: 714014835}
+  cardImage: {fileID: 33336383}
   fadeDuration: 0.5
   moveDistance: 500
   shownDuration: 1.5
@@ -1977,17 +1977,15 @@ MonoBehaviour:
   animationSpeed: 3
   rotateSpeed: 0.75
   xGap: 0.05
+  dragHeight: 1
   side: 0
   placementArea: {fileID: 67568927}
   boardUI: {fileID: 785026508}
+  mainCamera: {fileID: 1400754184}
   player1_deckPosition: {fileID: 378565211}
-  usedCardParent: {fileID: 1036891690}
-  hoverCardOffset: {x: 0, y: 0, z: 0}
-  dragHeight: 1
   cardLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  mainCamera: {fileID: 1400754184}
 --- !u!4 &1027425581
 Transform:
   m_ObjectHideFlags: 0

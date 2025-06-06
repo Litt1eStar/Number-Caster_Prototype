@@ -7,22 +7,21 @@ public class DeckLayoutManagement : MonoBehaviour
     [SerializeField] private Deck deck;
 
     [Header("Animation Setting")]
-    public float cardSpacing = 0.5f;    
-    public float animationSpeed = 5.0f;
-    public float rotateSpeed = 10f;
-    public float xGap = 0.05f;
+    [SerializeField] private float cardSpacing = 0.5f;
+    [SerializeField] private float animationSpeed = 5.0f;
+    [SerializeField] private float rotateSpeed = 10f;
+    [SerializeField] private float xGap = 0.05f;
+    [SerializeField] private float dragHeight = 1.0f;
 
     [Header("Gameplay Setting")]
-    public Turn side; //for test
-    public PlacementArea placementArea;
-    public BoardUI boardUI;
-    public Camera mainCamera;
+    [SerializeField] private Turn side; //for test
+    [SerializeField] private PlacementArea placementArea;
+    [SerializeField] private BoardUI boardUI;
+    [SerializeField] private Camera mainCamera;
 
     [Header("Reference Setting")]
-    public Transform player1_deckPosition;
-    public Transform usedCardParent;
-    public float dragHeight = 1.0f;
-    public LayerMask cardLayerMask = -1;
+    [SerializeField] private Transform player1_deckPosition;
+    [SerializeField] private LayerMask cardLayerMask = -1;
     
     private List<Transform> handOfPlayer = new List<Transform>();
     private Vector3 draggedCardOriginalPosition;

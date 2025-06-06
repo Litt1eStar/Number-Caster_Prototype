@@ -6,22 +6,22 @@ using DG.Tweening;
 public class PlacementArea : MonoBehaviour
 {
     [Header("Animation Setting")]
-    public int maxCards = 3;
-    public float cardSpacing = 0.5f;
-    public float animationSpeed = 5.0f;
+    [SerializeField] private int maxCards = 3;
+    [SerializeField] private float cardSpacing = 0.5f;
+    [SerializeField] private float animationSpeed = 5.0f;
+    [SerializeField] private float xGap = 0.05f;
     public float sendCardToUsedAreaAnimationSpeed = 10.0f;
-    public float xGap = 0.05f;
+    public float usedCardAreaYPosition = 0.0f;
 
     [Header("Reference Setting")]
-    public Transform placementParent;
+    [SerializeField] private Transform placementParent;
+    [SerializeField] private BoardUI boardUI;
     public Transform usedCardParent;
-    public BoardUI boardUI;    
 
     private List<Transform> cardOnBoards = new List<Transform>();
     private Queue<char> cardQueue = new Queue<char>();
     private bool isEnter = false;
     private int c = 0;
-    public float usedCardAreaYPosition = 0.0f;
 
     private void Update()
     {
