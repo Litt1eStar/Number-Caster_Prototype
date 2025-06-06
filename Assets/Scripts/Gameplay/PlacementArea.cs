@@ -79,29 +79,18 @@ public class PlacementArea : MonoBehaviour
     }
     private void StartDrag()
     {
-        Vector3 mousePos = Input.mousePosition;
-        Ray ray = mainCamera.ScreenPointToRay(mousePos);
-        RaycastHit hit;
+        Transform cardToDrag = GetCardUnderMouse();
+        if (cardToDrag == null || !cardOnBoards.Contains(cardToDrag)) return;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cardLayerMask))
-        {
-            Transform hitCard = hit.collider.transform;
-
-            if (cardOnBoards.Contains(hitCard))
-            {
-                //Set state when start drag
-                draggedCard = hitCard;
-                draggedCardOriginalPosition = draggedCard.localPosition;
-
-                Vector3 liftedPos = draggedCardOriginalPosition;
-                liftedPos.y += dragHeight;
-                draggedCard.localPosition = liftedPos;
-
-                draggedCard.SetAsLastSibling();
-            }
-        }
+        InitializeDragState(cardToDrag);
+        LiftCard(cardToDrag);
     }
 
+    private void InitializeDragState(Transform card)
+    {
+        draggedCard = card;
+        draggedCardOriginalPosition = card.localPosition;
+    }
     private Transform GetCardUnderMouse()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -114,6 +103,13 @@ public class PlacementArea : MonoBehaviour
         }
 
         return null;
+    }
+    private void LiftCard(Transform card)
+    {
+        Vector3 liftedPosition = draggedCardOriginalPosition;
+        liftedPosition.y += dragHeight;
+        card.localPosition = liftedPosition;
+        card.SetAsLastSibling();
     }
     void ContinueDrag()
     {
