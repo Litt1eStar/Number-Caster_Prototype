@@ -304,7 +304,7 @@ public class DeckLayoutManagement : MonoBehaviour
         card.SetParent(GameManager.Instance.usedCardParent);
 
         Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
-        card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
+        card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed);
         GameManager.Instance.usedCardAreaYPosition += yOffset;
 
         ClearDraggedCardState();
