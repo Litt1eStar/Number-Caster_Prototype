@@ -341,6 +341,7 @@ public class PlacementArea : MonoBehaviour
         return card.cardData.CardType == CardType.Operator;
     }
     #endregion
+    #region Unity Trigger Events
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Mouse"))
@@ -357,4 +358,6 @@ public class PlacementArea : MonoBehaviour
             isEnter = false;
         }
     }
+
+    #endregion
 }
