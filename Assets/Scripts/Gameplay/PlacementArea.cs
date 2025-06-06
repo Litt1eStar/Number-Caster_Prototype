@@ -29,6 +29,7 @@ public class PlacementArea : MonoBehaviour
     private Transform draggedCard = null;
     private Vector3 draggedCardOriginalPosition;
     private int draggedCardOriginalIndex;
+    private int amountOfRemainingCards = 0;
 
     private void Start()
     {
@@ -281,12 +282,59 @@ public class PlacementArea : MonoBehaviour
     private void SendCardBackToHand()
     {
         Card removedCard = draggedCard.GetComponent<Card>();
-        if (removedCard.cardData.CardType == CardType.Number) c -= 1;
-        cardOnBoards.Remove(draggedCard);
-        cardQueue.Dequeue();
-        deckLayoutManagement.AddCard(draggedCard.gameObject);
-        ClearDraggedCardState();
+        if (CanRemoveCard(draggedCard))
+        {
+            c = amountOfRemainingCards;
+            cardOnBoards.Remove(draggedCard);
+            cardQueue.Dequeue();
+            deckLayoutManagement.AddCard(draggedCard.gameObject);
+            ClearDraggedCardState();
+        }        
     }
+
+    private bool CanRemoveCard(Transform card)
+    {
+        if (!cardOnBoards.Contains(card))
+            return false;
+
+        Card cardComponent = card.GetComponent<Card>();
+
+        // If it's a number card, we can always remove it
+        if (cardComponent.cardData.CardType == CardType.Number)
+        {
+            amountOfRemainingCards = c - 1;
+            return true;
+        }
+
+        // If it's an operator card, we need to check if removal maintains the maxCards limit
+        if (cardComponent.cardData.CardType == CardType.Operator)
+        {
+            int cardIndex = cardOnBoards.IndexOf(card);
+
+            int numberCardsBefore = 0;
+            for (int i = 0; i < cardIndex; i++)
+            {
+                Card beforeCard = cardOnBoards[i].GetComponent<Card>();
+                if (beforeCard.cardData.CardType == CardType.Number)
+                    numberCardsBefore++;
+            }
+
+            int numberCardsAfter = 0;
+            for (int i = cardIndex + 1; i < cardOnBoards.Count; i++)
+            {
+                Card afterCard = cardOnBoards[i].GetComponent<Card>();
+                if (afterCard.cardData.CardType == CardType.Number)
+                    numberCardsAfter++;
+            }
+
+            amountOfRemainingCards = numberCardsBefore + numberCardsAfter;
+            Debug.Log((numberCardsBefore + numberCardsAfter) <= maxCards);
+            return (numberCardsBefore + numberCardsAfter) <= maxCards;
+        }
+
+        return false;
+    }
+
     public bool IsLatestCardOperator()
     {
         if(cardOnBoards.Count <= 0) return false;
