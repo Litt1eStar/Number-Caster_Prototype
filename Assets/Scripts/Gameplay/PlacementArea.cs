@@ -275,6 +275,7 @@ public class PlacementArea : MonoBehaviour
         return false;
     }
     #endregion
+    #region Board Action
     public bool IsReturnCardBackToHand(Transform newCard)
     {
         Card card = newCard.GetComponent<Card>();
@@ -339,6 +340,7 @@ public class PlacementArea : MonoBehaviour
         
         return card.cardData.CardType == CardType.Operator;
     }
+    #endregion
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Mouse"))
