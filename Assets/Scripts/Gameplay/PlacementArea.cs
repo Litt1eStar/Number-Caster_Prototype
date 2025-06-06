@@ -5,12 +5,14 @@ using DG.Tweening;
 
 public class PlacementArea : MonoBehaviour
 {
+    [Header("Animation Setting")]
     public int maxCards = 3;
-
     public float cardSpacing = 0.5f;
     public float animationSpeed = 5.0f;
     public float sendCardToUsedAreaAnimationSpeed = 10.0f;
     public float xGap = 0.05f;
+
+    [Header("Reference Setting")]
     public Transform placementParent;
     public Transform usedCardParent;
     public BoardUI boardUI;    
@@ -18,9 +20,9 @@ public class PlacementArea : MonoBehaviour
     private List<Transform> cardOnBoards = new List<Transform>();
     private Queue<char> cardQueue = new Queue<char>();
     private bool isEnter = false;
-
     private int c = 0;
     public float usedCardAreaYPosition = 0.0f;
+
     private void Update()
     {
         UpdateCardPositions();
