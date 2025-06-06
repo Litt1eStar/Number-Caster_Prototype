@@ -1974,7 +1974,6 @@ MonoBehaviour:
   xGap: 0.05
   dragHeight: 1
   side: 0
-  placementArea: {fileID: 67568927}
   mainCamera: {fileID: 1400754184}
   player1_deckPosition: {fileID: 378565211}
   cardLayerMask:
@@ -3404,7 +3403,6 @@ MonoBehaviour:
   usedCardAreaYPosition: 0
   placementParent: {fileID: 624225839}
   usedCardParent: {fileID: 1036891690}
-  boardUI: {fileID: 785026508}
 --- !u!1 &2068440190
 GameObject:
   m_ObjectHideFlags: 0
