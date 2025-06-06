@@ -70,12 +70,7 @@ public class PlacementArea : MonoBehaviour
         currentCardNumberCount = 0;
     }
     #endregion
-
-    private void UpdateButtonVisibility()
-    {
-        if (!IsBoardEmpty()) boardUI.ShowButton();
-        else boardUI.HideButton();
-    }
+    #region Drag and Drop System
     private void HandleDragAndDrop()
     {
         if (Input.GetMouseButtonDown(0) && draggedCard == null) StartDrag();
@@ -90,33 +85,7 @@ public class PlacementArea : MonoBehaviour
         InitializeDragState(cardToDrag);
         LiftCard(cardToDrag);
     }
-
-    private void InitializeDragState(Transform card)
-    {
-        draggedCard = card;
-        draggedCardOriginalPosition = card.localPosition;
-    }
-    private Transform GetCardUnderMouse()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        Ray ray = mainCamera.ScreenPointToRay(mousePos);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cardLayerMask))
-        {
-            return hit.collider.transform;
-        }
-
-        return null;
-    }
-    private void LiftCard(Transform card)
-    {
-        Vector3 liftedPosition = draggedCardOriginalPosition;
-        liftedPosition.y += dragHeight;
-        card.localPosition = liftedPosition;
-        card.SetAsLastSibling();
-    }
-    void ContinueDrag()
+    private void ContinueDrag()
     {
         //If we are dragging a card, we need to update its position
         //We will use the mouse position to calculate the new position of the card
@@ -127,14 +96,7 @@ public class PlacementArea : MonoBehaviour
         Vector3 localPos = draggedCard.parent.InverseTransformPoint(mouseWorldPosition);
         draggedCard.localPosition = localPos;
     }
-
-    private Vector3 GetMouseWorldPosition()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = mainCamera.WorldToScreenPoint(draggedCard.position).z;
-        return mainCamera.ScreenToWorldPoint(mousePos);
-    }
-    void EndDrag()
+    private void EndDrag()
     {
         switch (ActionManager.Instance.isInPlacementArea)
         {
@@ -149,13 +111,32 @@ public class PlacementArea : MonoBehaviour
         //Clear drag state after placing the card
         ClearDraggedCardState();
     }
-    private void ClearDraggedCardState()
+    private void InitializeDragState(Transform card)
     {
-        draggedCard = null;
-        draggedCardOriginalIndex = -1;
+        draggedCard = card;
+        draggedCardOriginalPosition = card.localPosition;
     }
+    private void LiftCard(Transform card)
+    {
+        Vector3 liftedPosition = draggedCardOriginalPosition;
+        liftedPosition.y += dragHeight;
+        card.localPosition = liftedPosition;
+        card.SetAsLastSibling();
+    }
+    private Transform GetCardUnderMouse()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        RaycastHit hit;
 
-    void AnimateCardBackToBoard()
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cardLayerMask))
+        {
+            return hit.collider.transform;
+        }
+
+        return null;
+    }
+    private void AnimateCardBackToBoard()
     {
         if (draggedCard == null) return;
 
@@ -176,6 +157,23 @@ public class PlacementArea : MonoBehaviour
         // Optional: Add a slight bounce effect or scale animation
         cardToAnimate.DOPunchScale(Vector3.one * 0.1f, 0.2f, 1, 0.5f);
     }
+    private void ClearDraggedCardState()
+    {
+        draggedCard = null;
+        draggedCardOriginalIndex = -1;
+    }
+    private Vector3 GetMouseWorldPosition()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = mainCamera.WorldToScreenPoint(draggedCard.position).z;
+        return mainCamera.ScreenToWorldPoint(mousePos);
+    }
+    private void UpdateButtonVisibility()
+    {
+        if (!IsBoardEmpty()) boardUI.ShowButton();
+        else boardUI.HideButton();
+    }
+    #endregion
     public void AddCard(Transform newCard)
     {
         if (newCard != null) 
