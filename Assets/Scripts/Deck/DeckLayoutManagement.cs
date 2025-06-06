@@ -6,35 +6,37 @@ public class DeckLayoutManagement : MonoBehaviour
 {
     [SerializeField] private Deck deck;
 
-    public float cardSpacing = 0.5f;    
-    public float animationSpeed = 5.0f;
-    public float rotateSpeed = 10f;
-    public float xGap = 0.05f;
+    [Header("Animation Setting")]
+    [SerializeField] private float cardSpacing = 0.5f;
+    [SerializeField] private float animationSpeed = 5.0f;
+    [SerializeField] private float rotateSpeed = 10f;
+    [SerializeField] private float xGap = 0.05f;
+    [SerializeField] private float dragHeight = 1.0f;
 
-    public Turn side; //for test
-    public PlacementArea placementArea;
-    public BoardUI boardUI;
+    [Header("Gameplay Setting")]
+    [SerializeField] private Turn side; //for test
+    [SerializeField] private Camera mainCamera;
 
-    public Transform player1_deckPosition;
-    public Transform usedCardParent;
-    public Vector3 hoverCardOffset;
-    public float dragHeight = 1.0f;
-    public LayerMask cardLayerMask = -1;
+    [Header("Reference Setting")]
+    [SerializeField] private Transform player1_deckPosition;
+    [SerializeField] private LayerMask cardLayerMask = -1;
     
     private List<Transform> handOfPlayer = new List<Transform>();
-
-    public Camera mainCamera;
+    private Vector3 draggedCardOriginalPosition;
     private Transform draggedCard;
     private int draggedCardOriginalIndex;
-    private Vector3 draggedCardOriginalPosition;
     private int insertIndex = -1;
 
+    private PlacementArea placementArea;
+    private BoardUI boardUI;
     private Card shownCard = null;
     private bool isCardDetailShown = false;
 
     private void Start()
     {
         side = Turn.Player1;
+        boardUI = GameManager.Instance.boardUI;
+        placementArea = GameManager.Instance.placementArea;
     }
     void Update()
     {
@@ -297,11 +299,11 @@ public class DeckLayoutManagement : MonoBehaviour
         float yOffset = 0.01f;
 
         RemoveCard(card.gameObject);
-        card.SetParent(placementArea.usedCardParent);
+        card.SetParent(GameManager.Instance.usedCardParent);
 
-        Vector3 targetPosition = new Vector3(0, placementArea.usedCardAreaYPosition, 0);
-        card.DOLocalMove(targetPosition, placementArea.sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
-        placementArea.usedCardAreaYPosition += yOffset;
+        Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
+        card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
+        GameManager.Instance.usedCardAreaYPosition += yOffset;
 
         ClearDraggedCardState();
     }

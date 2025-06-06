@@ -5,22 +5,31 @@ using DG.Tweening;
 
 public class PlacementArea : MonoBehaviour
 {
-    public int maxCards = 3;
+    [Header("Animation Setting")]
+    [SerializeField] private int maxCards = 3;
+    [SerializeField] private float cardSpacing = 0.5f;
+    [SerializeField] private float animationSpeed = 5.0f;
+    [SerializeField] private float xGap = 0.05f;
 
-    public float cardSpacing = 0.5f;
-    public float animationSpeed = 5.0f;
-    public float sendCardToUsedAreaAnimationSpeed = 10.0f;
-    public float xGap = 0.05f;
-    public Transform placementParent;
-    public Transform usedCardParent;
-    public BoardUI boardUI;    
-
+    private BoardUI boardUI;
     private List<Transform> cardOnBoards = new List<Transform>();
     private Queue<char> cardQueue = new Queue<char>();
     private bool isEnter = false;
-
     private int c = 0;
-    public float usedCardAreaYPosition = 0.0f;
+
+    private void Start()
+    {
+        boardUI = GameManager.Instance.boardUI;
+        if (boardUI == null)
+        {
+            Debug.LogError("BoardUI is not assigned in GameManager.");
+            return;
+        }
+        
+        cardOnBoards.Clear();
+        cardQueue.Clear();
+        c = 0;
+    }
     private void Update()
     {
         UpdateCardPositions();
@@ -54,7 +63,7 @@ public class PlacementArea : MonoBehaviour
         cardQueue.Enqueue(card.cardData.cardValue);
 
         cardOnBoards.Add(newCard);
-        newCard.SetParent(placementParent);
+        newCard.SetParent(GameManager.Instance.placementParent);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -149,11 +158,11 @@ public class PlacementArea : MonoBehaviour
 
         foreach (Transform card in cardOnBoards)
         {
-            card.SetParent(usedCardParent);
+            card.SetParent(GameManager.Instance.usedCardParent);
 
-            Vector3 targetPosition = new Vector3(0, usedCardAreaYPosition, 0);
-            card.DOLocalMove(targetPosition, sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
-            usedCardAreaYPosition += yOffset;
+            Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
+            card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed);
+            GameManager.Instance.usedCardAreaYPosition += yOffset;
         }
 
         cardOnBoards.Clear();
