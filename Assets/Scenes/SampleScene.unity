@@ -3400,7 +3400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c5a1a4ac3e8e74cb5dd451c24a902d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sendCardToUsedAreaAnimationSpeed: 10
+  sendCardToUsedAreaAnimationSpeed: 0.5
   usedCardAreaYPosition: 0
   placementParent: {fileID: 624225839}
   usedCardParent: {fileID: 1036891690}

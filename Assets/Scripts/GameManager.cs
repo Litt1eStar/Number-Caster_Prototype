@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     [Header("Animation Reference")]
-    public float sendCardToUsedAreaAnimationSpeed = 10.0f;
+    public float sendCardToUsedAreaAnimationSpeed = 0.5f;
     public float usedCardAreaYPosition = 0.0f;
 
     [Header("Transform Reference")]
