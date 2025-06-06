@@ -23,7 +23,7 @@ public class PlacementArea : MonoBehaviour
     private List<Transform> cardOnBoards = new List<Transform>();
     private Queue<char> cardQueue = new Queue<char>();
     private bool isEnter = false;
-    private int c = 0;
+    private int currentCardNumberCount = 0;
 
     private PlacementArea placementArea;
     private Transform draggedCard = null;
@@ -38,7 +38,7 @@ public class PlacementArea : MonoBehaviour
 
         cardOnBoards.Clear();
         cardQueue.Clear();
-        c = 0;
+        currentCardNumberCount = 0;
     }
     private void Update()
     {
@@ -165,11 +165,11 @@ public class PlacementArea : MonoBehaviour
         {
             Card card = newCard.GetComponent<Card>();
 
-            bool isReachLimit = c >= maxCards;
+            bool isReachLimit = currentCardNumberCount >= maxCards;
 
-            if (DeckHelper.IsOperatorCard(card)) c = 0;
-            if (isReachLimit && DeckHelper.IsOperatorCard(card)) c = 0;
-            else if(DeckHelper.IsNumberCard(card) && !isReachLimit) c++;
+            if (DeckHelper.IsOperatorCard(card)) currentCardNumberCount = 0;
+            if (isReachLimit && DeckHelper.IsOperatorCard(card)) currentCardNumberCount = 0;
+            else if(DeckHelper.IsNumberCard(card) && !isReachLimit) currentCardNumberCount++;
            
             AddCardToBoard(newCard, card);
         }
@@ -213,9 +213,9 @@ public class PlacementArea : MonoBehaviour
     public bool IsReturnCardBackToHand(Transform newCard)
     {
         Card card = newCard.GetComponent<Card>();
-        if (c >= maxCards && card.cardData.CardType == CardType.Number)
+        if (currentCardNumberCount >= maxCards && card.cardData.CardType == CardType.Number)
         {
-            Debug.Log($"Cannot place number card: {c}/{maxCards} slots filled");
+            Debug.Log($"Cannot place number card: {currentCardNumberCount}/{maxCards} slots filled");
             return true;
         }
 
@@ -282,9 +282,14 @@ public class PlacementArea : MonoBehaviour
             GameManager.Instance.usedCardAreaYPosition += yOffset;
         }
 
+        ResetBoard();
+    }
+
+    private void ResetBoard()
+    {
         cardOnBoards.Clear();
         cardQueue.Clear();
-        c = 0;
+        currentCardNumberCount = 0;
     }
 
     private void SendCardBackToHand()
@@ -292,7 +297,7 @@ public class PlacementArea : MonoBehaviour
         Card removedCard = draggedCard.GetComponent<Card>();
         if (CanRemoveCard(draggedCard))
         {
-            c = amountOfRemainingCards;
+            currentCardNumberCount = amountOfRemainingCards;
             cardOnBoards.Remove(draggedCard);
             cardQueue.Dequeue();
             deckLayoutManagement.AddCard(draggedCard.gameObject);
@@ -310,7 +315,7 @@ public class PlacementArea : MonoBehaviour
         // If it's a number card, we can always remove it
         if (cardComponent.cardData.CardType == CardType.Number)
         {
-            amountOfRemainingCards = c - 1;
+            amountOfRemainingCards = currentCardNumberCount - 1;
             return true;
         }
 
