@@ -127,6 +127,12 @@ public class PlacementArea : MonoBehaviour
         draggedCard.localPosition = localPos;
     }
 
+    private Vector3 GetMouseWorldPosition()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = mainCamera.WorldToScreenPoint(draggedCard.position).z;
+        return mainCamera.ScreenToWorldPoint(mousePos);
+    }
     void EndDrag()
     {
         switch (ActionManager.Instance.isInPlacementArea)
