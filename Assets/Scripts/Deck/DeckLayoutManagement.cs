@@ -40,13 +40,15 @@ public class DeckLayoutManagement : MonoBehaviour
     }
     void Update()
     {
+        HandleRightClick();
+        if (boardUI.isCardDetailShown) return;
+
         //FOR TESTING PURPOSE
         if (Input.GetKeyDown(KeyCode.Space))
         {
             DrawCard(Turn.Player1, deck);
         }
 
-        HandleRightClick();
         HandleDragAndDrop();
         UpdateCardPositions();
     }

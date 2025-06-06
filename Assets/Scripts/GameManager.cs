@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     public Transform usedCardParent;
 
     [Header("Class Reference")]
-    public BoardUI boardUI { get; private set;}
-    public PlacementArea placementArea { get; private set; }
+    public BoardUI boardUI;
+    public PlacementArea placementArea;
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         if (boardUI == null)
         {
             boardUI = GameObject.FindFirstObjectByType<BoardUI>();
-            if (boardUI == null)
+            if(boardUI == null)
             {
                 Debug.LogError("BoardUI is not in scene.");
             }
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         if(placementArea == null)
         {
             placementArea = GameObject.FindFirstObjectByType<PlacementArea>();
-            if (placementArea == null)
+            if(placementArea == null)
             {
                 Debug.LogError("PlacementArea is not in scene.");
             }

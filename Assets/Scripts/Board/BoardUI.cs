@@ -29,6 +29,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private float shownDuration = 1.5f;
 
     public bool onHidingPanel { get; private set; } = false;
+    public bool isCardDetailShown { get; private set; } = false;
     private Vector3 originalPosition;
     private Vector3 hiddenPosition;
     private void Start()
@@ -103,6 +104,8 @@ public class BoardUI : MonoBehaviour
         t_cardLevel.text = "Card Level : " + shownCard.cardData.cardLevel.ToString();
         t_cardDescription.text = "Card Description : " + shownCard.cardData.cardDescription;
         resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
+        
+        isCardDetailShown = true;
     }
 
     public void HideCardDetail()
@@ -118,6 +121,7 @@ public class BoardUI : MonoBehaviour
             t_cardLevel.text = string.Empty;
             t_cardDescription.text = string.Empty;
             onHidingPanel = false;
+            isCardDetailShown = false;
         });
     }
 }   
