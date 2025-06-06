@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Class Reference")]
     public BoardUI boardUI;
+    public PlacementArea placementArea;
 
     private void Awake()
     {

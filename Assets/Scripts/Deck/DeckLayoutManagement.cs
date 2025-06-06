@@ -15,7 +15,6 @@ public class DeckLayoutManagement : MonoBehaviour
 
     [Header("Gameplay Setting")]
     [SerializeField] private Turn side; //for test
-    [SerializeField] private PlacementArea placementArea;
     [SerializeField] private Camera mainCamera;
 
     [Header("Reference Setting")]
@@ -28,6 +27,7 @@ public class DeckLayoutManagement : MonoBehaviour
     private int draggedCardOriginalIndex;
     private int insertIndex = -1;
 
+    private PlacementArea placementArea;
     private BoardUI boardUI;
     private Card shownCard = null;
     private bool isCardDetailShown = false;
@@ -36,11 +36,7 @@ public class DeckLayoutManagement : MonoBehaviour
     {
         side = Turn.Player1;
         boardUI = GameManager.Instance.boardUI;
-        if (boardUI == null)
-        {
-            Debug.LogError("BoardUI is not assigned in GameManager.");
-            return;
-        }
+        placementArea = GameManager.Instance.placementArea;
     }
     void Update()
     {
