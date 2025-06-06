@@ -11,16 +11,25 @@ public class PlacementArea : MonoBehaviour
     [SerializeField] private float animationSpeed = 5.0f;
     [SerializeField] private float xGap = 0.05f;
 
-    [Header("Reference Setting")]
-    [SerializeField] private Transform placementParent;
-    [SerializeField] private BoardUI boardUI;
-    public Transform usedCardParent;
-
+    private BoardUI boardUI;
     private List<Transform> cardOnBoards = new List<Transform>();
     private Queue<char> cardQueue = new Queue<char>();
     private bool isEnter = false;
     private int c = 0;
 
+    private void Start()
+    {
+        boardUI = GameManager.Instance.boardUI;
+        if (boardUI == null)
+        {
+            Debug.LogError("BoardUI is not assigned in GameManager.");
+            return;
+        }
+        
+        cardOnBoards.Clear();
+        cardQueue.Clear();
+        c = 0;
+    }
     private void Update()
     {
         UpdateCardPositions();
@@ -54,7 +63,7 @@ public class PlacementArea : MonoBehaviour
         cardQueue.Enqueue(card.cardData.cardValue);
 
         cardOnBoards.Add(newCard);
-        newCard.SetParent(placementParent);
+        newCard.SetParent(GameManager.Instance.placementParent);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -149,7 +158,7 @@ public class PlacementArea : MonoBehaviour
 
         foreach (Transform card in cardOnBoards)
         {
-            card.SetParent(usedCardParent);
+            card.SetParent(GameManager.Instance.usedCardParent);
 
             Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
             card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed * Time.deltaTime);

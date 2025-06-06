@@ -335,9 +335,6 @@ MonoBehaviour:
   cardSpacing: 2.5
   animationSpeed: 5
   xGap: 0.05
-  placementParent: {fileID: 624225839}
-  boardUI: {fileID: 785026508}
-  usedCardParent: {fileID: 1036891690}
 --- !u!1 &115693665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1978,7 +1975,6 @@ MonoBehaviour:
   dragHeight: 1
   side: 0
   placementArea: {fileID: 67568927}
-  boardUI: {fileID: 785026508}
   mainCamera: {fileID: 1400754184}
   player1_deckPosition: {fileID: 378565211}
   cardLayerMask:
@@ -3406,6 +3402,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendCardToUsedAreaAnimationSpeed: 10
   usedCardAreaYPosition: 0
+  placementParent: {fileID: 624225839}
+  usedCardParent: {fileID: 1036891690}
+  boardUI: {fileID: 785026508}
 --- !u!1 &2068440190
 GameObject:
   m_ObjectHideFlags: 0

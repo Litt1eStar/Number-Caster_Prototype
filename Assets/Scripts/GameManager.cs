@@ -9,6 +9,13 @@ public class GameManager : MonoBehaviour
     public float sendCardToUsedAreaAnimationSpeed = 10.0f;
     public float usedCardAreaYPosition = 0.0f;
 
+    [Header("Transform Reference")]
+    public Transform placementParent;
+    public Transform usedCardParent;
+
+    [Header("Class Reference")]
+    public BoardUI boardUI;
+
     private void Awake()
     {
         if(instance == null)

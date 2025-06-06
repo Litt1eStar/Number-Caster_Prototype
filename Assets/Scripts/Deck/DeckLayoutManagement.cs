@@ -16,7 +16,6 @@ public class DeckLayoutManagement : MonoBehaviour
     [Header("Gameplay Setting")]
     [SerializeField] private Turn side; //for test
     [SerializeField] private PlacementArea placementArea;
-    [SerializeField] private BoardUI boardUI;
     [SerializeField] private Camera mainCamera;
 
     [Header("Reference Setting")]
@@ -29,12 +28,19 @@ public class DeckLayoutManagement : MonoBehaviour
     private int draggedCardOriginalIndex;
     private int insertIndex = -1;
 
+    private BoardUI boardUI;
     private Card shownCard = null;
     private bool isCardDetailShown = false;
 
     private void Start()
     {
         side = Turn.Player1;
+        boardUI = GameManager.Instance.boardUI;
+        if (boardUI == null)
+        {
+            Debug.LogError("BoardUI is not assigned in GameManager.");
+            return;
+        }
     }
     void Update()
     {
@@ -44,16 +50,9 @@ public class DeckLayoutManagement : MonoBehaviour
             DrawCard(Turn.Player1, deck);
         }
 
-        HandleRaycast();
         HandleRightClick();
         HandleDragAndDrop();
         UpdateCardPositions();
-    }
-    private void HandleRaycast()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        Ray ray = mainCamera.ScreenPointToRay(mousePos);
-        RaycastHit hit;
     }
     private void HandleDragAndDrop()
     {
@@ -304,7 +303,7 @@ public class DeckLayoutManagement : MonoBehaviour
         float yOffset = 0.01f;
 
         RemoveCard(card.gameObject);
-        card.SetParent(placementArea.usedCardParent);
+        card.SetParent(GameManager.Instance.usedCardParent);
 
         Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
         card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
