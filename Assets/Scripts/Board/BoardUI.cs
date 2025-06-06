@@ -5,20 +5,25 @@ using UnityEngine.UI;
 
 public class BoardUI : MonoBehaviour
 {
+    [Header("Button Reference")]
     [SerializeField] private GameObject btnContainer;
+
+    [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
     [SerializeField] private CanvasGroup resultCanvasGroup;
     [SerializeField] private TextMeshProUGUI t_rawValue;
     [SerializeField] private TextMeshProUGUI t_cappedValue;
 
+    [Header("Card Detail Reference")]
     [SerializeField] private GameObject cardDetailContainer;
     [SerializeField] private CanvasGroup cardDetailCanvasGroup;
-    [SerializeField] private Image cardImage;
     [SerializeField] private TextMeshProUGUI t_cardName;
     [SerializeField] private TextMeshProUGUI t_cardValue;
     [SerializeField] private TextMeshProUGUI t_cardLevel;
     [SerializeField] private TextMeshProUGUI t_cardDescription;
+    [SerializeField] private Image cardImage;
 
+    [Header("Animation Settings")]
     [SerializeField] private float fadeDuration = 0.5f;
     [SerializeField] private float moveDistance = 500f;
     [SerializeField] private float shownDuration = 1.5f;

@@ -18,7 +18,7 @@ public class DeckLayoutManagement : MonoBehaviour
     public BoardUI boardUI;
     public Camera mainCamera;
 
-    [Header("Transform Setting")]
+    [Header("Reference Setting")]
     public Transform player1_deckPosition;
     public Transform usedCardParent;
     public float dragHeight = 1.0f;
