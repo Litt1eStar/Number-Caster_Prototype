@@ -10,6 +10,14 @@ public class PlacementArea : MonoBehaviour
     [SerializeField] private float cardSpacing = 0.5f;
     [SerializeField] private float animationSpeed = 5.0f;
     [SerializeField] private float xGap = 0.05f;
+    [SerializeField] private float dragHeight = 1.0f;
+
+    [Header("Gameplay Setting")]
+    [SerializeField] private Camera mainCamera;
+
+    [Header("Reference Setting")]
+    [SerializeField] private LayerMask cardLayerMask = -1;
+    [SerializeField] private DeckLayoutManagement deckLayoutManagement;
 
     private BoardUI boardUI;
     private List<Transform> cardOnBoards = new List<Transform>();
@@ -17,15 +25,26 @@ public class PlacementArea : MonoBehaviour
     private bool isEnter = false;
     private int c = 0;
 
+    private PlacementArea placementArea;
+    private Transform draggedCard = null;
+    private Vector3 draggedCardOriginalPosition;
+    private int draggedCardOriginalIndex;
+
     private void Start()
     {
         boardUI = GameManager.Instance.boardUI;
+        placementArea = GameManager.Instance.placementArea;
         if (boardUI == null)
         {
             Debug.LogError("BoardUI is not assigned in GameManager.");
             return;
         }
-        
+        if(placementArea == null)
+        {
+            Debug.LogError("PlacementArea is not assigned in GameManager.");
+            return;
+        }
+
         cardOnBoards.Clear();
         cardQueue.Clear();
         c = 0;
@@ -33,6 +52,7 @@ public class PlacementArea : MonoBehaviour
     private void Update()
     {
         UpdateCardPositions();
+        HandleDragAndDrop();
         if (!IsBoardEmpty())
         {
             boardUI.ShowButton();
@@ -41,6 +61,94 @@ public class PlacementArea : MonoBehaviour
         {
             boardUI.HideButton();
         }
+    }
+    private void HandleDragAndDrop()
+    {
+        if (Input.GetMouseButtonDown(0) && draggedCard == null) StartDrag();
+        if (Input.GetMouseButton(0) && draggedCard != null) ContinueDrag();
+        if (Input.GetMouseButtonUp(0) && draggedCard != null) EndDrag();
+    }
+    private void StartDrag()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cardLayerMask))
+        {
+            Transform hitCard = hit.collider.transform;
+
+            if (cardOnBoards.Contains(hitCard))
+            {
+                //Set state when start drag
+                draggedCard = hitCard;
+                draggedCardOriginalPosition = draggedCard.localPosition;
+
+                Vector3 liftedPos = draggedCardOriginalPosition;
+                liftedPos.y += dragHeight;
+                draggedCard.localPosition = liftedPos;
+
+                draggedCard.SetAsLastSibling();
+            }
+        }
+    }
+    void ContinueDrag()
+    {
+        //If we are dragging a card, we need to update its position
+        //We will use the mouse position to calculate the new position of the card
+        //and set x position to make card appear on top of other cards
+        //Then calculate the insert index based on the position of dragged card
+
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = mainCamera.WorldToScreenPoint(draggedCard.position).z;
+        Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
+
+        Vector3 localPos = draggedCard.parent.InverseTransformPoint(worldPos);
+
+        draggedCard.localPosition = localPos;
+    }
+
+    void EndDrag()
+    {
+        switch (ActionManager.Instance.isInPlacementArea)
+        {
+            case true:
+                AnimateCardBackToBoard();
+                break;
+            case false:
+                SendCardBackToHand();
+                break;
+        }
+
+        //Clear drag state after placing the card
+        ClearDraggedCardState();
+    }
+    private void ClearDraggedCardState()
+    {
+        draggedCard = null;
+        draggedCardOriginalIndex = -1;
+    }
+
+    void AnimateCardBackToBoard()
+    {
+        if (draggedCard == null) return;
+
+        Transform cardToAnimate = draggedCard;
+        Vector3 originalPos = draggedCardOriginalPosition;
+
+        // Animate the card back to its original position
+        cardToAnimate.DOLocalMove(originalPos, 0.3f)
+            .SetEase(Ease.OutBack)
+            .OnComplete(() =>
+            {
+                // Reset drag state after animation completes
+                draggedCard = null;
+                // Update hand positions to ensure proper layout
+                UpdateCardPositions();
+            });
+
+        // Optional: Add a slight bounce effect or scale animation
+        cardToAnimate.DOPunchScale(Vector3.one * 0.1f, 0.2f, 1, 0.5f);
     }
     public void AddCard(Transform newCard)
     {
@@ -170,6 +278,15 @@ public class PlacementArea : MonoBehaviour
         c = 0;
     }
 
+    private void SendCardBackToHand()
+    {
+        Card removedCard = draggedCard.GetComponent<Card>();
+        if (removedCard.cardData.CardType == CardType.Number) c -= 1;
+        cardOnBoards.Remove(draggedCard);
+        cardQueue.Dequeue();
+        deckLayoutManagement.AddCard(draggedCard.gameObject);
+        ClearDraggedCardState();
+    }
     public bool IsLatestCardOperator()
     {
         if(cardOnBoards.Count <= 0) return false;

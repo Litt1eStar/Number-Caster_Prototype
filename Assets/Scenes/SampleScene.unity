@@ -335,6 +335,12 @@ MonoBehaviour:
   cardSpacing: 2.5
   animationSpeed: 5
   xGap: 0.05
+  dragHeight: 1
+  mainCamera: {fileID: 1400754184}
+  cardLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  deckLayoutManagement: {fileID: 1027425580}
 --- !u!1 &115693665
 GameObject:
   m_ObjectHideFlags: 0
