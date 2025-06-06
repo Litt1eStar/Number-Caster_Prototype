@@ -174,6 +174,7 @@ public class PlacementArea : MonoBehaviour
         else boardUI.HideButton();
     }
     #endregion
+    #region Card Management
     public void AddCard(Transform newCard)
     {
         if (newCard != null) 
@@ -189,7 +190,6 @@ public class PlacementArea : MonoBehaviour
             AddCardToBoard(newCard, card);
         }
     }
-
     private void AddCardToBoard(Transform newCard, Card card)
     {
         cardQueue.Enqueue(card.cardData.cardValue);
@@ -197,26 +197,7 @@ public class PlacementArea : MonoBehaviour
         cardOnBoards.Add(newCard);
         newCard.SetParent(GameManager.Instance.placementParent);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Mouse"))
-        {
-            ActionManager.Instance.EnterPlacementArea();
-            isEnter = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (isEnter)
-        {
-            ActionManager.Instance.ExitPlacementArea();
-            isEnter = false;
-        }
-    }
-
-    void UpdateCardPositions()
+    private void UpdateCardPositions()
     {
         for (int i = 0; i < cardOnBoards.Count; i++)
         {
@@ -224,66 +205,6 @@ public class PlacementArea : MonoBehaviour
             cardOnBoards[i].localPosition = Vector3.Lerp(cardOnBoards[i].localPosition, targetPos, Time.deltaTime * animationSpeed);
         }
     }
-
-    public bool IsReturnCardBackToHand(Transform newCard)
-    {
-        Card card = newCard.GetComponent<Card>();
-        if (currentCardNumberCount >= maxCards && card.cardData.CardType == CardType.Number)
-        {
-            Debug.Log($"Cannot place number card: {currentCardNumberCount}/{maxCards} slots filled");
-            return true;
-        }
-
-        return false;
-    }
-
-    public bool IsPreviousCardOperator()
-    {
-        if (cardOnBoards.Count == 0) return false;
-
-        Card lastCard = cardOnBoards[cardOnBoards.Count - 1].GetComponent<Card>();
-        return lastCard.cardData.CardType == CardType.Operator;
-    }   
-
-    public bool IsBoardEmpty() => cardOnBoards.Count == 0;
-    public void OnClickAttackButton()
-    {
-        if (IsLatestCardOperator())
-        {
-            //Give some feedback to player that they cannot use this button
-            return;
-        }
-
-        if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
-        {
-            //Send card on board to used card area
-            SendCardToUsedArea();
-            //Cap Value of result
-            int cappedValue = ValueCapper.CapValue(result);
-            //Use result to Attack Enemy
-            boardUI.ShowResult(result, cappedValue);
-        }
-    }
-
-    public void OnClickProtectButton()
-    {
-        if (IsLatestCardOperator())
-        {
-            //Give some feedback to player that they cannot use this button
-            return;
-        }
-
-        if (BoardCalculation.CalculateBoardValue(cardQueue, out int result))
-        {
-            //Send card on board to used card area
-            SendCardToUsedArea();
-            //Cap Value of result
-            int cappedValue = ValueCapper.CapValue(result);
-            //Use result to Create Shield for Player
-            boardUI.ShowResult(result, cappedValue);
-        }
-    }
-
     private void SendCardToUsedArea()
     {
         float yOffset = 0.01f;
@@ -299,7 +220,6 @@ public class PlacementArea : MonoBehaviour
 
         ResetBoard();
     }
-
     private void SendCardBackToHand()
     {
         Card removedCard = draggedCard.GetComponent<Card>();
@@ -312,7 +232,6 @@ public class PlacementArea : MonoBehaviour
             ClearDraggedCardState();
         }        
     }
-
     private bool CanRemoveCard(Transform card)
     {
         if (!cardOnBoards.Contains(card))
@@ -355,7 +274,62 @@ public class PlacementArea : MonoBehaviour
 
         return false;
     }
+    #endregion
+    public bool IsReturnCardBackToHand(Transform newCard)
+    {
+        Card card = newCard.GetComponent<Card>();
+        if (currentCardNumberCount >= maxCards && card.cardData.CardType == CardType.Number)
+        {
+            Debug.Log($"Cannot place number card: {currentCardNumberCount}/{maxCards} slots filled");
+            return true;
+        }
 
+        return false;
+    }
+    public bool IsPreviousCardOperator()
+    {
+        if (cardOnBoards.Count == 0) return false;
+
+        Card lastCard = cardOnBoards[cardOnBoards.Count - 1].GetComponent<Card>();
+        return lastCard.cardData.CardType == CardType.Operator;
+    }   
+    public bool IsBoardEmpty() => cardOnBoards.Count == 0;
+    public void OnClickAttackButton()
+    {
+        if (IsLatestCardOperator())
+        {
+            //Give some feedback to player that they cannot use this button
+            return;
+        }
+
+        if(BoardCalculation.CalculateBoardValue(cardQueue, out int result))
+        {
+            //Send card on board to used card area
+            SendCardToUsedArea();
+            //Cap Value of result
+            int cappedValue = ValueCapper.CapValue(result);
+            //Use result to Attack Enemy
+            boardUI.ShowResult(result, cappedValue);
+        }
+    }
+    public void OnClickProtectButton()
+    {
+        if (IsLatestCardOperator())
+        {
+            //Give some feedback to player that they cannot use this button
+            return;
+        }
+
+        if (BoardCalculation.CalculateBoardValue(cardQueue, out int result))
+        {
+            //Send card on board to used card area
+            SendCardToUsedArea();
+            //Cap Value of result
+            int cappedValue = ValueCapper.CapValue(result);
+            //Use result to Create Shield for Player
+            boardUI.ShowResult(result, cappedValue);
+        }
+    }
     public bool IsLatestCardOperator()
     {
         if(cardOnBoards.Count <= 0) return false;
@@ -364,5 +338,21 @@ public class PlacementArea : MonoBehaviour
         Card card = lastCard.GetComponent<Card>();
         
         return card.cardData.CardType == CardType.Operator;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Mouse"))
+        {
+            ActionManager.Instance.EnterPlacementArea();
+            isEnter = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (isEnter)
+        {
+            ActionManager.Instance.ExitPlacementArea();
+            isEnter = false;
+        }
     }
 }
