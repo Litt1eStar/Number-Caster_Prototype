@@ -101,6 +101,20 @@ public class PlacementArea : MonoBehaviour
             }
         }
     }
+
+    private Transform GetCardUnderMouse()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, cardLayerMask))
+        {
+            return hit.collider.transform;
+        }
+
+        return null;
+    }
     void ContinueDrag()
     {
         //If we are dragging a card, we need to update its position
