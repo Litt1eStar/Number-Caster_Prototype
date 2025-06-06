@@ -44,14 +44,7 @@ public class PlacementArea : MonoBehaviour
     {
         UpdateCardPositions();
         HandleDragAndDrop();
-        if (!IsBoardEmpty())
-        {
-            boardUI.ShowButton();
-        }
-        else
-        {
-            boardUI.HideButton();
-        }
+        UpdateButtonVisibility();
     }
     private void InitializeComponent()
     {
@@ -60,7 +53,6 @@ public class PlacementArea : MonoBehaviour
 
         ValidateComponent();
     }
-
     private void ValidateComponent()
     {
         if (boardUI == null)
@@ -73,6 +65,11 @@ public class PlacementArea : MonoBehaviour
             Debug.LogError("PlacementArea is not assigned in GameManager.");
             return;
         }
+    }
+    private void UpdateButtonVisibility()
+    {
+        if (!IsBoardEmpty()) boardUI.ShowButton();
+        else boardUI.HideButton();
     }
     private void HandleDragAndDrop()
     {
