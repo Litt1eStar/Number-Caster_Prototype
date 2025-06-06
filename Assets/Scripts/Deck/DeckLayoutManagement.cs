@@ -6,27 +6,28 @@ public class DeckLayoutManagement : MonoBehaviour
 {
     [SerializeField] private Deck deck;
 
+    [Header("Animation Setting")]
     public float cardSpacing = 0.5f;    
     public float animationSpeed = 5.0f;
     public float rotateSpeed = 10f;
     public float xGap = 0.05f;
 
+    [Header("Gameplay Setting")]
     public Turn side; //for test
     public PlacementArea placementArea;
     public BoardUI boardUI;
+    public Camera mainCamera;
 
+    [Header("Transform Setting")]
     public Transform player1_deckPosition;
     public Transform usedCardParent;
-    public Vector3 hoverCardOffset;
     public float dragHeight = 1.0f;
     public LayerMask cardLayerMask = -1;
     
     private List<Transform> handOfPlayer = new List<Transform>();
-
-    public Camera mainCamera;
+    private Vector3 draggedCardOriginalPosition;
     private Transform draggedCard;
     private int draggedCardOriginalIndex;
-    private Vector3 draggedCardOriginalPosition;
     private int insertIndex = -1;
 
     private Card shownCard = null;
@@ -44,9 +45,16 @@ public class DeckLayoutManagement : MonoBehaviour
             DrawCard(Turn.Player1, deck);
         }
 
+        HandleRaycast();
         HandleRightClick();
         HandleDragAndDrop();
         UpdateCardPositions();
+    }
+    private void HandleRaycast()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        Ray ray = mainCamera.ScreenPointToRay(mousePos);
+        RaycastHit hit;
     }
     private void HandleDragAndDrop()
     {
