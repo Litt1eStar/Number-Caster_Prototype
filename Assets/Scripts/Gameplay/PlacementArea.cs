@@ -33,8 +33,7 @@ public class PlacementArea : MonoBehaviour
 
     private void Start()
     {
-        boardUI = GameManager.Instance.boardUI;
-        placementArea = GameManager.Instance.placementArea;
+        InitializeComponent();
         if (boardUI == null)
         {
             Debug.LogError("BoardUI is not assigned in GameManager.");
@@ -62,6 +61,11 @@ public class PlacementArea : MonoBehaviour
         {
             boardUI.HideButton();
         }
+    }
+    private void InitializeComponent()
+    {
+        boardUI = GameManager.Instance.boardUI;
+        placementArea = GameManager.Instance.placementArea;
     }
     private void HandleDragAndDrop()
     {
