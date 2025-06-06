@@ -118,12 +118,8 @@ public class PlacementArea : MonoBehaviour
         //and set x position to make card appear on top of other cards
         //Then calculate the insert index based on the position of dragged card
 
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = mainCamera.WorldToScreenPoint(draggedCard.position).z;
-        Vector3 worldPos = mainCamera.ScreenToWorldPoint(mousePos);
-
-        Vector3 localPos = draggedCard.parent.InverseTransformPoint(worldPos);
-
+        Vector3 mouseWorldPosition = GetMouseWorldPosition();
+        Vector3 localPos = draggedCard.parent.InverseTransformPoint(mouseWorldPosition);
         draggedCard.localPosition = localPos;
     }
 
