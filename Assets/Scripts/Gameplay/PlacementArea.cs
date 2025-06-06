@@ -10,8 +10,6 @@ public class PlacementArea : MonoBehaviour
     [SerializeField] private float cardSpacing = 0.5f;
     [SerializeField] private float animationSpeed = 5.0f;
     [SerializeField] private float xGap = 0.05f;
-    public float sendCardToUsedAreaAnimationSpeed = 10.0f;
-    public float usedCardAreaYPosition = 0.0f;
 
     [Header("Reference Setting")]
     [SerializeField] private Transform placementParent;
@@ -153,9 +151,9 @@ public class PlacementArea : MonoBehaviour
         {
             card.SetParent(usedCardParent);
 
-            Vector3 targetPosition = new Vector3(0, usedCardAreaYPosition, 0);
-            card.DOLocalMove(targetPosition, sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
-            usedCardAreaYPosition += yOffset;
+            Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
+            card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed * Time.deltaTime);
+            GameManager.Instance.usedCardAreaYPosition += yOffset;
         }
 
         cardOnBoards.Clear();
