@@ -34,11 +34,7 @@ public class PlacementArea : MonoBehaviour
     private void Start()
     {
         InitializeComponent();
-        
-
-        cardOnBoards.Clear();
-        cardQueue.Clear();
-        currentCardNumberCount = 0;
+        ResetBoard();
     }
     private void Update()
     {
@@ -46,6 +42,7 @@ public class PlacementArea : MonoBehaviour
         HandleDragAndDrop();
         UpdateButtonVisibility();
     }
+    #region Initialization Component
     private void InitializeComponent()
     {
         boardUI = GameManager.Instance.boardUI;
@@ -66,6 +63,14 @@ public class PlacementArea : MonoBehaviour
             return;
         }
     }
+    private void ResetBoard()
+    {
+        cardOnBoards.Clear();
+        cardQueue.Clear();
+        currentCardNumberCount = 0;
+    }
+    #endregion
+
     private void UpdateButtonVisibility()
     {
         if (!IsBoardEmpty()) boardUI.ShowButton();
@@ -295,13 +300,6 @@ public class PlacementArea : MonoBehaviour
         }
 
         ResetBoard();
-    }
-
-    private void ResetBoard()
-    {
-        cardOnBoards.Clear();
-        cardQueue.Clear();
-        currentCardNumberCount = 0;
     }
 
     private void SendCardBackToHand()
