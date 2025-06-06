@@ -34,16 +34,7 @@ public class PlacementArea : MonoBehaviour
     private void Start()
     {
         InitializeComponent();
-        if (boardUI == null)
-        {
-            Debug.LogError("BoardUI is not assigned in GameManager.");
-            return;
-        }
-        if(placementArea == null)
-        {
-            Debug.LogError("PlacementArea is not assigned in GameManager.");
-            return;
-        }
+        
 
         cardOnBoards.Clear();
         cardQueue.Clear();
@@ -66,6 +57,22 @@ public class PlacementArea : MonoBehaviour
     {
         boardUI = GameManager.Instance.boardUI;
         placementArea = GameManager.Instance.placementArea;
+
+        ValidateComponent();
+    }
+
+    private void ValidateComponent()
+    {
+        if (boardUI == null)
+        {
+            Debug.LogError("BoardUI is not assigned in GameManager.");
+            return;
+        }
+        if (placementArea == null)
+        {
+            Debug.LogError("PlacementArea is not assigned in GameManager.");
+            return;
+        }
     }
     private void HandleDragAndDrop()
     {
