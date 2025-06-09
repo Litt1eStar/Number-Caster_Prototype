@@ -70,7 +70,6 @@ public class DeckLayoutManagement : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, cardLayerMask))
             {
                 shownCard = hit.collider.transform.GetComponent<Card>();
-                Debug.Log("Right click on card");
                 boardUI.ShowCardDetail(shownCard);
                 isCardDetailShown = true;
             }
@@ -96,8 +95,6 @@ public class DeckLayoutManagement : MonoBehaviour
         handOfPlayer.Add(card.transform);
         UpdateCardPositions();
     }
-
-
     public void RemoveCard(GameObject card)
     {
         if (handOfPlayer.Contains(card.transform))
@@ -164,7 +161,7 @@ public class DeckLayoutManagement : MonoBehaviour
                 if (placementArea.IsReturnCardBackToHand(draggedCard))
                 {
                     AnimateCardBackToHand();
-                    Debug.LogWarning("Card returned to hand - placement area full");
+                    ErrorManager.Instance.SetErrorMessage("Card returned to hand - placement area full");
                     return;
                 }
 
@@ -172,7 +169,7 @@ public class DeckLayoutManagement : MonoBehaviour
                 if (DeckHelper.IsOperatorCard(card) && (placementArea.IsPreviousCardOperator() || placementArea.IsBoardEmpty()))
                 {
                     AnimateCardBackToHand();
-                    Debug.LogWarning("Cannot place another Operator card here.");
+                    ErrorManager.Instance.SetErrorMessage("Cannot place Operator card here.");
                     return;
                 }
 
@@ -202,14 +199,12 @@ public class DeckLayoutManagement : MonoBehaviour
         //Clear drag state after placing the card
         ClearDraggedCardState();
     }
-
     private void ClearDraggedCardState()
     {
         draggedCard = null;
         draggedCardOriginalIndex = -1;
         insertIndex = -1;
     }
-
     private void UseSkillCard(Card card)
     {
         Debug.Log("Use skill card");
@@ -220,7 +215,6 @@ public class DeckLayoutManagement : MonoBehaviour
         RemoveCard(draggedCard.gameObject);
         placementArea.AddCard(temp);
     }
-
     void AnimateCardBackToHand()
     {
         if (draggedCard == null) return;
@@ -245,8 +239,6 @@ public class DeckLayoutManagement : MonoBehaviour
         // Optional: Add a slight bounce effect or scale animation
         cardToAnimate.DOPunchScale(Vector3.one * 0.1f, 0.2f, 1, 0.5f);
     }
-
-
     void SwapCard(List<Transform> container, Transform objToInsert, int from, int to)
     {
         container.RemoveAt(from);
