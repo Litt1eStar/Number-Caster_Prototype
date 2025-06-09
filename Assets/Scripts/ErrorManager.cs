@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class ErrorManager : MonoBehaviour
     private static ErrorManager _instance;
 
     [SerializeField] private TextMeshProUGUI t_error;
+    [SerializeField] private CanvasGroup textCanvasGroup;
+    [SerializeField] private float fadeDuration = 0.5f;
     private string errorMessage = string.Empty;
 
     private void Awake()
@@ -23,9 +26,22 @@ public class ErrorManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        textCanvasGroup.alpha = 0f;
+    }
     public void SetErrorMessage(string errMsg)
     {
         errorMessage = errMsg;
         t_error.text = errorMessage;
+        AnimateText();
+    }
+
+    private void AnimateText()
+    {
+        Sequence resultSequence = DOTween.Sequence();
+        resultSequence.Append(textCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
+        resultSequence.AppendInterval(1f);
+        resultSequence.Append(textCanvasGroup.DOFade(0f, fadeDuration)).SetEase(Ease.InFlash);
     }
 }

@@ -230,7 +230,11 @@ public class PlacementArea : MonoBehaviour
             cardQueue.Dequeue();
             deckLayoutManagement.AddCard(draggedCard.gameObject);
             ClearDraggedCardState();
-        }        
+        }
+        else
+        {
+            ErrorManager.Instance.SetErrorMessage("Can't Remove this card.");
+        }
     }
     private bool CanRemoveCard(Transform card)
     {
@@ -299,6 +303,7 @@ public class PlacementArea : MonoBehaviour
         if (IsLatestCardOperator())
         {
             //Give some feedback to player that they cannot use this button
+            ErrorManager.Instance.SetErrorMessage("Can't Calculate - Lastest card is Operator");
             return;
         }
 
@@ -317,6 +322,7 @@ public class PlacementArea : MonoBehaviour
         if (IsLatestCardOperator())
         {
             //Give some feedback to player that they cannot use this button
+            ErrorManager.Instance.SetErrorMessage("Can't Calculate - Lastest card is Operator");
             return;
         }
 
