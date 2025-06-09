@@ -54,12 +54,12 @@ public class PlacementArea : MonoBehaviour
     {
         if (boardUI == null)
         {
-            Debug.LogError("BoardUI is not assigned in GameManager.");
+            ErrorManager.Instance.SetErrorMessage("BoardUI is not assigned in GameManager.");
             return;
         }
         if (placementArea == null)
         {
-            Debug.LogError("PlacementArea is not assigned in GameManager.");
+            ErrorManager.Instance.SetErrorMessage("PlacementArea is not assigned in GameManager.");
             return;
         }
     }
@@ -268,7 +268,6 @@ public class PlacementArea : MonoBehaviour
             }
 
             amountOfRemainingCards = numberCardsBefore + numberCardsAfter;
-            Debug.Log((numberCardsBefore + numberCardsAfter) <= maxCards);
             return (numberCardsBefore + numberCardsAfter) <= maxCards;
         }
 
@@ -281,7 +280,7 @@ public class PlacementArea : MonoBehaviour
         Card card = newCard.GetComponent<Card>();
         if (currentCardNumberCount >= maxCards && card.cardData.CardType == CardType.Number)
         {
-            Debug.Log($"Cannot place number card: {currentCardNumberCount}/{maxCards} slots filled");
+            ErrorManager.Instance.SetErrorMessage($"Cannot place number card: {currentCardNumberCount}/{maxCards} slots filled");
             return true;
         }
 

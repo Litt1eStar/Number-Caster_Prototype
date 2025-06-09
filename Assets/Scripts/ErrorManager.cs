@@ -7,7 +7,7 @@ public class ErrorManager : MonoBehaviour
     private static ErrorManager _instance;
 
     [SerializeField] private TextMeshProUGUI t_error;
-    private string errorMessage = string.Empty; 
+    private string errorMessage = string.Empty;
 
     private void Awake()
     {
