@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Match : MonoBehaviour
 {
+    ClassSO[] classes;
+
     public void Init()
     {
+        LoadMockupClassData();
         InitPlayerData();
         InitEnemyData();
     }
@@ -18,5 +21,10 @@ public class Match : MonoBehaviour
     {
         Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
         Debug.Log(enemy.name);
+    }
+
+    private void LoadMockupClassData()
+    {
+        classes = Resources.LoadAll<ClassSO>("Data/ClassSO");
     }
 }
