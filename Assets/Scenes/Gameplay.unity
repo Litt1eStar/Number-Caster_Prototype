@@ -3442,8 +3442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7b30204e735c64bb80ee2d12c7a8f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handParent: {fileID: 378565211}
-  playerSide: 0
+  classSO: {fileID: 0}
+  HP: 20
+  ARMOR: 0
 --- !u!4 &1336173102
 Transform:
   m_ObjectHideFlags: 0
