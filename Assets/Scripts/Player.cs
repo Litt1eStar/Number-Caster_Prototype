@@ -7,5 +7,9 @@ public enum Turn
 }
 public class Player : Entity
 {
-
+    public override void SetUI()
+    {
+        base.SetUI();
+        GameManager.Instance.boardUI.SetPlayerUI();
+    }
 }

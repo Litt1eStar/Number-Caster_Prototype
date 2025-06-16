@@ -136,4 +136,13 @@ public class BoardUI : MonoBehaviour
             isCardDetailShown = false;
         });
     }
+    public void SetPlayerUI()
+    {
+
+    }
+
+    public void SetEnemyUI()
+    {
+
+    }   
 }   
