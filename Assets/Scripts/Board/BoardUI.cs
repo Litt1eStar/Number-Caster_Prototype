@@ -34,6 +34,8 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_playerHP;
     [SerializeField] private TextMeshProUGUI t_playerArmor;
     [SerializeField] private TextMeshProUGUI t_playerSkill;
+    [SerializeField] private Transform playerDeckContainer;
+    private ClassSO currentPlayerClass;
 
     [Header("Enemy Settings")]
     [SerializeField] private Image img_enemy;
@@ -41,6 +43,8 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_enemyHP;
     [SerializeField] private TextMeshProUGUI t_enemyArmor;
     [SerializeField] private TextMeshProUGUI t_enemySkill;
+    [SerializeField] private Transform enemyDeckContainer;
+    private ClassSO currentEnemyClass;
 
     public bool onHidingPanel { get; private set; } = false;
     public bool isCardDetailShown { get; private set; } = false;
@@ -76,17 +80,14 @@ public class BoardUI : MonoBehaviour
         }
         cardDetailCanvasGroup.alpha = 0f;
     }
-
     public void ShowButton()
     {
         btnContainer.SetActive(true);
     }
-
     public void HideButton()
     {
         btnContainer.SetActive(false);
     }
-
     public void ShowResult(int rawValue, int cappedValue)
     {
         t_rawValue.text = $"Raw Value: {rawValue}";
@@ -108,7 +109,6 @@ public class BoardUI : MonoBehaviour
 
         resultSequence.OnComplete(() => resultTextContainer.SetActive(false));
     }
-
     public void ShowCardDetail(Card shownCard)
     {
         Sequence resultSequence = DOTween.Sequence();
@@ -121,7 +121,6 @@ public class BoardUI : MonoBehaviour
         
         isCardDetailShown = true;
     }
-
     public void HideCardDetail()
     {
         Sequence resultSequence = DOTween.Sequence();
@@ -140,19 +139,34 @@ public class BoardUI : MonoBehaviour
     }
     public void SetPlayerUI(ClassSO playerClass, float HP, float ARMOR)
     {
+        currentPlayerClass = playerClass;
         img_player.sprite = playerClass.ClassIcon;
         t_playerClass.text = playerClass.ClassName;
         t_playerHP.text = HP.ToString();
         t_playerArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
         t_playerSkill.text = playerClass.Skill.SkillName;
     }
-
     public void SetEnemyUI(ClassSO enemyClass, float HP, float ARMOR)
     {
+        currentEnemyClass = enemyClass;
         img_enemy.sprite = enemyClass.ClassIcon;
         t_enemyClass.text = enemyClass.ClassName;
         t_enemyHP.text = HP.ToString();
         t_enemyArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
         t_enemySkill.text = enemyClass.Skill.SkillName;
     }   
+    public void InitDeckOnBoard(DeckSO deckSO, Turn turn)
+    {
+        GameObject obj = deckSO.cards[0];
+        if (turn == Turn.PLAYER)
+        {
+            obj.transform.SetParent(playerDeckContainer);
+        }
+        else
+        {
+            obj.transform.SetParent(enemyDeckContainer);
+        }
+
+        obj.transform.localScale = Vector3.zero;
+    }
 }   

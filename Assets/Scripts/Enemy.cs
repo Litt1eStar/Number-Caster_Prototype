@@ -6,5 +6,6 @@ public class Enemy : Entity
     {
         base.SetUI();
         GameManager.Instance.boardUI.SetEnemyUI(classSO, HP, ARMOR);
+        GameManager.Instance.boardUI.InitDeckOnBoard(deckSO, Turn.ENEMY);
     }
 }

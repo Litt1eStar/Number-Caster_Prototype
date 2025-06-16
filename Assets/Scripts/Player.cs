@@ -11,5 +11,6 @@ public class Player : Entity
     {
         base.SetUI();
         GameManager.Instance.boardUI.SetPlayerUI(classSO, HP, ARMOR);
+        GameManager.Instance.boardUI.InitDeckOnBoard(deckSO, Turn.PLAYER);
     }
 }
