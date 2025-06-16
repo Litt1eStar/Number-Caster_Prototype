@@ -21,6 +21,14 @@ public class ActionManager : MonoBehaviour
         }
     
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            StartMatch();
+        }
+    }
     public void EnterPlacementArea()
     {
         isInPlacementArea = true;
@@ -29,5 +37,18 @@ public class ActionManager : MonoBehaviour
     public void ExitPlacementArea()
     {
         isInPlacementArea = false;
+    }
+
+    public void StartMatch()
+    {
+        Match match = Instantiate(new GameObject("Match")).AddComponent<Match>();
+        if (match != null)
+        {
+            match.Init();
+        }
+        else
+        {
+            Debug.LogError("Failed to create Match instance.");
+        }
     }
 }
