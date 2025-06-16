@@ -28,6 +28,18 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private float moveDistance = 500f;
     [SerializeField] private float shownDuration = 1.5f;
 
+    [Header("Player Settings")]
+    [SerializeField] private Image img_player;
+    [SerializeField] private TextMeshProUGUI t_playerClass;
+    [SerializeField] private TextMeshProUGUI t_playerHP;
+    [SerializeField] private TextMeshProUGUI t_playerArmor;
+
+    [Header("Enemy Settings")]
+    [SerializeField] private Image img_enemy;
+    [SerializeField] private TextMeshProUGUI t_enemyClass;
+    [SerializeField] private TextMeshProUGUI t_enemyHP;
+    [SerializeField] private TextMeshProUGUI t_enemyArmor;
+
     public bool onHidingPanel { get; private set; } = false;
     public bool isCardDetailShown { get; private set; } = false;
     private Vector3 originalPosition;
