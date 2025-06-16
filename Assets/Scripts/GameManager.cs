@@ -33,6 +33,16 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Match match = new GameObject("Match").AddComponent<Match>();
+        if (match != null)
+        {
+            match.Init();
+        }
+        else
+        {
+            Debug.LogError("Failed to create Match instance.");
+        }
+
         if (boardUI == null)
         {
             boardUI = GameObject.FindFirstObjectByType<BoardUI>();
