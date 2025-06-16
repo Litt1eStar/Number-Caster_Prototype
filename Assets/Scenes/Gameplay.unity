@@ -3443,6 +3443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   classSO: {fileID: 0}
+  deckSO: {fileID: 0}
   HP: 20
   ARMOR: 0
 --- !u!4 &1336173102
