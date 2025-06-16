@@ -14,7 +14,7 @@ public class Card : MonoBehaviour
 
     public void FlipCard()
     {
-        if (owner == Turn.Player1 && !isOnTop)
+        if (owner == Turn.PLAYER && !isOnTop)
         {
             this.transform.localRotation = Quaternion.Euler(0, 180, 0);
             isOnTop = true;

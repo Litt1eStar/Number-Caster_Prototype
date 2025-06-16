@@ -34,7 +34,7 @@ public class DeckLayoutManagement : MonoBehaviour
 
     private void Start()
     {
-        side = Turn.Player1;
+        side = Turn.PLAYER;
         boardUI = GameManager.Instance.boardUI;
         placementArea = GameManager.Instance.placementArea;
     }
@@ -46,7 +46,7 @@ public class DeckLayoutManagement : MonoBehaviour
         //FOR TESTING PURPOSE
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DrawCard(Turn.Player1, deck);
+            DrawCard(Turn.PLAYER, deck);
         }
 
         HandleDragAndDrop();

@@ -2,11 +2,10 @@ using UnityEngine;
 
 public enum Turn
 {
-    Player1,
-    Player2 
+    PLAYER,
+    ENEMY
 }
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    public Transform handParent;
-    public Turn playerSide;
+
 }
