@@ -6,4 +6,5 @@ public class ClassSO : ScriptableObject
     public string ClassName;
     public string ClassDescription;
     public SkillSO Skill;
+    public Sprite ClassIcon;
 }

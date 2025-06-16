@@ -854,10 +854,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 26.9
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -2137,10 +2137,12 @@ MonoBehaviour:
   t_playerClass: {fileID: 1187604963}
   t_playerHP: {fileID: 1227407055}
   t_playerArmor: {fileID: 1972226773}
+  t_playerSkill: {fileID: 1317079808}
   img_enemy: {fileID: 1981430668}
   t_enemyClass: {fileID: 890066848}
   t_enemyHP: {fileID: 1509889629}
   t_enemyArmor: {fileID: 1633431333}
+  t_enemySkill: {fileID: 327350426}
 --- !u!4 &785026509
 Transform:
   m_ObjectHideFlags: 0
@@ -3748,10 +3750,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 26.9
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -4325,7 +4327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -23, y: -96}
+  m_AnchoredPosition: {x: -37, y: -96}
   m_SizeDelta: {x: 129.56549, y: 126.20657}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1509889629
@@ -4786,7 +4788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -23, y: -159}
+  m_AnchoredPosition: {x: -36.999985, y: -159}
   m_SizeDelta: {x: 129.56549, y: 126.20657}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1633431333

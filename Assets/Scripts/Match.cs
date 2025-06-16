@@ -29,12 +29,14 @@ public class Match : MonoBehaviour
     {
         Player player = new GameObject("Player").AddComponent<Player>();
         player.SetData(_playerClass, _playerDeck);
+        player.SetUI();
     }
 
     private void InitEnemyData(ClassSO _enemyClass, DeckSO _enemyDeck)
     {
         Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
         enemy.SetData(_enemyClass, _enemyDeck);
+        enemy.SetUI();
     }
 
     private void LoadMockupDataFromResources()

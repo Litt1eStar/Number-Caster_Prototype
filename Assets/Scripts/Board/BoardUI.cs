@@ -33,12 +33,14 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_playerClass;
     [SerializeField] private TextMeshProUGUI t_playerHP;
     [SerializeField] private TextMeshProUGUI t_playerArmor;
+    [SerializeField] private TextMeshProUGUI t_playerSkill;
 
     [Header("Enemy Settings")]
     [SerializeField] private Image img_enemy;
     [SerializeField] private TextMeshProUGUI t_enemyClass;
     [SerializeField] private TextMeshProUGUI t_enemyHP;
     [SerializeField] private TextMeshProUGUI t_enemyArmor;
+    [SerializeField] private TextMeshProUGUI t_enemySkill;
 
     public bool onHidingPanel { get; private set; } = false;
     public bool isCardDetailShown { get; private set; } = false;
@@ -136,13 +138,21 @@ public class BoardUI : MonoBehaviour
             isCardDetailShown = false;
         });
     }
-    public void SetPlayerUI()
+    public void SetPlayerUI(ClassSO playerClass, float HP, float ARMOR)
     {
-
+        img_player.sprite = playerClass.ClassIcon;
+        t_playerClass.text = playerClass.ClassName;
+        t_playerHP.text = HP.ToString();
+        t_playerArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
+        t_playerSkill.text = playerClass.Skill.SkillName;
     }
 
-    public void SetEnemyUI()
+    public void SetEnemyUI(ClassSO enemyClass, float HP, float ARMOR)
     {
-
+        img_enemy.sprite = enemyClass.ClassIcon;
+        t_enemyClass.text = enemyClass.ClassName;
+        t_enemyHP.text = HP.ToString();
+        t_enemyArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
+        t_enemySkill.text = enemyClass.Skill.SkillName;
     }   
 }   
