@@ -336,6 +336,8 @@ public class PlacementArea : MonoBehaviour
             int cappedValue = ValueCapper.CapValue(result);
             //Use result to Create Shield for Player
             boardUI.ShowResult(result, cappedValue);
+            Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+            target.IncreaseShield(cappedValue);
         }
     }
     public bool IsLatestCardOperator()

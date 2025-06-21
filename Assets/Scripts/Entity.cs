@@ -27,7 +27,7 @@ public class Entity : MonoBehaviour
         if (HP - damage > 0)
         {
             HP -= damage;
-            Debug.Log($"Got hit {this.name} took {damage} damage. Remaining HP: {HP}");
+            Debug.Log($"{this.name} Got hit took {damage} damage. Remaining HP: {HP}");
         }
         else
         {
@@ -35,5 +35,11 @@ public class Entity : MonoBehaviour
             Debug.Log($"{this.name} has been defeated!");
             // Handle defeat logic here, e.g., end the game or trigger a defeat animation
         }
+    }
+
+    public void IncreaseShield(int value)
+    {
+        ARMOR += value;
+        Debug.Log($"{this.name} gained {value} armor. Total Armor: {ARMOR}");
     }
 }
