@@ -314,9 +314,12 @@ public class PlacementArea : MonoBehaviour
             //Cap Value of result
             int cappedValue = ValueCapper.CapValue(result);
             //Use result to Attack Enemy
-            boardUI.ShowResult(result, cappedValue);
             Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.enemy : GameManager.Instance.player;
+            Turn receiver = TurnManager.Instance.currentTurn == Turn.PLAYER ? Turn.ENEMY : Turn.PLAYER;
             target.TakeDamage(cappedValue);
+
+            boardUI.EntityTakeDamage(receiver, target.HP);
+            boardUI.ShowResult(result, cappedValue);
         }
     }
     public void OnClickProtectButton()
@@ -335,9 +338,11 @@ public class PlacementArea : MonoBehaviour
             //Cap Value of result
             int cappedValue = ValueCapper.CapValue(result);
             //Use result to Create Shield for Player
-            boardUI.ShowResult(result, cappedValue);
             Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
             target.IncreaseShield(cappedValue);
+
+            boardUI.EntityGainShield(TurnManager.Instance.currentTurn, target.ARMOR);
+            boardUI.ShowResult(result, cappedValue);
         }
     }
     public bool IsLatestCardOperator()

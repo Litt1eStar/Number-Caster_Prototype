@@ -169,4 +169,27 @@ public class BoardUI : MonoBehaviour
 
         obj.transform.localScale = Vector3.zero;
     }
+
+    public void EntityTakeDamage(Turn receiver,int currentHP)
+    {
+        if(receiver == Turn.PLAYER)
+        {
+            t_playerHP.text = currentHP.ToString();
+        }
+        else if (receiver == Turn.ENEMY)
+        {
+            t_enemyHP.text = currentHP.ToString();
+        }
+    }
+
+    public void EntityGainShield (Turn receiver,int currentShield)
+    {
+        if(receiver == Turn.PLAYER)
+        {
+            t_playerArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
+        }else if(receiver == Turn.ENEMY)
+        {
+            t_enemyArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
+        }
+    }
 }   
