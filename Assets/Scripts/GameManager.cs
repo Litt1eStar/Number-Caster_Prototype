@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     public BoardUI boardUI;
     public PlacementArea placementArea;
 
+    [Header("Match Settings")]
+    public Player player { get; private set; } = null;
+    public Enemy enemy { get; private set; } = null;
+
     private void Awake()
     {
         if(instance == null)
@@ -60,5 +64,15 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("PlacementArea is not in scene.");
             }
         }
+    }
+
+    public void SetPlayer(Player player)
+    {
+        this.player = player;
+    }
+
+    public void SetEnemy(Enemy enemy)
+    {
+        this.enemy = enemy;
     }
 }

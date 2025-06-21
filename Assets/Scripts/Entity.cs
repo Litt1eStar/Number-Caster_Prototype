@@ -6,6 +6,9 @@ public class Entity : MonoBehaviour
     public DeckSO deckSO;
     public int HP = 20;
     public int ARMOR = 0;
+    public int MAX_MANA = 10;
+    public int currentMaxMana = 1;
+    public int currentMana = 1;
 
     public void SetData(ClassSO _classSO, DeckSO _deckSO)
     {
@@ -14,4 +17,9 @@ public class Entity : MonoBehaviour
     }
 
     public virtual void SetUI() { }
+    public void IncreaseMaxMana()
+    {
+        currentMaxMana += 1;
+        currentMana = currentMaxMana;
+    }
 }

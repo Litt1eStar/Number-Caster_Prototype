@@ -47,6 +47,14 @@ public class TurnManager : MonoBehaviour
     {
         currentTurn = currentTurn == Turn.PLAYER ? Turn.ENEMY : Turn.PLAYER;
         timer = 0f;
-        Debug.Log("Switched turn to: " + currentTurn);
+        StartTurn();
+    }
+
+    public void StartTurn()
+    {
+        //Increase Mana for 1 unit
+        //Draw card
+        Entity entity = currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+        entity.IncreaseMaxMana();
     }
 }

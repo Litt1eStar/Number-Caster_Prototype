@@ -30,6 +30,7 @@ public class Match : MonoBehaviour
     private void InitPlayerData(ClassSO _playerClass, DeckSO _playerDeck)
     {
         Player player = new GameObject("Player").AddComponent<Player>();
+        GameManager.Instance.SetPlayer(player);
         player.SetData(_playerClass, _playerDeck);
         player.SetUI();
     }
@@ -37,8 +38,11 @@ public class Match : MonoBehaviour
     private void InitEnemyData(ClassSO _enemyClass, DeckSO _enemyDeck)
     {
         Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
+        GameManager.Instance.SetEnemy(enemy);
         enemy.SetData(_enemyClass, _enemyDeck);
         enemy.SetUI();
+
+        Debug.Log(enemy);
     }
 
     private void LoadMockupDataFromResources()
