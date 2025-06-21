@@ -23,6 +23,8 @@ public class Match : MonoBehaviour
 
         InitPlayerData(playerClass, playerDeck);
         InitEnemyData(enemyClass, enemyDeck);
+
+        TurnManager.Instance.InitTurnSystem();
     }
 
     private void InitPlayerData(ClassSO _playerClass, DeckSO _playerDeck)
