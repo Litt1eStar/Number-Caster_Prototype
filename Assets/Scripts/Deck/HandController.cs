@@ -46,14 +46,9 @@ public class HandController : MonoBehaviour
         HandleRightClick();
         if (boardUI.isCardDetailShown) return;
 
-        //FOR TESTING PURPOSE
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DrawCard(Turn.PLAYER, player_deck);
-        }
-
         HandleDragAndDrop();
-        UpdateCardPositions();
+
+        UpdateCardPositions(TurnManager.Instance.currentTurn);
     }
     private void HandleDragAndDrop()
     {
@@ -102,12 +97,12 @@ public class HandController : MonoBehaviour
         List<Transform> targetHand = destination == Turn.PLAYER ? handOfPlayer : handOfEnemy;
         Vector3 cardRotation = destination == Turn.PLAYER ? new Vector3(0, 0, 180) : new Vector3(0, 0, 0);
 
-        card.GetComponent<Card>().SetOwner(TurnManager.Instance.currentTurn);
+        card.GetComponent<Card>().SetOwner(destination);
         card.transform.SetParent(destinationHand);
         card.transform.DOLocalRotate(cardRotation, rotateSpeed).SetEase(Ease.OutQuart);
 
         targetHand.Add(card.transform);
-        UpdateCardPositions();
+        UpdateCardPositions(destination);
     }
     public void RemoveCard(GameObject card)
     {
@@ -116,7 +111,7 @@ public class HandController : MonoBehaviour
         {
             targetHand.Remove(card.transform);
             card.transform.SetParent(null);
-            UpdateCardPositions();
+            UpdateCardPositions(TurnManager.Instance.currentTurn);
         }
     }
     void StartDrag()
@@ -248,7 +243,7 @@ public class HandController : MonoBehaviour
                 insertIndex = -1;
 
                 // Update hand positions to ensure proper layout
-                UpdateCardPositions();
+                UpdateCardPositions(Turn.PLAYER);
             });
 
         // Optional: Add a slight bounce effect or scale animation
@@ -287,9 +282,9 @@ public class HandController : MonoBehaviour
 
         insertIndex = Mathf.Clamp(insertIndex, 0, handOfPlayer.Count - 1);
     }
-    void UpdateCardPositions()
+    void UpdateCardPositions(Turn turn)
     {
-        List<Transform> targetHand = TurnManager.Instance.currentTurn == Turn.PLAYER ? handOfPlayer : handOfEnemy;
+        List<Transform> targetHand = turn == Turn.PLAYER ? handOfPlayer : handOfEnemy;
 
         for (int i = 0; i < targetHand.Count; i++)
         {

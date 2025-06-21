@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum Turn
@@ -9,7 +10,6 @@ public class TurnManager : MonoBehaviour
 {
     private static TurnManager _instance;
     public static TurnManager Instance { get { return _instance; } }
-
 
     public Turn currentTurn;
     [SerializeField] private float timer = 0f;
@@ -42,8 +42,24 @@ public class TurnManager : MonoBehaviour
     {
         currentTurn = startingSide;
         timer = 0f;
-        StartTurn();
+        StartCoroutine(DrawInitialCards());
     }
+    IEnumerator DrawInitialCards()
+    {
+        yield return StartCoroutine(DrawCardsForPlayer(Turn.PLAYER, 5));
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(DrawCardsForPlayer(Turn.ENEMY, 5));
+    }
+    IEnumerator DrawCardsForPlayer(Turn player, int cardCount)
+    {
+        for (int i = 0; i < cardCount; i++)
+        {
+            currentTurn = player;
+            DrawCard(player);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     public void SwitchTurn()
     {
         currentTurn = currentTurn == Turn.PLAYER ? Turn.ENEMY : Turn.PLAYER;

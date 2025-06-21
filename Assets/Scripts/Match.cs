@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Match : MonoBehaviour
@@ -26,6 +27,7 @@ public class Match : MonoBehaviour
 
         TurnManager.Instance.InitTurnSystem();
     }
+    
 
     private void InitPlayerData(ClassSO _playerClass, DeckSO _playerDeck)
     {
@@ -38,7 +40,6 @@ public class Match : MonoBehaviour
     private void InitEnemyData(ClassSO _enemyClass, DeckSO _enemyDeck)
     {
         Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
-        Debug.Log(enemy);
         GameManager.Instance.SetEnemy(enemy);
         enemy.SetData(_enemyClass, _enemyDeck);
         enemy.SetUI();
