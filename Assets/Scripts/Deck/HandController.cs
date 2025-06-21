@@ -100,19 +100,21 @@ public class HandController : MonoBehaviour
     {
         Transform destinationHand = destination == Turn.PLAYER ? player_handParent : enemy_handParent;
         List<Transform> targetHand = destination == Turn.PLAYER ? handOfPlayer : handOfEnemy;
-       
+        Vector3 cardRotation = destination == Turn.PLAYER ? new Vector3(0, 0, 180) : new Vector3(0, 0, 0);
+
         card.GetComponent<Card>().SetOwner(TurnManager.Instance.currentTurn);
         card.transform.SetParent(destinationHand);
-        card.transform.DOLocalRotate(new Vector3(0, 0, 180), rotateSpeed).SetEase(Ease.OutQuart);
+        card.transform.DOLocalRotate(cardRotation, rotateSpeed).SetEase(Ease.OutQuart);
 
         targetHand.Add(card.transform);
         UpdateCardPositions();
     }
     public void RemoveCard(GameObject card)
     {
-        if (handOfPlayer.Contains(card.transform))
+        List<Transform> targetHand = TurnManager.Instance.currentTurn == Turn.PLAYER ? handOfPlayer : handOfEnemy;
+        if (targetHand.Contains(card.transform))
         {
-            handOfPlayer.Remove(card.transform);
+            targetHand.Remove(card.transform);
             card.transform.SetParent(null);
             UpdateCardPositions();
         }
