@@ -6,7 +6,7 @@ public class Card : MonoBehaviour
     public CardSO cardData;
    
     private Turn owner;
-    private bool isOnTop = false;
+    private float rotateSpeed;
     public void SetOwner(Turn newOwner, float rotateSpeed)
     {
         owner = newOwner;
@@ -16,6 +16,7 @@ public class Card : MonoBehaviour
     public void FlipCard(float rotateSpeed)
     {
         Vector3 cardRotation = Vector3.zero;
+        this.rotateSpeed = rotateSpeed;
         if (owner == Turn.PLAYER)
         {
             cardRotation = new Vector3(0, 0, 180);
@@ -25,11 +26,14 @@ public class Card : MonoBehaviour
             cardRotation = new Vector3(0, 0, 0);
         }
 
-        this.transform.DOLocalRotate(cardRotation, rotateSpeed).SetEase(Ease.OutQuart);
+        this.transform.DOLocalRotate(cardRotation, this.rotateSpeed).SetEase(Ease.OutQuart);
     }
 
     public void FlipCardToAnotherSide()
     {
-
+        if(owner == Turn.ENEMY)
+        {
+            this.transform.DOLocalRotate(new Vector3(0, 0, -90), rotateSpeed).SetEase(Ease.OutQuart);
+        }
     }
 }

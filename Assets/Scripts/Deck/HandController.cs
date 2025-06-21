@@ -225,8 +225,11 @@ public class HandController : MonoBehaviour
         RemoveCard(draggedCard.gameObject);
         placementArea.AddCard(temp);
     }
+
+    //Enemy Use Card Logic
     public void EnemyUseCard()
     {
+        //In real logic, we would have to create another logic to create an AI to choose a card
         int randomIndex = Random.Range(0, handOfEnemy.Count);
         Transform cardToUse = handOfEnemy[randomIndex];
         Card card = cardToUse.GetComponent<Card>();
@@ -235,10 +238,12 @@ public class HandController : MonoBehaviour
         if(card.cardData.CardType == CardType.Skill)
         {
             UseSkillCard(card);
+            SendCardToUsedArea(cardToUse);
         }
         else
         {
             placementArea.AddCard(cardToUse);
+            card.FlipCardToAnotherSide();
         }
     }
     void AnimateCardBackToHand()
