@@ -24,16 +24,38 @@ public class Entity : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
-        if (HP - damage > 0)
+        if (ARMOR < 0)
         {
-            HP -= damage;
-            Debug.Log($"{this.name} Got hit took {damage} damage. Remaining HP: {HP}");
+            if (HP - damage > 0)
+            {
+                HP -= damage;
+                Debug.Log($"{this.name} Got hit took {damage} damage. Remaining HP: {HP}");
+            }
+            else
+            {
+                HP = 0;
+                Debug.Log($"{this.name} has been defeated!");
+            }
         }
         else
         {
-            HP = 0;
-            Debug.Log($"{this.name} has been defeated!");
-            // Handle defeat logic here, e.g., end the game or trigger a defeat animation
+            //damage -> 3
+            //ARMOR -> 2
+            //damageToArmor = 2
+            //remainingDamage = damage - damageToArmor = 1
+            int damageToArmor = Mathf.Min(ARMOR, damage); 
+            int remainingDamage = damage - damageToArmor;
+            ARMOR -= damageToArmor;
+            if(HP - remainingDamage > 0)
+            {
+                HP -= remainingDamage;
+                Debug.Log($"{this.name} Got hit took {damage} damage. Remaining HP: {HP}");
+            }
+            else
+            {
+                HP = 0;
+                Debug.Log($"{this.name} has been defeated!");
+            }
         }
     }
 

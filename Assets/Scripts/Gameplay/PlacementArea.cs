@@ -318,7 +318,7 @@ public class PlacementArea : MonoBehaviour
             Turn receiver = TurnManager.Instance.currentTurn == Turn.PLAYER ? Turn.ENEMY : Turn.PLAYER;
             target.TakeDamage(cappedValue);
 
-            boardUI.EntityTakeDamage(receiver, target.HP);
+            boardUI.EntityTakeDamage(receiver, target.HP, target.ARMOR);
             boardUI.ShowResult(result, cappedValue);
         }
     }
