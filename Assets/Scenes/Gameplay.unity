@@ -151,6 +151,7 @@ Transform:
   - {fileID: 1607347678}
   - {fileID: 32876639}
   - {fileID: 378565211}
+  - {fileID: 1948050760}
   - {fileID: 119473401}
   - {fileID: 67568925}
   - {fileID: 624225839}
@@ -1108,7 +1109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 378565211}
   m_Layer: 0
-  m_Name: Hand-Player01
+  m_Name: Hand-Player
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3105,7 +3106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c60a50126ca78441b78fcfb562be32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deck: {fileID: 1607347677}
+  player_deck: {fileID: 1607347677}
+  enemy_deck: {fileID: 32876640}
   cardSpacing: 1.5
   animationSpeed: 3
   rotateSpeed: 0.75
@@ -3113,7 +3115,8 @@ MonoBehaviour:
   dragHeight: 1
   side: 0
   mainCamera: {fileID: 1400754184}
-  player1_deckPosition: {fileID: 378565211}
+  player_handParent: {fileID: 378565211}
+  enemy_handParent: {fileID: 1948050760}
   cardLayerMask:
     serializedVersion: 2
     m_Bits: 64
@@ -5454,6 +5457,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918393185}
   m_CullTransparentMesh: 1
+--- !u!1 &1948050759
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1948050760}
+  m_Layer: 0
+  m_Name: Hand-Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1948050760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948050759}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -4.74, y: 6.2759957, z: -0.461833}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6394631}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1972226771
 GameObject:
   m_ObjectHideFlags: 0
@@ -5713,8 +5747,9 @@ MonoBehaviour:
   usedCardAreaYPosition: 0
   placementParent: {fileID: 624225839}
   usedCardParent: {fileID: 1036891690}
-  boardUI: {fileID: 0}
-  placementArea: {fileID: 0}
+  boardUI: {fileID: 785026508}
+  placementArea: {fileID: 67568927}
+  handController: {fileID: 1027425580}
 --- !u!1 &2068440190
 GameObject:
   m_ObjectHideFlags: 0

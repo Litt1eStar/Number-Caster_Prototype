@@ -11,7 +11,7 @@ public class TurnManager : MonoBehaviour
     public static TurnManager Instance { get { return _instance; } }
 
 
-    [SerializeField] private Turn currentTurn;
+    public Turn currentTurn;
     [SerializeField] private float timer = 0f;
     [SerializeField] private float turnDuration = 60f;
 
@@ -42,6 +42,7 @@ public class TurnManager : MonoBehaviour
     {
         currentTurn = startingSide;
         timer = 0f;
+        StartTurn();
     }
     public void SwitchTurn()
     {
@@ -56,5 +57,12 @@ public class TurnManager : MonoBehaviour
         //Draw card
         Entity entity = currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
         entity.IncreaseMaxMana();
+        DrawCard(currentTurn);
+    }
+
+    public void DrawCard(Turn destination)
+    {
+        if (destination == Turn.PLAYER) GameManager.Instance.handController.DrawCardToPlayer();
+        else if (destination == Turn.ENEMY) GameManager.Instance.handController.DrawCardToEnemy();
     }
 }

@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [Header("Class Reference")]
     public BoardUI boardUI;
     public PlacementArea placementArea;
+    public HandController handController;
 
     [Header("Match Settings")]
     public Player player { get; private set; } = null;

@@ -2,9 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using DG.Tweening;
-public class DeckLayoutManagement : MonoBehaviour
+public class HandController : MonoBehaviour
 {
-    [SerializeField] private Deck deck;
+    [SerializeField] private Deck player_deck;
+    [SerializeField] private Deck enemy_deck;
 
     [Header("Animation Setting")]
     [SerializeField] private float cardSpacing = 0.5f;
@@ -18,7 +19,8 @@ public class DeckLayoutManagement : MonoBehaviour
     [SerializeField] private Camera mainCamera;
 
     [Header("Reference Setting")]
-    [SerializeField] private Transform player1_deckPosition;
+    [SerializeField] private Transform player_handParent;
+    [SerializeField] private Transform enemy_handParent;
     [SerializeField] private LayerMask cardLayerMask = -1;
     
     private List<Transform> handOfPlayer = new List<Transform>();
@@ -46,7 +48,7 @@ public class DeckLayoutManagement : MonoBehaviour
         //FOR TESTING PURPOSE
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DrawCard(Turn.PLAYER, deck);
+            DrawCard(Turn.PLAYER, player_deck);
         }
 
         HandleDragAndDrop();
@@ -80,15 +82,24 @@ public class DeckLayoutManagement : MonoBehaviour
             isCardDetailShown = false;
         }
     }
-    public void DrawCard(Turn sender, Deck deckOfSender)
+    public void DrawCard(Turn destination, Deck deckOfSender)
     {
         GameObject drawedCard = deckOfSender.DrawCard();
-        if (drawedCard != null) AddCard(drawedCard);
+        if (drawedCard != null) AddCard(drawedCard, destination);
     }
-    public void AddCard(GameObject card)
+    public void DrawCardToPlayer()
     {
+        DrawCard(Turn.PLAYER, player_deck);
+    }
+    public void DrawCardToEnemy()
+    {
+        DrawCard(Turn.ENEMY, enemy_deck);
+    }
+    public void AddCard(GameObject card, Turn destination)
+    {
+        Transform destinationHand = destination == Turn.PLAYER ? player_handParent : enemy_handParent;
         card.GetComponent<Card>().SetOwner(side);
-        card.transform.SetParent(player1_deckPosition);
+        card.transform.SetParent(destinationHand);
 
         card.transform.DOLocalRotate(new Vector3(0, 0, 180), rotateSpeed).SetEase(Ease.OutQuart);
 

@@ -38,11 +38,11 @@ public class Match : MonoBehaviour
     private void InitEnemyData(ClassSO _enemyClass, DeckSO _enemyDeck)
     {
         Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
+        Debug.Log(enemy);
         GameManager.Instance.SetEnemy(enemy);
         enemy.SetData(_enemyClass, _enemyDeck);
         enemy.SetUI();
 
-        Debug.Log(enemy);
     }
 
     private void LoadMockupDataFromResources()

@@ -17,7 +17,7 @@ public class PlacementArea : MonoBehaviour
 
     [Header("Reference Setting")]
     [SerializeField] private LayerMask cardLayerMask = -1;
-    [SerializeField] private DeckLayoutManagement deckLayoutManagement;
+    [SerializeField] private HandController deckLayoutManagement;
 
     private BoardUI boardUI;
     private List<Transform> cardOnBoards = new List<Transform>();
@@ -228,7 +228,7 @@ public class PlacementArea : MonoBehaviour
             currentCardNumberCount = amountOfRemainingCards;
             cardOnBoards.Remove(draggedCard);
             cardQueue.Dequeue();
-            deckLayoutManagement.AddCard(draggedCard.gameObject);
+            deckLayoutManagement.AddCard(draggedCard.gameObject, TurnManager.Instance.currentTurn);
             ClearDraggedCardState();
         }
         else
