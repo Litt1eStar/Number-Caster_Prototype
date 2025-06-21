@@ -51,15 +51,17 @@ public class TurnManager : MonoBehaviour
 
     public void InitTurnSystem(Turn startingSide = Turn.PLAYER)
     {
-        currentTurn = startingSide;
-        timer = 0f;
         StartCoroutine(DrawInitialCards());
+        timer = 0f;
+        currentTurn = startingSide;
     }
     IEnumerator DrawInitialCards()
     {
         yield return StartCoroutine(DrawCardsForPlayer(Turn.ENEMY, 5));
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(DrawCardsForPlayer(Turn.PLAYER, 5));
+        yield return new WaitForSeconds(1f);
+        StartTurn();
     }
     IEnumerator DrawCardsForPlayer(Turn player, int cardCount)
     {
