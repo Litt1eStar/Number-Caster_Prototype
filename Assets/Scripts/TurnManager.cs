@@ -29,9 +29,24 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if(timer >= turnDuration)
+        {
+            SwitchTurn();
+            timer = 0f;
+        }
+    }
     public void InitTurnSystem(Turn startingSide = Turn.PLAYER)
     {
         currentTurn = startingSide;
         timer = 0f;
+    }
+    public void SwitchTurn()
+    {
+        currentTurn = currentTurn == Turn.PLAYER ? Turn.ENEMY : Turn.PLAYER;
+        timer = 0f;
+        Debug.Log("Switched turn to: " + currentTurn);
     }
 }
