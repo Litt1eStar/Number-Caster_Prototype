@@ -13,6 +13,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private CanvasGroup resultCanvasGroup;
     [SerializeField] private TextMeshProUGUI t_rawValue;
     [SerializeField] private TextMeshProUGUI t_cappedValue;
+    [SerializeField] private TextMeshProUGUI t_timer;
 
     [Header("Card Detail Reference")]
     [SerializeField] private GameObject cardDetailContainer;
@@ -193,5 +194,12 @@ public class BoardUI : MonoBehaviour
         {
             t_enemyArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
         }
+    }
+    public void UpdateTimerText(float val)
+    {
+        int minutes = Mathf.FloorToInt(val / 60f);
+        int seconds = Mathf.FloorToInt(val % 60f);
+
+        t_timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }   

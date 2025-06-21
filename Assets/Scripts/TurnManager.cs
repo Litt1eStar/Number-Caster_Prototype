@@ -31,15 +31,16 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if(timer >= turnDuration)
+        timer -= Time.deltaTime;
+        GameManager.Instance.boardUI.UpdateTimerText(timer);
+
+        if (timer <= 0)
         {
             EndTurn();
         }
     }
     public void EndTurn()
     {
-        timer = 0f;
         StartCoroutine(EndTurnSequence());
     }
     public IEnumerator EndTurnSequence()
@@ -51,8 +52,9 @@ public class TurnManager : MonoBehaviour
 
     public void InitTurnSystem(Turn startingSide = Turn.PLAYER)
     {
+        timer = 60f;
         StartCoroutine(DrawInitialCards());
-        timer = 0f;
+        GameManager.Instance.boardUI.UpdateTimerText(timer);
         currentTurn = startingSide;
     }
     IEnumerator DrawInitialCards()
@@ -76,7 +78,6 @@ public class TurnManager : MonoBehaviour
     public void SwitchTurn()
     {
         currentTurn = currentTurn == Turn.PLAYER ? Turn.ENEMY : Turn.PLAYER;
-        timer = 0f;
         StartTurn();
     }
 
@@ -84,6 +85,7 @@ public class TurnManager : MonoBehaviour
     {
         //Increase Mana for 1 unit
         //Draw card
+        timer = turnDuration;
         Entity entity = currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
         entity.IncreaseMaxMana();
         DrawCard(currentTurn);
