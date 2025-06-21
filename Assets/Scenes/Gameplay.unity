@@ -149,6 +149,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1607347678}
+  - {fileID: 32876639}
   - {fileID: 378565211}
   - {fileID: 119473401}
   - {fileID: 67568925}
@@ -157,6 +158,93 @@ Transform:
   - {fileID: 532699363}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &32876638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 32876639}
+  - component: {fileID: 32876640}
+  m_Layer: 0
+  m_Name: Deck-Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &32876639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32876638}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.87, y: -0.3240043, z: 7.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6394631}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &32876640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32876638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5664d4f50f1bd499b3c2c3b5a4b7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cards:
+  - {fileID: 4909887123431069279, guid: 952e75ae62b321241925fcf9d1e9f961, type: 3}
+  - {fileID: 3393991365181011571, guid: 77f12c26acf95184e9ab1cd0b62c181d, type: 3}
+  - {fileID: 5992384741566154965, guid: da5522d2ed697c64888600911aab857e, type: 3}
+  - {fileID: 4810419782507781787, guid: 158b29e2473743642949d6497d49354b, type: 3}
+  - {fileID: 3460136090670230312, guid: 03ffbd55d14549d479853637319b6312, type: 3}
+  - {fileID: 282311954968202538, guid: ac4ede3d6da199144b09b144718e81f4, type: 3}
+  - {fileID: 6007072903265410969, guid: 221c8c65d5bfe1346a2421bfeaf31710, type: 3}
+  - {fileID: 8529837141352135442, guid: 58e798f279b67ec4faa8dd8b83954cc9, type: 3}
+  - {fileID: 1284143610179299231, guid: e3a1acb0247da37429fe5a154ca4f801, type: 3}
+  - {fileID: 6918421371877213798, guid: ce9c07f39f94e50448c0b02ed60b3b03, type: 3}
+  - {fileID: 4909887123431069279, guid: 952e75ae62b321241925fcf9d1e9f961, type: 3}
+  - {fileID: 5688959767934733332, guid: a6c270b94fab8ef40b7b7ab87ea9d5f1, type: 3}
+  - {fileID: 8009747571583907549, guid: eceeee8e2859e38439cdfecf6ee9db74, type: 3}
+  - {fileID: 6024785049906254209, guid: d013e2b181e73e445bacdfe2eb6166c7, type: 3}
+  - {fileID: 1083352664639026487, guid: 185f844024525194ab5e12dc2ad88848, type: 3}
+  - {fileID: 282311954968202538, guid: ac4ede3d6da199144b09b144718e81f4, type: 3}
+  - {fileID: 6006858086585358933, guid: 75fe9c7eddb3379419a7149e6456b89f, type: 3}
+  - {fileID: 1284143610179299231, guid: e3a1acb0247da37429fe5a154ca4f801, type: 3}
+  - {fileID: 8529837141352135442, guid: 58e798f279b67ec4faa8dd8b83954cc9, type: 3}
+  - {fileID: 4530829186689936463, guid: c3be8769c89e0a448b1f9822669bf82d, type: 3}
+  - {fileID: 6007072903265410969, guid: 221c8c65d5bfe1346a2421bfeaf31710, type: 3}
+  - {fileID: 5688959767934733332, guid: a6c270b94fab8ef40b7b7ab87ea9d5f1, type: 3}
+  - {fileID: 2889963029689645481, guid: 1f388b9e9ec2e4b43969a6e040cf6496, type: 3}
+  - {fileID: 3460136090670230312, guid: 03ffbd55d14549d479853637319b6312, type: 3}
+  - {fileID: 5688959767934733332, guid: a6c270b94fab8ef40b7b7ab87ea9d5f1, type: 3}
+  - {fileID: 8460857629152592067, guid: 9e129be49ea7d7e47925770287e588c1, type: 3}
+  - {fileID: 4689388756117619765, guid: 3e3b28f99f609954b9ef8805a1f9864b, type: 3}
+  - {fileID: 750535498770217083, guid: 73880498125ff29468a203345a1b8c5c, type: 3}
+  - {fileID: 6006858086585358933, guid: 75fe9c7eddb3379419a7149e6456b89f, type: 3}
+  - {fileID: 5688959767934733332, guid: a6c270b94fab8ef40b7b7ab87ea9d5f1, type: 3}
+  - {fileID: 4810419782507781787, guid: 158b29e2473743642949d6497d49354b, type: 3}
+  - {fileID: 2889963029689645481, guid: 1f388b9e9ec2e4b43969a6e040cf6496, type: 3}
+  - {fileID: 4909887123431069279, guid: 952e75ae62b321241925fcf9d1e9f961, type: 3}
+  - {fileID: 1585175997630689802, guid: 8ed2012b060a9c24b9ea91b267dc0693, type: 3}
+  - {fileID: 4810419782507781787, guid: 158b29e2473743642949d6497d49354b, type: 3}
+  - {fileID: 5787815915942669150, guid: aa0de56866ea6d2438d2ec331765aaf1, type: 3}
+  - {fileID: 1083352664639026487, guid: 185f844024525194ab5e12dc2ad88848, type: 3}
+  - {fileID: 4538395161415288544, guid: ddb861d1a8cd3e747a8b88f6b4d759fa, type: 3}
+  - {fileID: 6024785049906254209, guid: d013e2b181e73e445bacdfe2eb6166c7, type: 3}
+  - {fileID: 750535498770217083, guid: 73880498125ff29468a203345a1b8c5c, type: 3}
+  deckParent: {fileID: 32876639}
+  cardSpacing: 0.045
 --- !u!1 &33336381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,7 +1867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2138,11 +2226,13 @@ MonoBehaviour:
   t_playerHP: {fileID: 1227407055}
   t_playerArmor: {fileID: 1972226773}
   t_playerSkill: {fileID: 1317079808}
+  playerDeckContainer: {fileID: 1607347678}
   img_enemy: {fileID: 1981430668}
   t_enemyClass: {fileID: 890066848}
   t_enemyHP: {fileID: 1509889629}
   t_enemyArmor: {fileID: 1633431333}
   t_enemySkill: {fileID: 327350426}
+  enemyDeckContainer: {fileID: 32876639}
 --- !u!4 &785026509
 Transform:
   m_ObjectHideFlags: 0
@@ -2704,7 +2794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4678,7 +4768,7 @@ GameObject:
   - component: {fileID: 1607347678}
   - component: {fileID: 1607347677}
   m_Layer: 0
-  m_Name: Deck-Player01
+  m_Name: Deck-Player
   m_TagString: Untagged
   m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
