@@ -34,10 +34,21 @@ public class TurnManager : MonoBehaviour
         timer += Time.deltaTime;
         if(timer >= turnDuration)
         {
-            SwitchTurn();
-            timer = 0f;
+            EndTurn();
         }
     }
+    public void EndTurn()
+    {
+        timer = 0f;
+        StartCoroutine(EndTurnSequence());
+    }
+    public IEnumerator EndTurnSequence()
+    {
+        DrawCard(currentTurn);
+        yield return new WaitForSeconds(1.5f); 
+        SwitchTurn();
+    }
+
     public void InitTurnSystem(Turn startingSide = Turn.PLAYER)
     {
         currentTurn = startingSide;
@@ -46,9 +57,9 @@ public class TurnManager : MonoBehaviour
     }
     IEnumerator DrawInitialCards()
     {
-        yield return StartCoroutine(DrawCardsForPlayer(Turn.PLAYER, 5));
-        yield return new WaitForSeconds(1f);
         yield return StartCoroutine(DrawCardsForPlayer(Turn.ENEMY, 5));
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(DrawCardsForPlayer(Turn.PLAYER, 5));
     }
     IEnumerator DrawCardsForPlayer(Turn player, int cardCount)
     {
