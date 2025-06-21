@@ -97,9 +97,9 @@ public class HandController : MonoBehaviour
         List<Transform> targetHand = destination == Turn.PLAYER ? handOfPlayer : handOfEnemy;
         Vector3 cardRotation = destination == Turn.PLAYER ? new Vector3(0, 0, 180) : new Vector3(0, 0, 0);
 
-        card.GetComponent<Card>().SetOwner(destination);
+        card.GetComponent<Card>().SetOwner(destination, rotateSpeed);
         card.transform.SetParent(destinationHand);
-        card.transform.DOLocalRotate(cardRotation, rotateSpeed).SetEase(Ease.OutQuart);
+        //card.transform.DOLocalRotate(cardRotation, rotateSpeed).SetEase(Ease.OutQuart);
 
         targetHand.Add(card.transform);
         UpdateCardPositions(destination);
@@ -229,8 +229,17 @@ public class HandController : MonoBehaviour
     {
         int randomIndex = Random.Range(0, handOfEnemy.Count);
         Transform cardToUse = handOfEnemy[randomIndex];
+        Card card = cardToUse.GetComponent<Card>();
         RemoveCard(cardToUse.gameObject);
-        placementArea.AddCard(cardToUse);
+
+        if(card.cardData.CardType == CardType.Skill)
+        {
+            UseSkillCard(card);
+        }
+        else
+        {
+            placementArea.AddCard(cardToUse);
+        }
     }
     void AnimateCardBackToHand()
     {
