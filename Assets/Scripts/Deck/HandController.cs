@@ -225,6 +225,13 @@ public class HandController : MonoBehaviour
         RemoveCard(draggedCard.gameObject);
         placementArea.AddCard(temp);
     }
+    public void EnemyUseCard()
+    {
+        int randomIndex = Random.Range(0, handOfEnemy.Count);
+        Transform cardToUse = handOfEnemy[randomIndex];
+        RemoveCard(cardToUse.gameObject);
+        placementArea.AddCard(cardToUse);
+    }
     void AnimateCardBackToHand()
     {
         if (draggedCard == null) return;
