@@ -315,6 +315,8 @@ public class PlacementArea : MonoBehaviour
             int cappedValue = ValueCapper.CapValue(result);
             //Use result to Attack Enemy
             boardUI.ShowResult(result, cappedValue);
+            Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.enemy : GameManager.Instance.player;
+            target.TakeDamage(cappedValue);
         }
     }
     public void OnClickProtectButton()

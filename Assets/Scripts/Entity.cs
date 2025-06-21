@@ -22,4 +22,18 @@ public class Entity : MonoBehaviour
         currentMaxMana += 1;
         currentMana = currentMaxMana;
     }
+    public void TakeDamage(int damage)
+    {
+        if (HP - damage > 0)
+        {
+            HP -= damage;
+            Debug.Log($"Got hit {this.name} took {damage} damage. Remaining HP: {HP}");
+        }
+        else
+        {
+            HP = 0;
+            Debug.Log($"{this.name} has been defeated!");
+            // Handle defeat logic here, e.g., end the game or trigger a defeat animation
+        }
+    }
 }
