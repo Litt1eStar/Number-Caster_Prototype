@@ -1,5 +1,10 @@
 using UnityEngine;
 
+public enum Turn
+{
+    PLAYER,
+    ENEMY
+}
 public class TurnManager : MonoBehaviour
 {
     private static TurnManager _instance;
