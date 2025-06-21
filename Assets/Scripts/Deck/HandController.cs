@@ -24,6 +24,7 @@ public class HandController : MonoBehaviour
     [SerializeField] private LayerMask cardLayerMask = -1;
     
     private List<Transform> handOfPlayer = new List<Transform>();
+    private List<Transform> handOfEnemy = new List<Transform>();
     private Vector3 draggedCardOriginalPosition;
     private Transform draggedCard;
     private int draggedCardOriginalIndex;
@@ -98,12 +99,13 @@ public class HandController : MonoBehaviour
     public void AddCard(GameObject card, Turn destination)
     {
         Transform destinationHand = destination == Turn.PLAYER ? player_handParent : enemy_handParent;
-        card.GetComponent<Card>().SetOwner(side);
+        List<Transform> targetHand = destination == Turn.PLAYER ? handOfPlayer : handOfEnemy;
+       
+        card.GetComponent<Card>().SetOwner(TurnManager.Instance.currentTurn);
         card.transform.SetParent(destinationHand);
-
         card.transform.DOLocalRotate(new Vector3(0, 0, 180), rotateSpeed).SetEase(Ease.OutQuart);
 
-        handOfPlayer.Add(card.transform);
+        targetHand.Add(card.transform);
         UpdateCardPositions();
     }
     public void RemoveCard(GameObject card)
@@ -285,16 +287,18 @@ public class HandController : MonoBehaviour
     }
     void UpdateCardPositions()
     {
-        for (int i = 0; i < handOfPlayer.Count; i++)
+        List<Transform> targetHand = TurnManager.Instance.currentTurn == Turn.PLAYER ? handOfPlayer : handOfEnemy;
+
+        for (int i = 0; i < targetHand.Count; i++)
         {
-            if (handOfPlayer[i] == draggedCard) continue;
+            if (targetHand[i] == draggedCard) continue;
 
-            Vector3 targetPos = DeckHelper.CalculateTargetPosition(i, handOfPlayer, cardSpacing, xGap);
+            Vector3 targetPos = DeckHelper.CalculateTargetPosition(i, targetHand, cardSpacing, xGap);
 
-            handOfPlayer[i].localPosition = Vector3.Lerp(handOfPlayer[i].localPosition, targetPos, Time.deltaTime * animationSpeed);
-            if (handOfPlayer[i] != draggedCard)
+            targetHand[i].localPosition = Vector3.Lerp(targetHand[i].localPosition, targetPos, Time.deltaTime * animationSpeed);
+            if (targetHand[i] != draggedCard)
             {
-                handOfPlayer[i].SetSiblingIndex(i);
+                targetHand[i].SetSiblingIndex(i);
             }
         }
     }
