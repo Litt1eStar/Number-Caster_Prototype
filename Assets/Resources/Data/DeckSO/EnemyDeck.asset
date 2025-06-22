@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyDeck
   m_EditorClassIdentifier: 
   cards:
-  - {fileID: 4909887123431069279, guid: 952e75ae62b321241925fcf9d1e9f961, type: 3}
+  - {fileID: 297811341944864620, guid: a7276703965d2e146987ab2f4829fe59, type: 3}
   - {fileID: 8529837141352135442, guid: 58e798f279b67ec4faa8dd8b83954cc9, type: 3}
   - {fileID: 297811341944864620, guid: 8b215cdb96d991f4c8d728dbff6c2d8b, type: 3}
   - {fileID: 1083352664639026487, guid: 185f844024525194ab5e12dc2ad88848, type: 3}

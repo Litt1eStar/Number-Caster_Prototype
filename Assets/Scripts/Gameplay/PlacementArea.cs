@@ -220,15 +220,17 @@ public class PlacementArea : MonoBehaviour
 
         ResetBoard();
     }
-    private void SendCardBackToHand()
+    public void SendCardBackToHand(Transform targetCard = null)
     {
-        Card removedCard = draggedCard.GetComponent<Card>();
-        if (CanRemoveCard(draggedCard))
+        if(targetCard == null)
+            targetCard = draggedCard;
+        
+        if (CanRemoveCard(targetCard))
         {
             currentCardNumberCount = amountOfRemainingCards;
-            cardOnBoards.Remove(draggedCard);
+            cardOnBoards.Remove(targetCard);
             cardQueue.Dequeue();
-            deckLayoutManagement.AddCard(draggedCard.gameObject, TurnManager.Instance.currentTurn);
+            deckLayoutManagement.AddCard(targetCard.gameObject, TurnManager.Instance.currentTurn);
             ClearDraggedCardState();
         }
         else
@@ -374,4 +376,5 @@ public class PlacementArea : MonoBehaviour
     }
 
     #endregion
+    public List<Transform> GetCardsOnBoard() => cardOnBoards;
 }

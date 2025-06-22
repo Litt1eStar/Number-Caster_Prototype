@@ -9,6 +9,7 @@ public static class BoardCalculation
         EquationParser(cards, out List<string> terms, out List<char> operators);
         List<int> values = new List<int>();
 
+        Debug.Log(terms.Count);
         foreach (var term in terms)
         {
             int value = Convert.ToInt32(term, 16);

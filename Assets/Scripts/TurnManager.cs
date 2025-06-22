@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum Turn
@@ -41,7 +43,24 @@ public class TurnManager : MonoBehaviour
     }
     public void EndTurn()
     {
+        StartCoroutine(SendRemainingCardOnBoardBackToHand());   
+        timer = turnDuration;
         StartCoroutine(EndTurnSequence());
+    }
+    public IEnumerator SendRemainingCardOnBoardBackToHand()
+    {
+        List<Transform> cardsOnBoard = GameManager.Instance.placementArea.GetCardsOnBoard();
+        
+        if(cardsOnBoard.Count <= 0) yield return null;  
+        
+        List<Transform> cardsCopy = new List<Transform>(cardsOnBoard);
+        foreach (Transform card in cardsCopy)
+        {
+            GameManager.Instance.placementArea.SendCardBackToHand(card);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(3f);
     }
     public IEnumerator EndTurnSequence()
     {
@@ -52,7 +71,7 @@ public class TurnManager : MonoBehaviour
 
     public void InitTurnSystem(Turn startingSide = Turn.PLAYER)
     {
-        timer = 60f;
+        timer = turnDuration;
         StartCoroutine(DrawInitialCards());
         GameManager.Instance.boardUI.UpdateTimerText(timer);
         currentTurn = startingSide;

@@ -25,6 +25,7 @@ public class Deck : MonoBehaviour
             GameObject cardObj = Instantiate(cards[i], deckParent);
             cardObj.transform.rotation = Quaternion.Euler(0, 0, 90);
             cardObj.transform.position = pos + new Vector3(0, cardSpacing, 0);
+            cardObj.transform.localPosition = new Vector3(1, 1, 1);
             pos = cardObj.transform.position;
 
             deckStack.Push(cardObj);
