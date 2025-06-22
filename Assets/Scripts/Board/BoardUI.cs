@@ -14,6 +14,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_rawValue;
     [SerializeField] private TextMeshProUGUI t_cappedValue;
     [SerializeField] private TextMeshProUGUI t_timer;
+    [SerializeField] private TextMeshProUGUI t_turnText;
 
     [Header("Card Detail Reference")]
     [SerializeField] private GameObject cardDetailContainer;
@@ -80,6 +81,10 @@ public class BoardUI : MonoBehaviour
             }
         }
         cardDetailCanvasGroup.alpha = 0f;
+    }
+    private void Update()
+    {
+        UpdateTurnText();
     }
     public void ShowButton()
     {
@@ -201,5 +206,10 @@ public class BoardUI : MonoBehaviour
         int seconds = Mathf.FloorToInt(val % 60f);
 
         t_timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void UpdateTurnText()
+    {
+        t_turnText.text = TurnManager.Instance.currentTurn == Turn.PLAYER ? "Player" : "Enemy";
     }
 }   
