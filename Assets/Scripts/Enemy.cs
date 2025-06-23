@@ -7,6 +7,7 @@ public class Enemy : Entity
 {
     private List<Transform> handOfEnemy;
     private List<Transform> handOfPlayer;
+    private List<Transform> usedCard;
     public override void SetUI()
     {
         base.SetUI();
@@ -24,7 +25,8 @@ public class Enemy : Entity
     {
         int randomAmount = Random.Range(1, handOfEnemy.Count);
         Debug.Log($"Amount of Card to Player in this turn : {randomAmount}/{handOfEnemy.Count}");
-        List<Transform> usedCard = PickRandomCardOnHand(handOfEnemy, randomAmount);
+        //usedCard = PickRandomCardOnHand(handOfEnemy, randomAmount);
+        usedCard = handOfEnemy;
 
         int numbersToPlay = 3; //Count number card in usedCard
         int operatorsToPlay = 3; //Count operator card in usedCard
@@ -35,9 +37,20 @@ public class Enemy : Entity
             int excessNumber = numbersToPlay - maxPlayableNumbers;
             //Remove excess numbers from usedCard
         }
+
+        StartCoroutine(PlayCard());
         yield return null;
     }
 
+    IEnumerator PlayCard()
+    {
+        while(GameManager.Instance.handController.HandOfEnemy.Count > 0)
+        {
+            Debug.Log($"Playing Card : {GameManager.Instance.handController.HandOfEnemy[0].gameObject.name}");
+            GameManager.Instance.handController.SendCardToPlacementArea(GameManager.Instance.handController.HandOfEnemy[0]);
+            yield return new WaitForSeconds(2f);
+        }
+    }
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
     {
         return null;

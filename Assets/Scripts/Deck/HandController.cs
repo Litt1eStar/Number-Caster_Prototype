@@ -219,11 +219,20 @@ public class HandController : MonoBehaviour
     {
         Debug.Log("Use skill card");
     }
-    private void SendCardToPlacementArea()
+    public void SendCardToPlacementArea(Transform objToSend = null)
     {
-        Transform temp = draggedCard;
-        RemoveCard(draggedCard.gameObject);
-        placementArea.AddCard(temp);
+        if(objToSend == null)
+        {
+            Transform temp = draggedCard;
+            RemoveCard(draggedCard.gameObject);
+            placementArea.AddCard(temp);
+        }
+        else
+        {
+            Transform temp = objToSend;
+            RemoveCard(objToSend.gameObject);
+            placementArea.AddCard(temp);
+        }
     }
 
     //Enemy Use Card Logic
