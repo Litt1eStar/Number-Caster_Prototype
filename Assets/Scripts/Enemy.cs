@@ -25,8 +25,8 @@ public class Enemy : Entity
     IEnumerator ExecuteBotTurn()
     {
         int randomAmount = Random.Range(1, handOfEnemy.Count);
-        Debug.Log($"Amount of Card to Player in this turn : {randomAmount}/{handOfEnemy.Count}");
-        //usedCard = PickRandomCardOnHand(handOfEnemy, randomAmount);
+        usedCard = PickRandomCardOnHand(handOfEnemy, randomAmount);
+        Debug.Log($"Amount of Card to Player in this turn : {usedCard.Count}/{handOfEnemy.Count}");
 
         int numbersToPlay = 3; //Count number card in usedCard
         int operatorsToPlay = 3; //Count operator card in usedCard
@@ -65,6 +65,7 @@ public class Enemy : Entity
     }
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
     {
-        return null;
+
+        return hands.GetRange(0, amountToPick);
     }
 }
