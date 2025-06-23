@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTurn: 0
   timer: 0
-  turnDuration: 10
+  turnDuration: 90
 --- !u!1 &656112209
 GameObject:
   m_ObjectHideFlags: 0

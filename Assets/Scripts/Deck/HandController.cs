@@ -335,7 +335,6 @@ public class HandController : MonoBehaviour
         ClearDraggedCardState();
     }
 
-
-
-
+    public List<Transform> HandOfEnemy => handOfEnemy;
+    public List<Transform> HandOfPlayer => handOfPlayer;
 }
