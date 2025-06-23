@@ -108,6 +108,11 @@ public class TurnManager : MonoBehaviour
         Entity entity = currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
         entity.IncreaseMaxMana();
         DrawCard(currentTurn);
+
+        if (currentTurn == Turn.ENEMY)
+        {
+            GameManager.Instance.enemy.StartBotTurn();
+        }
     }
 
     public void DrawCard(Turn destination)
