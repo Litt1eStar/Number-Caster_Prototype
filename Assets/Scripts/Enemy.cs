@@ -28,9 +28,11 @@ public class Enemy : Entity
         usedCard = PickRandomCardOnHand(handOfEnemy, randomAmount);
         Debug.Log($"Amount of Card to Player in this turn : {usedCard.Count}/{handOfEnemy.Count}");
 
-        int numbersToPlay = 3; //Count number card in usedCard
-        int operatorsToPlay = 3; //Count operator card in usedCard
+        int numbersToPlay = CountCardByType(usedCard, CardType.Number); //Count number card in usedCard
+        int operatorsToPlay = CountCardByType(usedCard, CardType.Operator); //Count operator card in usedCard
         int maxPlayableNumbers = (operatorsToPlay + 1) * GameManager.Instance.placementArea.MaxCardOnCardSequence(); //Max number of card that can be played in this turn
+
+        Debug.Log($"Amount of Numbers Card: {numbersToPlay}, Amount of Operators Card: {operatorsToPlay}, Max playable Cards: {maxPlayableNumbers}");
 
         if (numbersToPlay > maxPlayableNumbers)
         {
@@ -45,7 +47,7 @@ public class Enemy : Entity
 
     IEnumerator PlayCard()
     {
-        while(usedCard.Count > 0)
+        while (usedCard.Count > 0)
         {
             if (usedCard[0].GetComponent<Card>().cardData.CardType != CardType.Skill)
             {
@@ -67,5 +69,18 @@ public class Enemy : Entity
     {
 
         return hands.GetRange(0, amountToPick);
+    }
+
+    private int CountCardByType(List<Transform> cards, CardType type)
+    {
+        int count = 0;
+        foreach (Transform card in cards)
+        {
+            if (card.GetComponent<Card>().cardData.CardType == type)
+            {
+                count++;
+            }
+        }
+        return count;
     }
 }
