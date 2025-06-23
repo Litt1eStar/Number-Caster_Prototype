@@ -18,6 +18,7 @@ public class Enemy : Entity
     public void StartBotTurn()
     {
         handOfEnemy = GameManager.Instance.handController.HandOfEnemy;
+        usedCard = new List<Transform>(handOfEnemy);
         StartCoroutine(ExecuteBotTurn());
     }
 
@@ -26,7 +27,6 @@ public class Enemy : Entity
         int randomAmount = Random.Range(1, handOfEnemy.Count);
         Debug.Log($"Amount of Card to Player in this turn : {randomAmount}/{handOfEnemy.Count}");
         //usedCard = PickRandomCardOnHand(handOfEnemy, randomAmount);
-        usedCard = handOfEnemy;
 
         int numbersToPlay = 3; //Count number card in usedCard
         int operatorsToPlay = 3; //Count operator card in usedCard
@@ -38,18 +38,30 @@ public class Enemy : Entity
             //Remove excess numbers from usedCard
         }
 
-        StartCoroutine(PlayCard());
-        yield return null;
+        yield return StartCoroutine(PlayCard());
+        yield return new WaitForSeconds(10f); //delay after playing cards
+        TurnManager.Instance.EndTurn();
     }
 
     IEnumerator PlayCard()
     {
-        while(GameManager.Instance.handController.HandOfEnemy.Count > 0)
+        while(usedCard.Count > 0)
         {
-            Debug.Log($"Playing Card : {GameManager.Instance.handController.HandOfEnemy[0].gameObject.name}");
-            GameManager.Instance.handController.SendCardToPlacementArea(GameManager.Instance.handController.HandOfEnemy[0]);
-            yield return new WaitForSeconds(2f);
+            if (usedCard[0].GetComponent<Card>().cardData.CardType != CardType.Skill)
+            {
+                GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0]);
+            }
+            else
+            {
+                Debug.Log("Use Skill Card");
+            }
+
+            usedCard.RemoveAt(0);  //Remove card after playing it
+            yield return new WaitForSeconds(Random.Range(0.5f, 3f));
         }
+
+        Debug.Log("All cards played.");
+        yield return null;
     }
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
     {
