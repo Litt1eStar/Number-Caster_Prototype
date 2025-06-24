@@ -93,6 +93,19 @@ public class Enemy : Entity
                         }
                         break;
                     case CardType.Operator:
+                        if (usedCard.Count > 1)
+                        {
+                            bool shouldPlayOperatorCard = usedCard[1].GetComponent<Card>().cardData.CardType == CardType.Number;
+                            if (shouldPlayOperatorCard)
+                            {
+                                GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0].transform);
+                                currentCardNumberCount = 0;
+                            }
+                            else
+                            {
+                                Debug.Log("Should not play operator card, next card is not a number card.");
+                            }
+                        }
                         break;
                     case CardType.Skill:
                         Debug.Log("Use Skill Card");
