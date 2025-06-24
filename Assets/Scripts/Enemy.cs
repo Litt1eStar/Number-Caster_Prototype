@@ -88,11 +88,15 @@ public class Enemy : Entity
                         else
                         {
                             Debug.Log("Cannot play more number cards, limit reached.");
+                            //Find first operator card in usedCard
+                            //If found then play it, else skip
                         }
                         break;
                     case CardType.Operator:
                         break;
                     case CardType.Skill:
+                        Debug.Log("Use Skill Card");
+                        GameManager.Instance.handController.UseSkillCard(randomCard);
                         break;
                 }
             }
