@@ -114,20 +114,21 @@ public class Enemy : Entity
                 }
             }
 
-            /*            if (usedCard[0].GetComponent<Card>().cardData.CardType != CardType.Skill)
-                        {
-                            GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0]);
-                        }
-                        else
-                        {
-                            Debug.Log("Use Skill Card");
-                        }
-                        /*usedCard.RemoveAt(0);  //Remove card after playing it*/
             usedCard.RemoveAt(0);
             yield return new WaitForSeconds(Random.Range(0.5f, 3f));
         }
 
         Debug.Log("All cards played.");
+        yield return new WaitForSeconds(5f); // Wait for a moment before ending the turn
+        bool isAttacking = true;
+        if(isAttacking)
+        {
+            GameManager.Instance.placementArea.OnClickAttackButton();
+        }
+        else
+        {
+            GameManager.Instance.placementArea.OnClickProtectButton();
+        }
         yield return null;
     }
 
