@@ -378,4 +378,5 @@ public class PlacementArea : MonoBehaviour
     #endregion
     public List<Transform> GetCardsOnBoard() => cardOnBoards;
     public int MaxCardOnCardSequence() => maxCards;
+    public bool IsEmptyBorad() => cardOnBoards.Count <= 0;
 }

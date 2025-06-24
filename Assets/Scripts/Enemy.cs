@@ -49,22 +49,46 @@ public class Enemy : Entity
     {
         while (usedCard.Count > 0)
         {
-            if (usedCard[0].GetComponent<Card>().cardData.CardType != CardType.Skill)
+            Card randomCard = usedCard[0].GetComponent<Card>();
+            if (GameManager.Instance.placementArea.IsBoardEmpty())
             {
-                GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0]);
+                //Case for first card played, it can be only number and skill card
+                switch (randomCard.cardData.CardType)
+                {
+                    case CardType.Number:
+                        GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0].transform);
+                        Debug.Log("Play Number Card: " + randomCard.cardData.cardName);
+                        break;
+                    case CardType.Operator:
+                        break;
+                    case CardType.Skill:
+                        Debug.Log("Use Skill Card");
+                        break;
+                }
             }
             else
             {
-                Debug.Log("Use Skill Card");
+                //Case for subsequent cards played, it can be number, operator, or skill card
+                Debug.Log("Play subsequent card: " + randomCard.cardData.cardName);
             }
 
-            usedCard.RemoveAt(0);  //Remove card after playing it
+            /*            if (usedCard[0].GetComponent<Card>().cardData.CardType != CardType.Skill)
+                        {
+                            GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0]);
+                        }
+                        else
+                        {
+                            Debug.Log("Use Skill Card");
+                        }
+                        /*usedCard.RemoveAt(0);  //Remove card after playing it*/
+            usedCard.RemoveAt(0);
             yield return new WaitForSeconds(Random.Range(0.5f, 3f));
         }
 
         Debug.Log("All cards played.");
         yield return null;
     }
+
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
     {
 

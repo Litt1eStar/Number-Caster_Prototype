@@ -13,7 +13,7 @@ public class Card : MonoBehaviour
         FlipCard(rotateSpeed);
     }
 
-    public void FlipCard(float rotateSpeed)
+    public void FlipCard(float rotateSpeed = 0.75f)
     {
         Vector3 cardRotation = Vector3.zero;
         this.rotateSpeed = rotateSpeed;
