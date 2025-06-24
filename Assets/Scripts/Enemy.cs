@@ -47,6 +47,8 @@ public class Enemy : Entity
 
     IEnumerator PlayCard()
     {
+        int currentCardNumberCount = 0; 
+
         while (usedCard.Count > 0)
         {
             Card randomCard = usedCard[0].GetComponent<Card>();
@@ -57,12 +59,16 @@ public class Enemy : Entity
                 {
                     case CardType.Number:
                         GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0].transform);
+                        currentCardNumberCount++;
                         Debug.Log("Play Number Card: " + randomCard.cardData.cardName);
                         break;
                     case CardType.Operator:
+                        //We're going to find first card in used card that is number card
+                        //If it's not found, then we can't play operator card
                         break;
                     case CardType.Skill:
                         Debug.Log("Use Skill Card");
+                        GameManager.Instance.handController.UseSkillCard(randomCard);
                         break;
                 }
             }
@@ -70,6 +76,25 @@ public class Enemy : Entity
             {
                 //Case for subsequent cards played, it can be number, operator, or skill card
                 Debug.Log("Play subsequent card: " + randomCard.cardData.cardName);
+                switch (randomCard.cardData.CardType)
+                {
+                    case CardType.Number:
+                        bool isReachLimit = currentCardNumberCount >= GameManager.Instance.placementArea.MaxCardOnCardSequence();
+                        if (!isReachLimit)
+                        {
+                            GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0].transform);
+                            currentCardNumberCount++;
+                        }
+                        else
+                        {
+                            Debug.Log("Cannot play more number cards, limit reached.");
+                        }
+                        break;
+                    case CardType.Operator:
+                        break;
+                    case CardType.Skill:
+                        break;
+                }
             }
 
             /*            if (usedCard[0].GetComponent<Card>().cardData.CardType != CardType.Skill)

@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards:
-  - {fileID: 750535498770217083, guid: 73880498125ff29468a203345a1b8c5c, type: 3}
+  - {fileID: 6024785049906254209, guid: d013e2b181e73e445bacdfe2eb6166c7, type: 3}
   - {fileID: 3393991365181011571, guid: 77f12c26acf95184e9ab1cd0b62c181d, type: 3}
   - {fileID: 5992384741566154965, guid: da5522d2ed697c64888600911aab857e, type: 3}
   - {fileID: 4810419782507781787, guid: 158b29e2473743642949d6497d49354b, type: 3}
@@ -242,8 +242,8 @@ MonoBehaviour:
   - {fileID: 5787815915942669150, guid: aa0de56866ea6d2438d2ec331765aaf1, type: 3}
   - {fileID: 1083352664639026487, guid: 185f844024525194ab5e12dc2ad88848, type: 3}
   - {fileID: 4538395161415288544, guid: ddb861d1a8cd3e747a8b88f6b4d759fa, type: 3}
-  - {fileID: 6024785049906254209, guid: d013e2b181e73e445bacdfe2eb6166c7, type: 3}
   - {fileID: 750535498770217083, guid: 73880498125ff29468a203345a1b8c5c, type: 3}
+  - {fileID: 2889963029689645481, guid: 1f388b9e9ec2e4b43969a6e040cf6496, type: 3}
   deckParent: {fileID: 32876639}
   cardSpacing: 0.045
 --- !u!1 &33336381

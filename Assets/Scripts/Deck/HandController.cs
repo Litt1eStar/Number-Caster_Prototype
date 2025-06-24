@@ -186,7 +186,6 @@ public class HandController : MonoBehaviour
                 if (card.cardData.CardType == CardType.Skill)
                 {
                     UseSkillCard(card);
-                    SendCardToUsedArea(draggedCard);
                 }
                 else if (DeckHelper.ValidCardTypeOnBoard(card))
                 {
@@ -215,9 +214,10 @@ public class HandController : MonoBehaviour
         draggedCardOriginalIndex = -1;
         insertIndex = -1;
     }
-    private void UseSkillCard(Card card)
+    public void UseSkillCard(Card card)
     {
         Debug.Log("Use skill card");
+        SendCardToUsedArea(card.transform);
     }
     public void SendCardToPlacementArea(Transform objToSend = null)
     {
@@ -247,7 +247,6 @@ public class HandController : MonoBehaviour
         if(card.cardData.CardType == CardType.Skill)
         {
             UseSkillCard(card);
-            SendCardToUsedArea(cardToUse);
         }
         else
         {
