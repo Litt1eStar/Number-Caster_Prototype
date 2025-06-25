@@ -9,6 +9,7 @@ public class Enemy : Entity
     private List<Transform> handOfPlayer;
     private List<Transform> usedCard;
     private float turnStartTime;
+    private int currentCardNumberCount = 0;
     public override void SetUI()
     {
         base.SetUI();
@@ -49,7 +50,6 @@ public class Enemy : Entity
 
     IEnumerator PlayCard()
     {
-        int currentCardNumberCount = 0;
         int cardPlayed = 0;
 
         while (usedCard.Count > 0)
@@ -67,8 +67,7 @@ public class Enemy : Entity
                 switch (randomCard.cardData.CardType)
                 {
                     case CardType.Number:
-                        GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0].transform);
-                        currentCardNumberCount++;
+                        UseNumberCard(usedCard[0].transform);
                         Debug.Log("Play Number Card: " + randomCard.cardData.cardName);
                         break;
                     case CardType.Operator:
@@ -91,8 +90,7 @@ public class Enemy : Entity
                         bool isReachLimit = currentCardNumberCount >= GameManager.Instance.placementArea.MaxCardOnCardSequence();
                         if (!isReachLimit)
                         {
-                            GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0].transform);
-                            currentCardNumberCount++;
+                            UseNumberCard(usedCard[0].transform);
                         }
                         else
                         {
@@ -107,8 +105,7 @@ public class Enemy : Entity
                             bool shouldPlayOperatorCard = usedCard[1].GetComponent<Card>().cardData.CardType == CardType.Number;
                             if (shouldPlayOperatorCard)
                             {
-                                GameManager.Instance.handController.SendCardToPlacementArea(usedCard[0].transform);
-                                currentCardNumberCount = 0;
+                                UseOperatorCard(usedCard[0].transform); 
                             }
                             else
                             {
@@ -130,8 +127,14 @@ public class Enemy : Entity
 
         Debug.Log("All cards played.");
         yield return new WaitForSeconds(5f); // Wait for a moment before ending the turn
+        ActionDecision();
+        yield return null;
+    }
+    
+    private void ActionDecision()
+    {
         bool isAttacking = false;
-        if(isAttacking)
+        if (isAttacking)
         {
             GameManager.Instance.placementArea.OnClickAttackButton();
         }
@@ -139,19 +142,17 @@ public class Enemy : Entity
         {
             GameManager.Instance.placementArea.OnClickProtectButton();
         }
-        yield return null;
+    }
+    private void UseNumberCard(Transform card)
+    {
+        GameManager.Instance.handController.SendCardToPlacementArea(card);
+        currentCardNumberCount++;
     }
 
-    private Card FindFirstCardByType(List<Transform> cards, CardType type)
+    private void UseOperatorCard(Transform card)
     {
-        foreach (Transform card in cards)
-        {
-            if (card.GetComponent<Card>().cardData.CardType == type)
-            {
-                return card.GetComponent<Card>();
-            }
-        }
-        return null;
+        GameManager.Instance.handController.SendCardToPlacementArea(card);
+        currentCardNumberCount = 0;
     }
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
     {
