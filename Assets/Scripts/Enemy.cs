@@ -8,6 +8,7 @@ public class Enemy : Entity
     private List<Transform> handOfEnemy;
     private List<Transform> handOfPlayer;
     private List<Transform> usedCard;
+    private float turnStartTime;
     public override void SetUI()
     {
         base.SetUI();
@@ -19,6 +20,7 @@ public class Enemy : Entity
     {
         handOfEnemy = GameManager.Instance.handController.HandOfEnemy;
         usedCard = new List<Transform>(handOfEnemy);
+        turnStartTime = Time.time;
         StartCoroutine(ExecuteBotTurn());
     }
 
@@ -47,11 +49,18 @@ public class Enemy : Entity
 
     IEnumerator PlayCard()
     {
-        int currentCardNumberCount = 0; 
+        int currentCardNumberCount = 0;
+        int cardPlayed = 0;
 
         while (usedCard.Count > 0)
         {
             Card randomCard = usedCard[0].GetComponent<Card>();
+
+            float turnTimeRemaining = 90f - (Time.time - turnStartTime);
+            float cardDelay = BotCardTimingLogic.CalculateCardPlayDelay(usedCard.Count, turnTimeRemaining, randomCard);
+
+            Debug.Log($"Delay : {cardDelay}");
+
             if (GameManager.Instance.placementArea.IsBoardEmpty())
             {
                 //Case for first card played, it can be only number and skill card
@@ -115,7 +124,8 @@ public class Enemy : Entity
             }
 
             usedCard.RemoveAt(0);
-            yield return new WaitForSeconds(Random.Range(0.5f, 3f)); //how long should it take to play each card
+            cardPlayed++;
+            yield return new WaitForSeconds(cardDelay); //how long should it take to play each card
         }
 
         Debug.Log("All cards played.");
