@@ -115,12 +115,12 @@ public class Enemy : Entity
             }
 
             usedCard.RemoveAt(0);
-            yield return new WaitForSeconds(Random.Range(0.5f, 3f));
+            yield return new WaitForSeconds(Random.Range(0.5f, 3f)); //how long should it take to play each card
         }
 
         Debug.Log("All cards played.");
         yield return new WaitForSeconds(5f); // Wait for a moment before ending the turn
-        bool isAttacking = true;
+        bool isAttacking = false;
         if(isAttacking)
         {
             GameManager.Instance.placementArea.OnClickAttackButton();
@@ -132,6 +132,17 @@ public class Enemy : Entity
         yield return null;
     }
 
+    private Card FindFirstCardByType(List<Transform> cards, CardType type)
+    {
+        foreach (Transform card in cards)
+        {
+            if (card.GetComponent<Card>().cardData.CardType == type)
+            {
+                return card.GetComponent<Card>();
+            }
+        }
+        return null;
+    }
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
     {
 
@@ -149,5 +160,36 @@ public class Enemy : Entity
             }
         }
         return count;
+    }
+}
+
+public class BotCardTimingLogic
+{
+    private const float TURN_DURATION = 90f;
+    private const float MIN_CARD_DELAY = 0.5f;
+    private const float MAX_CARD_DELAY = 4f;
+    private const float BUFFER_TIME = 10f; //time for attack, protect decision making
+
+    public static float CalculateCardPlayDelay(int cardsRemaining, float turnTimeRemaining, Card currentCard)
+    {
+        float baseDelay = (turnTimeRemaining - BUFFER_TIME) / cardsRemaining;
+        float cardTypeMultiplier = GetCardTypeMultiplier(currentCard.cardData.CardType);
+
+        return 0;
+    }
+
+    private static float GetCardTypeMultiplier(CardType cardType)
+    {
+        switch (cardType)
+        {
+            case CardType.Number:
+                return 0.8f; // Base multiplier for number cards
+            case CardType.Operator:
+                return 1.2f; // Slightly longer delay for operator cards
+            case CardType.Skill:
+                return 1.5f; // Longer delay for skill cards due to their complexity
+            default:
+                return 1.0f; // Default multiplier
+        }
     }
 }
