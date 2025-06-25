@@ -174,8 +174,13 @@ public class BotCardTimingLogic
     {
         float baseDelay = (turnTimeRemaining - BUFFER_TIME) / cardsRemaining;
         float cardTypeMultiplier = GetCardTypeMultiplier(currentCard.cardData.CardType);
+        float strategicDelay = GetStrategicDelay(currentCard);
+        float finalDelay = (baseDelay * cardTypeMultiplier) + strategicDelay;
 
-        return 0;
+        finalDelay = Mathf.Clamp(finalDelay, MIN_CARD_DELAY, MAX_CARD_DELAY);
+        finalDelay += Random.Range(-0.2f, 0.3f);
+        
+        return Mathf.Max(finalDelay, MIN_CARD_DELAY);
     }
 
     private static float GetCardTypeMultiplier(CardType cardType)
@@ -191,5 +196,32 @@ public class BotCardTimingLogic
             default:
                 return 1.0f; // Default multiplier
         }
+    }
+
+    private static float GetStrategicDelay(Card currentCard)
+    {
+        float strategicDelay = 0f;
+
+        if (currentCard.cardData.CardType == CardType.Skill)
+        {
+            strategicDelay += 0.5f;
+        }
+
+        if (GameManager.Instance.placementArea.IsBoardEmpty())
+        {
+            strategicDelay += 0.3f;
+        }
+        
+        float hpPercentage = (float)GameManager.Instance.enemy.HP / 20;
+        if (hpPercentage < 0.3f)
+        {
+            strategicDelay *= 0.5f;
+        }
+        else if (hpPercentage > 0.8f)
+        {
+            strategicDelay *= 1.2f; 
+        }
+
+        return strategicDelay;
     }
 }
