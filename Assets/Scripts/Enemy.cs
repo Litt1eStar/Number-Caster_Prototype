@@ -67,7 +67,7 @@ public class Enemy : Entity
                 switch (randomCard.cardData.CardType)
                 {
                     case CardType.Number:
-                        UseNumberCard(usedCard[0].transform);
+                        UseNumberCard(randomCard);
                         Debug.Log("Play Number Card: " + randomCard.cardData.cardName);
                         break;
                     case CardType.Operator:
@@ -90,7 +90,7 @@ public class Enemy : Entity
                         bool isReachLimit = currentCardNumberCount >= GameManager.Instance.placementArea.MaxCardOnCardSequence();
                         if (!isReachLimit)
                         {
-                            UseNumberCard(usedCard[0].transform);
+                            UseNumberCard(randomCard);
                         }
                         else
                         {
@@ -105,7 +105,7 @@ public class Enemy : Entity
                             bool shouldPlayOperatorCard = usedCard[1].GetComponent<Card>().cardData.CardType == CardType.Number;
                             if (shouldPlayOperatorCard)
                             {
-                                UseOperatorCard(usedCard[0].transform); 
+                                UseOperatorCard(randomCard); 
                             }
                             else
                             {
@@ -143,15 +143,17 @@ public class Enemy : Entity
             GameManager.Instance.placementArea.OnClickProtectButton();
         }
     }
-    private void UseNumberCard(Transform card)
+    private void UseNumberCard(Card card)
     {
-        GameManager.Instance.handController.SendCardToPlacementArea(card);
+        GameManager.Instance.handController.SendCardToPlacementArea(card.transform);
+        card.FlipCardToAnotherSide();
         currentCardNumberCount++;
     }
 
-    private void UseOperatorCard(Transform card)
+    private void UseOperatorCard(Card card)
     {
-        GameManager.Instance.handController.SendCardToPlacementArea(card);
+        GameManager.Instance.handController.SendCardToPlacementArea(card.transform);
+        card.FlipCardToAnotherSide();
         currentCardNumberCount = 0;
     }
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
