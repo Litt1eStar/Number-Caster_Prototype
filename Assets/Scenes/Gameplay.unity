@@ -156,6 +156,7 @@ Transform:
   - {fileID: 67568925}
   - {fileID: 624225839}
   - {fileID: 1036891690}
+  - {fileID: 1740066600}
   - {fileID: 532699363}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -204,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards:
-  - {fileID: 750535498770217083, guid: 73880498125ff29468a203345a1b8c5c, type: 3}
+  - {fileID: 6024785049906254209, guid: d013e2b181e73e445bacdfe2eb6166c7, type: 3}
   - {fileID: 3393991365181011571, guid: 77f12c26acf95184e9ab1cd0b62c181d, type: 3}
   - {fileID: 5992384741566154965, guid: da5522d2ed697c64888600911aab857e, type: 3}
   - {fileID: 4810419782507781787, guid: 158b29e2473743642949d6497d49354b, type: 3}
@@ -241,9 +242,9 @@ MonoBehaviour:
   - {fileID: 4810419782507781787, guid: 158b29e2473743642949d6497d49354b, type: 3}
   - {fileID: 5787815915942669150, guid: aa0de56866ea6d2438d2ec331765aaf1, type: 3}
   - {fileID: 1083352664639026487, guid: 185f844024525194ab5e12dc2ad88848, type: 3}
-  - {fileID: 4538395161415288544, guid: ddb861d1a8cd3e747a8b88f6b4d759fa, type: 3}
-  - {fileID: 6024785049906254209, guid: d013e2b181e73e445bacdfe2eb6166c7, type: 3}
-  - {fileID: 750535498770217083, guid: 73880498125ff29468a203345a1b8c5c, type: 3}
+  - {fileID: 4810419782507781787, guid: 158b29e2473743642949d6497d49354b, type: 3}
+  - {fileID: 3393991365181011571, guid: 77f12c26acf95184e9ab1cd0b62c181d, type: 3}
+  - {fileID: 6006858086585358933, guid: 75fe9c7eddb3379419a7149e6456b89f, type: 3}
   deckParent: {fileID: 32876639}
   cardSpacing: 0.045
 --- !u!1 &33336381
@@ -2102,7 +2103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTurn: 0
   timer: 0
-  turnDuration: 10
+  turnDuration: 90
 --- !u!1 &656112209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3280,7 +3281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1036891690}
   m_Layer: 0
-  m_Name: UsedCardArea-Parent
+  m_Name: enemy-UsedCardArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3295,7 +3296,7 @@ Transform:
   m_GameObject: {fileID: 1036891689}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.86, y: 0, z: 9.77}
+  m_LocalPosition: {x: -2.86, y: 0, z: -9.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5662,6 +5663,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738521759}
   m_CullTransparentMesh: 1
+--- !u!1 &1740066599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1740066600}
+  m_Layer: 0
+  m_Name: player-UsedCardArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1740066600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740066599}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 0, z: -9.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6394631}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1774093776
 GameObject:
   m_ObjectHideFlags: 0
@@ -6428,7 +6460,8 @@ MonoBehaviour:
   sendCardToUsedAreaAnimationSpeed: 0.5
   usedCardAreaYPosition: 0
   placementParent: {fileID: 624225839}
-  usedCardParent: {fileID: 1036891690}
+  playerUsedArea: {fileID: 1740066600}
+  enemyUsedArea: {fileID: 1036891690}
   boardUI: {fileID: 785026508}
   placementArea: {fileID: 67568927}
   handController: {fileID: 1027425580}

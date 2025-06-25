@@ -186,7 +186,6 @@ public class HandController : MonoBehaviour
                 if (card.cardData.CardType == CardType.Skill)
                 {
                     UseSkillCard(card);
-                    SendCardToUsedArea(draggedCard);
                 }
                 else if (DeckHelper.ValidCardTypeOnBoard(card))
                 {
@@ -215,15 +214,25 @@ public class HandController : MonoBehaviour
         draggedCardOriginalIndex = -1;
         insertIndex = -1;
     }
-    private void UseSkillCard(Card card)
+    public void UseSkillCard(Card card)
     {
         Debug.Log("Use skill card");
+        SendCardToUsedArea(card.transform);
     }
-    private void SendCardToPlacementArea()
+    public void SendCardToPlacementArea(Transform objToSend = null)
     {
-        Transform temp = draggedCard;
-        RemoveCard(draggedCard.gameObject);
-        placementArea.AddCard(temp);
+        if(objToSend == null)
+        {
+            Transform temp = draggedCard;
+            RemoveCard(draggedCard.gameObject);
+            placementArea.AddCard(temp);
+        }
+        else
+        {
+            Transform temp = objToSend;
+            RemoveCard(objToSend.gameObject);
+            placementArea.AddCard(temp);
+        }
     }
 
     //Enemy Use Card Logic
@@ -238,7 +247,6 @@ public class HandController : MonoBehaviour
         if(card.cardData.CardType == CardType.Skill)
         {
             UseSkillCard(card);
-            SendCardToUsedArea(cardToUse);
         }
         else
         {
@@ -326,7 +334,7 @@ public class HandController : MonoBehaviour
         float yOffset = 0.01f;
 
         RemoveCard(card.gameObject);
-        card.SetParent(GameManager.Instance.usedCardParent);
+        card.SetParent(GameManager.Instance.playerUsedArea);
 
         Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
         card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed);
@@ -335,7 +343,6 @@ public class HandController : MonoBehaviour
         ClearDraggedCardState();
     }
 
-
-
-
+    public List<Transform> HandOfEnemy => handOfEnemy;
+    public List<Transform> HandOfPlayer => handOfPlayer;
 }

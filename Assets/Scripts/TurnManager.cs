@@ -54,9 +54,11 @@ public class TurnManager : MonoBehaviour
         if(cardsOnBoard.Count <= 0) yield return null;  
         
         List<Transform> cardsCopy = new List<Transform>(cardsOnBoard);
+        Debug.Log($"Card on Board : {cardsCopy.Count}");
         foreach (Transform card in cardsCopy)
         {
             GameManager.Instance.placementArea.SendCardBackToHand(card);
+            Debug.Log($"Send {card.gameObject.name}");
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -108,6 +110,11 @@ public class TurnManager : MonoBehaviour
         Entity entity = currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
         entity.IncreaseMaxMana();
         DrawCard(currentTurn);
+
+        if (currentTurn == Turn.ENEMY)
+        {
+            GameManager.Instance.enemy.StartBotTurn();
+        }
     }
 
     public void DrawCard(Turn destination)
