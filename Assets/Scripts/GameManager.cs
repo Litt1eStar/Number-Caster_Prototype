@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Transform Reference")]
     public Transform placementParent;
-    public Transform usedCardParent;
+    public Transform playerUsedArea;
+    public Transform enemyUsedArea;
 
     [Header("Class Reference")]
     public BoardUI boardUI;

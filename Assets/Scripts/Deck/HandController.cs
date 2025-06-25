@@ -334,7 +334,7 @@ public class HandController : MonoBehaviour
         float yOffset = 0.01f;
 
         RemoveCard(card.gameObject);
-        card.SetParent(GameManager.Instance.usedCardParent);
+        card.SetParent(GameManager.Instance.playerUsedArea);
 
         Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
         card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed);

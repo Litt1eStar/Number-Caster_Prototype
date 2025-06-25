@@ -208,10 +208,11 @@ public class PlacementArea : MonoBehaviour
     private void SendCardToUsedArea()
     {
         float yOffset = 0.01f;
+        Transform usedAreaParent = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.playerUsedArea : GameManager.Instance.enemyUsedArea;
 
         foreach (Transform card in cardOnBoards)
         {
-            card.SetParent(GameManager.Instance.usedCardParent);
+            card.SetParent(usedAreaParent);
 
             Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
             card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed);
