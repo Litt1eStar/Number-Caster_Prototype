@@ -14,6 +14,8 @@ public class Entity : MonoBehaviour
     {
         classSO = _classSO;
         deckSO = _deckSO;
+
+        deckSO.InitialDeck();
     }
 
     public virtual void SetUI() { }

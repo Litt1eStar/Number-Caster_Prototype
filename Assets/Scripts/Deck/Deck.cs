@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class Deck : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> cards;
     [SerializeField] private Transform deckParent;
     [SerializeField] private float cardSpacing = 0.04f;
 
     private Stack<GameObject> deckStack = new Stack<GameObject>();   
+    private List<GameObject> cards;
     private Vector3 pos;
 
     private void Start()
     {
         pos = deckParent.position;
-
-        //InitDeck();
     }
 
     public void SetDeckParent(Transform _deckParent)
