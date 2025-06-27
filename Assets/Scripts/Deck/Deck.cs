@@ -15,11 +15,18 @@ public class Deck : MonoBehaviour
     {
         pos = deckParent.position;
 
-        InitDeck();
+        //InitDeck();
     }
 
-    private void InitDeck()
+    public void SetDeckParent(Transform _deckParent)
     {
+        deckParent = _deckParent;
+    }
+    public void InitDeck(DeckSO deckData)
+    {
+        if(deckData == null) return;
+        cards = new List<GameObject>(deckData.cards);
+
         for (int i = 0; i < cards.Count; i++)
         {
             GameObject cardObj = Instantiate(cards[i], deckParent);

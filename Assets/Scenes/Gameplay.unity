@@ -6459,6 +6459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sendCardToUsedAreaAnimationSpeed: 0.5
   usedCardAreaYPosition: 0
+  playerDeck: {fileID: 1607347677}
+  enemyDeck: {fileID: 32876640}
   placementParent: {fileID: 624225839}
   playerUsedArea: {fileID: 1740066600}
   enemyUsedArea: {fileID: 1036891690}

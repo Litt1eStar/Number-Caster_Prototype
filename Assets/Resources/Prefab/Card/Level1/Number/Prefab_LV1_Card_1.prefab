@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8291813916432043301}
@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453443a4cf99f0d4cb6ce7ecc1ff6284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: 0
   cardData: {fileID: 11400000, guid: cc1f18c2e70448342aab3fd6df4cb4d5, type: 2}
 --- !u!65 &284010484373907432
 BoxCollider:

@@ -163,7 +163,12 @@ public class BoardUI : MonoBehaviour
     }   
     public void InitDeckOnBoard(DeckSO deckSO, Turn turn)
     {
-        GameObject obj = deckSO.cards[0];
+        Deck deck = turn == Turn.PLAYER ? GameManager.Instance.playerDeck : GameManager.Instance.enemyDeck;
+        Transform deckParent = turn == Turn.PLAYER ? playerDeckContainer : enemyDeckContainer;
+        deck.SetDeckParent(deckParent);
+        deck.InitDeck(deckSO);
+
+        /*GameObject obj = deckSO.cards[0];
         if (turn == Turn.PLAYER)
         {
             obj.transform.SetParent(playerDeckContainer);
@@ -173,7 +178,7 @@ public class BoardUI : MonoBehaviour
             obj.transform.SetParent(enemyDeckContainer);
         }
 
-        obj.transform.localScale = Vector3.zero;
+        obj.transform.localScale = Vector3.zero;*/
     }
 
     public void EntityTakeDamage(Turn receiver,int currentHP, int currentShield)
