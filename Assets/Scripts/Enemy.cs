@@ -56,6 +56,13 @@ public class Enemy : Entity
         {
             Card randomCard = usedCard[0].GetComponent<Card>();
 
+            if(GameManager.Instance.enemy.currentMana - randomCard.cardData.cost < 0)
+            {
+                Debug.Log("Not enough mana to play card: " + randomCard.cardData.cardName);
+                usedCard.RemoveAt(0);
+                continue; // Skip this card if not enough mana
+            }
+
             float turnTimeRemaining = 90f - (Time.time - turnStartTime);
             float cardDelay = BotCardTimingLogic.CalculateCardPlayDelay(usedCard.Count, turnTimeRemaining, randomCard);
 
@@ -76,7 +83,7 @@ public class Enemy : Entity
                         break;
                     case CardType.Skill:
                         Debug.Log("Use Skill Card");
-                        GameManager.Instance.handController.UseSkillCard(randomCard);
+                        GameManager.Instance.handController.UseSkillCard(randomCard, randomCard.cardData.cost);
                         break;
                 }
             }
@@ -115,7 +122,7 @@ public class Enemy : Entity
                         break;
                     case CardType.Skill:
                         Debug.Log("Use Skill Card");
-                        GameManager.Instance.handController.UseSkillCard(randomCard);
+                        GameManager.Instance.handController.UseSkillCard(randomCard, randomCard.cardData.cost);
                         break;
                 }
             }

@@ -18,3 +18,4 @@ MonoBehaviour:
   cardLevel: 1
   cardValue: 69
   cardDescription: Card Number E
+  cost: 2

@@ -18,3 +18,4 @@ MonoBehaviour:
   cardLevel: 1
   cardValue: 45
   cardDescription: Operator MINUS
+  cost: 2
