@@ -18,3 +18,4 @@ MonoBehaviour:
   cardLevel: 1
   cardValue: 48
   cardDescription: Shuffle
+  cost: 3

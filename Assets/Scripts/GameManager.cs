@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public float sendCardToUsedAreaAnimationSpeed = 0.5f;
     public float usedCardAreaYPosition = 0.0f;
 
+    [Header("Deck Reference")]
+    public Deck playerDeck;
+    public Deck enemyDeck;
+
     [Header("Transform Reference")]
     public Transform placementParent;
     public Transform playerUsedArea;

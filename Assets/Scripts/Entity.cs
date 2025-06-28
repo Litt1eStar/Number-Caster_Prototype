@@ -14,6 +14,8 @@ public class Entity : MonoBehaviour
     {
         classSO = _classSO;
         deckSO = _deckSO;
+
+        deckSO.InitialDeck();
     }
 
     public virtual void SetUI() { }
@@ -63,5 +65,14 @@ public class Entity : MonoBehaviour
     {
         ARMOR += value;
         Debug.Log($"{this.name} gained {value} armor. Total Armor: {ARMOR}");
+    }
+    public void UseCard(int mana)
+    {
+        if(currentMana - mana >= 0)
+        {
+            currentMana -= mana;
+        }
+
+        Debug.Log("Mana Left : " + currentMana);
     }
 }

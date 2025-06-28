@@ -18,3 +18,4 @@ MonoBehaviour:
   cardLevel: 1
   cardValue: 70
   cardDescription: Card Number F
+  cost: 2

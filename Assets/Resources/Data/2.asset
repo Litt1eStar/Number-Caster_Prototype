@@ -18,3 +18,4 @@ MonoBehaviour:
   cardLevel: 1
   cardValue: 50
   cardDescription: Card Number 2
+  cost: 1

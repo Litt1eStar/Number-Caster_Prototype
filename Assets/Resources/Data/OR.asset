@@ -18,3 +18,4 @@ MonoBehaviour:
   cardLevel: 0
   cardValue: 124
   cardDescription: Operator OR
+  cost: 2

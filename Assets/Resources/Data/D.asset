@@ -18,3 +18,4 @@ MonoBehaviour:
   cardLevel: 1
   cardValue: 68
   cardDescription: Card Number D
+  cost: 2

@@ -168,6 +168,16 @@ public class HandController : MonoBehaviour
         switch (ActionManager.Instance.isInPlacementArea)
         {
             case true:
+                Entity entity = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+                int cardCost = draggedCard.GetComponent<Card>().cardData.cost;
+                
+                if (entity.currentMana - cardCost < 0)
+                {
+                    Debug.LogError("Not enough mana to play this card.");
+                    AnimateCardBackToHand();
+                    return;
+                }
+
                 if (placementArea.IsReturnCardBackToHand(draggedCard))
                 {
                     AnimateCardBackToHand();
@@ -185,11 +195,11 @@ public class HandController : MonoBehaviour
 
                 if (card.cardData.CardType == CardType.Skill)
                 {
-                    UseSkillCard(card);
+                    UseSkillCard(card, cardCost);
                 }
                 else if (DeckHelper.ValidCardTypeOnBoard(card))
                 {
-                    SendCardToPlacementArea();
+                    SendCardToPlacementArea(draggedCard, cardCost);
                 }
                 break;
             case false:
@@ -214,27 +224,39 @@ public class HandController : MonoBehaviour
         draggedCardOriginalIndex = -1;
         insertIndex = -1;
     }
-    public void UseSkillCard(Card card)
+    public void UseSkillCard(Card card, int cardCost)
     {
         Debug.Log("Use skill card");
         SendCardToUsedArea(card.transform);
+        ReduceMana(TurnManager.Instance.currentTurn, cardCost);
     }
-    public void SendCardToPlacementArea(Transform objToSend = null)
+    public void SendCardToPlacementArea(Transform objToSend = null, int cardCost = 0)
     {
         if(objToSend == null)
         {
             Transform temp = draggedCard;
             RemoveCard(draggedCard.gameObject);
             placementArea.AddCard(temp);
+     
+            ReduceMana(TurnManager.Instance.currentTurn, cardCost);
         }
         else
         {
             Transform temp = objToSend;
             RemoveCard(objToSend.gameObject);
             placementArea.AddCard(temp);
+            ReduceMana(TurnManager.Instance.currentTurn, cardCost);
         }
+
     }
 
+    public void ReduceMana(Turn turn, int cost)
+    {
+        Entity target = turn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+        if (target == null) return;
+
+        target.UseCard(cost);
+    }
     //Enemy Use Card Logic
     public void EnemyUseCard()
     {
@@ -246,12 +268,13 @@ public class HandController : MonoBehaviour
 
         if(card.cardData.CardType == CardType.Skill)
         {
-            UseSkillCard(card);
+            UseSkillCard(card, card.cardData.cost);
         }
         else
         {
             placementArea.AddCard(cardToUse);
             card.FlipCardToAnotherSide();
+            ReduceMana(Turn.ENEMY, card.cardData.cost);
         }
     }
     void AnimateCardBackToHand()
