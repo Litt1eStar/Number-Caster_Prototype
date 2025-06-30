@@ -36,6 +36,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_playerArmor;
     [SerializeField] private TextMeshProUGUI t_playerSkill;
     [SerializeField] private Transform playerDeckContainer;
+    [SerializeField] private Transform manaContainer;
     private ClassSO currentPlayerClass;
 
     [Header("Enemy Settings")]
@@ -44,8 +45,12 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_enemyHP;
     [SerializeField] private TextMeshProUGUI t_enemyArmor;
     [SerializeField] private TextMeshProUGUI t_enemySkill;
+    [SerializeField] private TextMeshProUGUI t_enemyMana;
     [SerializeField] private Transform enemyDeckContainer;
     private ClassSO currentEnemyClass;
+
+    [Header("Prefab Setting")]
+    [SerializeField] private GameObject manaPrefab;
 
     public bool onHidingPanel { get; private set; } = false;
     public bool isCardDetailShown { get; private set; } = false;
@@ -156,6 +161,33 @@ public class BoardUI : MonoBehaviour
         t_enemyArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
         t_enemySkill.text = enemyClass.Skill.SkillName;
     }   
+   
+    public void AddManaToContainer(int maxMana)
+    {
+        Turn currentTurn = TurnManager.Instance.currentTurn;
+
+        if (manaContainer.GetChildCount() > 0 && currentTurn == Turn.PLAYER)
+        {
+            foreach (Transform mana in manaContainer)
+            {
+                Debug.Log($"Destroying Mana Object : {mana.name}");
+                Destroy(mana.gameObject);
+            }
+        }
+
+        if(currentTurn == Turn.PLAYER)
+        {
+            for (int i = 0; i < maxMana; i++)
+            {
+                GameObject manaObj = Instantiate(manaPrefab, manaContainer);
+            }
+        }
+        else if (currentTurn == Turn.ENEMY)
+        {
+            t_enemyMana.text = GameManager.Instance.enemy.currentMana.ToString() + "/" + maxMana.ToString();
+        }  
+    }
+
     public void InitDeckOnBoard(DeckSO deckSO, Turn turn)
     {
         Deck deck = turn == Turn.PLAYER ? GameManager.Instance.playerDeck : GameManager.Instance.enemyDeck;

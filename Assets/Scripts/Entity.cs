@@ -23,6 +23,8 @@ public class Entity : MonoBehaviour
     {
         currentMaxMana += 1;
         currentMana = currentMaxMana;
+
+        GameManager.Instance.boardUI.AddManaToContainer(currentMaxMana);
     }
     public void TakeDamage(int damage)
     {
