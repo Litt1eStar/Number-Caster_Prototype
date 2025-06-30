@@ -73,6 +73,7 @@ public class Entity : MonoBehaviour
         if(currentMana - mana >= 0)
         {
             currentMana -= mana;
+            GameManager.Instance.boardUI.UpdateManavVisual();
         }
 
         Debug.Log("Mana Left : " + currentMana);

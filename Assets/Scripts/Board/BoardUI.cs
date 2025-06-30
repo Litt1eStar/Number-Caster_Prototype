@@ -188,6 +188,14 @@ public class BoardUI : MonoBehaviour
         }  
     }
 
+    public void UpdateManavVisual(int usedAmount = 1)
+    {
+        for(int i = 0; i < usedAmount; i++)
+        {
+            Destroy(manaContainer.GetChild(i).gameObject);
+        }
+    }
+
     public void InitDeckOnBoard(DeckSO deckSO, Turn turn)
     {
         Deck deck = turn == Turn.PLAYER ? GameManager.Instance.playerDeck : GameManager.Instance.enemyDeck;
