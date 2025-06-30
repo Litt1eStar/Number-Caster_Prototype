@@ -229,9 +229,13 @@ public class PlacementArea : MonoBehaviour
         if (CanRemoveCard(targetCard))
         {
             currentCardNumberCount = amountOfRemainingCards;
+            int cardCost = targetCard.GetComponent<Card>().cardData.cost;
             cardOnBoards.Remove(targetCard);
             cardQueue.Dequeue();
             deckLayoutManagement.AddCard(targetCard.gameObject, TurnManager.Instance.currentTurn);
+            
+            Entity currentEntity = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+            currentEntity.IncreaseMana(cardCost);
             ClearDraggedCardState();
         }
         else

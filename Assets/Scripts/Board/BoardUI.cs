@@ -162,7 +162,7 @@ public class BoardUI : MonoBehaviour
         t_enemySkill.text = enemyClass.Skill.SkillName;
     }   
    
-    public void AddManaToContainer(int maxMana)
+    public void InitManaOnBeginTurn(int maxMana)
     {
         Turn currentTurn = TurnManager.Instance.currentTurn;
 
@@ -187,12 +187,33 @@ public class BoardUI : MonoBehaviour
             t_enemyMana.text = GameManager.Instance.enemy.currentMana.ToString() + "/" + maxMana.ToString();
         }  
     }
-
-    public void UpdateManavVisual(int usedAmount = 1)
+    public void IncreaseMana(int addedAmount)
     {
-        for(int i = 0; i < usedAmount; i++)
+        Turn currentTurn = TurnManager.Instance.currentTurn;
+
+        if(currentTurn == Turn.ENEMY)
         {
-            Destroy(manaContainer.GetChild(i).gameObject);
+            GameManager.Instance.enemy.currentMana += addedAmount;
+            t_enemyMana.text = GameManager.Instance.enemy.currentMana.ToString() + "/" + GameManager.Instance.enemy.currentMaxMana.ToString();
+        }
+        else if(currentTurn == Turn.PLAYER)
+        {
+            for (int i = 0; i < addedAmount; i++)
+            {
+                GameObject manaObj = Instantiate(manaPrefab, manaContainer);
+            }
+        }
+    }
+    public void DecreaseMana(int usedAmount)
+    {
+        for (int i = 0; i < usedAmount; i++)
+        {
+            if(manaContainer.childCount > 0)
+            {
+                GameObject manaToDestroy = manaContainer.GetChild(0).gameObject;
+                Debug.Log($"Mana Gameobject ({i}) : " + manaToDestroy.name);
+                DestroyImmediate(manaToDestroy);
+            }
         }
     }
 

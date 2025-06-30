@@ -59,7 +59,7 @@ public class Enemy : Entity
             if(GameManager.Instance.enemy.currentMana - randomCard.cardData.cost < 0)
             {
                 Debug.Log("Not enough mana to play card: " + randomCard.cardData.cardName);
-                usedCard.RemoveAt(0);
+                usedCard.RemoveAt(0); 
                 continue; // Skip this card if not enough mana
             }
 
@@ -67,6 +67,9 @@ public class Enemy : Entity
             float cardDelay = BotCardTimingLogic.CalculateCardPlayDelay(usedCard.Count, turnTimeRemaining, randomCard);
 
             Debug.Log($"Delay : {cardDelay}");
+
+            bool isEnoughMana = GameManager.Instance.enemy.currentMana >= randomCard.cardData.cost;
+            if (!isEnoughMana) yield return null;
 
             if (GameManager.Instance.placementArea.IsBoardEmpty())
             {

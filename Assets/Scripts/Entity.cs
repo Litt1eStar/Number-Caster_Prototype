@@ -24,7 +24,12 @@ public class Entity : MonoBehaviour
         currentMaxMana += 1;
         currentMana = currentMaxMana;
 
-        GameManager.Instance.boardUI.AddManaToContainer(currentMaxMana);
+        GameManager.Instance.boardUI.InitManaOnBeginTurn(currentMaxMana);
+    }
+    public void IncreaseMana(int value)
+    {
+        currentMana += value;
+        GameManager.Instance.boardUI.IncreaseMana(value);
     }
     public void TakeDamage(int damage)
     {
@@ -73,9 +78,10 @@ public class Entity : MonoBehaviour
         if(currentMana - mana >= 0)
         {
             currentMana -= mana;
-            GameManager.Instance.boardUI.UpdateManavVisual();
         }
 
+        Debug.Log("Using Card with mana cost: " + mana + " Current Mana: " + currentMana);
+        GameManager.Instance.boardUI.DecreaseMana(mana);
         Debug.Log("Mana Left : " + currentMana);
     }
 }
