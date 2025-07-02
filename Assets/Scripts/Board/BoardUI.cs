@@ -1,7 +1,7 @@
-using DG.Tweening;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+    using DG.Tweening;
+    using TMPro;
+    using UnityEngine;
+    using UnityEngine.UI;
 
 public class BoardUI : MonoBehaviour
 {
@@ -76,7 +76,7 @@ public class BoardUI : MonoBehaviour
         }
         resultCanvasGroup.alpha = 0f;
 
-        if(cardDetailCanvasGroup == null)
+        if (cardDetailCanvasGroup == null)
         {
             cardDetailCanvasGroup = cardDetailContainer.GetComponent<CanvasGroup>();
             if (cardDetailCanvasGroup == null)
@@ -124,7 +124,7 @@ public class BoardUI : MonoBehaviour
         t_cardLevel.text = "Card Level : " + shownCard.cardData.cardLevel.ToString();
         t_cardDescription.text = "Card Description : " + shownCard.cardData.cardDescription;
         resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
-        
+
         isCardDetailShown = true;
     }
     public void HideCardDetail()
@@ -160,8 +160,9 @@ public class BoardUI : MonoBehaviour
         t_enemyHP.text = HP.ToString();
         t_enemyArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
         t_enemySkill.text = enemyClass.Skill.SkillName;
-    }   
-   
+        t_enemyMana.text = GameManager.Instance.enemy.currentMana.ToString() + "/" + GameManager.Instance.enemy.currentMaxMana.ToString();
+    }
+
     public void InitManaOnBeginTurn(int maxMana)
     {
         Turn currentTurn = TurnManager.Instance.currentTurn;
@@ -175,7 +176,7 @@ public class BoardUI : MonoBehaviour
             }
         }
 
-        if(currentTurn == Turn.PLAYER)
+        if (currentTurn == Turn.PLAYER)
         {
             for (int i = 0; i < maxMana; i++)
             {
@@ -185,18 +186,18 @@ public class BoardUI : MonoBehaviour
         else if (currentTurn == Turn.ENEMY)
         {
             t_enemyMana.text = GameManager.Instance.enemy.currentMana.ToString() + "/" + maxMana.ToString();
-        }  
+        }
     }
     public void IncreaseMana(int addedAmount)
     {
         Turn currentTurn = TurnManager.Instance.currentTurn;
 
-        if(currentTurn == Turn.ENEMY)
+        if (currentTurn == Turn.ENEMY)
         {
             GameManager.Instance.enemy.currentMana += addedAmount;
             t_enemyMana.text = GameManager.Instance.enemy.currentMana.ToString() + "/" + GameManager.Instance.enemy.currentMaxMana.ToString();
         }
-        else if(currentTurn == Turn.PLAYER)
+        else if (currentTurn == Turn.PLAYER)
         {
             for (int i = 0; i < addedAmount; i++)
             {

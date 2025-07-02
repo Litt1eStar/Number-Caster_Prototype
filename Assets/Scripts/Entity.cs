@@ -80,7 +80,6 @@ public class Entity : MonoBehaviour
             currentMana -= mana;
         }
 
-        Debug.Log("Using Card with mana cost: " + mana + " Current Mana: " + currentMana);
         GameManager.Instance.boardUI.DecreaseMana(mana);
         Debug.Log("Mana Left : " + currentMana);
     }
