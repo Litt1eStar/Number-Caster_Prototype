@@ -7,6 +7,11 @@ using UnityEngine;
 public class DeckSO : ScriptableObject
 {
     public List<GameObject> cards;
+    public int amountOfNumberCards = 22;
+    public int amountOfOperatorCards = 4;
+    public int amountOfSkillCards = 4;  
+    public int amountOfBaseTwoTen = 13; 
+    public int amountOfBaseSixteen = 5;
 
     public void InitialDeck()
     {
@@ -16,19 +21,10 @@ public class DeckSO : ScriptableObject
         //Operator cards for 8
         //Skill cards for 4
         cards = new List<GameObject>();
-        int amountOfNumberCards = 18;
-        int amountOfOperatorCards = 8;
-        int amountOfSkillCards = 4;
-        int amountOfBaseTwoTen = 13;
-        int amountOfBaseSixteen = 5;
 
         GameObject[] numberCardsCatalog = Resources.LoadAll<GameObject>("Prefab/Card/Level1/Number");
         GameObject[] operatorCardsCatalog = Resources.LoadAll<GameObject>("Prefab/Card/Level1/Operator");
         GameObject[] skillCardsCatalog = Resources.LoadAll<GameObject>("Prefab/Card/Level1/Skill");
-
-        int baseTwoTenCount = 0;
-        int baseSixteenCount = 0;
-
         List<string> baseSixteenValues = new List<string> { "A", "B", "C", "D", "E", "F" };
         List<GameObject> baseTwoTen = new List<GameObject>();
         List<GameObject> baseSixteen = new List<GameObject>();

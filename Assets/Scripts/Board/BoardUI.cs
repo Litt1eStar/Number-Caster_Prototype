@@ -207,14 +207,24 @@ public class BoardUI : MonoBehaviour
     }
     public void DecreaseMana(int usedAmount)
     {
-        for (int i = 0; i < usedAmount; i++)
+        Turn currentTurn = TurnManager.Instance.currentTurn;
+
+        switch (currentTurn)
         {
-            if(manaContainer.childCount > 0)
-            {
-                GameObject manaToDestroy = manaContainer.GetChild(0).gameObject;
-                Debug.Log($"Mana Gameobject ({i}) : " + manaToDestroy.name);
-                DestroyImmediate(manaToDestroy);
-            }
+            case Turn.PLAYER:
+                for (int i = 0; i < usedAmount; i++)
+                {
+                    if (manaContainer.childCount > 0)
+                    {
+                        GameObject manaToDestroy = manaContainer.GetChild(0).gameObject;
+                        Debug.Log($"Mana Gameobject ({i}) : " + manaToDestroy.name);
+                        DestroyImmediate(manaToDestroy);
+                    }
+                }
+                break;
+            case Turn.ENEMY:
+                t_enemyMana.text = GameManager.Instance.enemy.currentMana.ToString() + "/" + GameManager.Instance.player.currentMaxMana.ToString();
+                break;
         }
     }
 

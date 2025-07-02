@@ -163,6 +163,7 @@ public class Enemy : Entity
         GameManager.Instance.handController.SendCardToPlacementArea(card.cardData.cost, card.transform);
         card.FlipCardToAnotherSide();
         currentCardNumberCount++;
+        GameManager.Instance.boardUI.DecreaseMana(card.cardData.cost);
     }
 
     private void UseOperatorCard(Card card)
@@ -170,6 +171,7 @@ public class Enemy : Entity
         GameManager.Instance.handController.SendCardToPlacementArea(card.cardData.cost, card.transform);
         card.FlipCardToAnotherSide();
         currentCardNumberCount = 0;
+        GameManager.Instance.boardUI.DecreaseMana(card.cardData.cost);
     }
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
     {
