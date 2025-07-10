@@ -35,6 +35,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_playerHP;
     [SerializeField] private TextMeshProUGUI t_playerArmor;
     [SerializeField] private TextMeshProUGUI t_playerSkill;
+    [SerializeField] private Slider slider_playerHP;
     [SerializeField] private Transform playerDeckContainer;
     [SerializeField] private Transform manaContainer;
     private ClassSO currentPlayerClass;
@@ -46,6 +47,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_enemyArmor;
     [SerializeField] private TextMeshProUGUI t_enemySkill;
     [SerializeField] private TextMeshProUGUI t_enemyMana;
+    [SerializeField] private Slider slider_enemyHP;
     [SerializeField] private Transform enemyDeckContainer;
     private ClassSO currentEnemyClass;
 
@@ -151,6 +153,7 @@ public class BoardUI : MonoBehaviour
         t_playerHP.text = HP.ToString();
         t_playerArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
         t_playerSkill.text = playerClass.Skill.SkillName;
+        slider_playerHP.value = HP;
     }
     public void SetEnemyUI(ClassSO enemyClass, float HP, float ARMOR)
     {
@@ -161,6 +164,7 @@ public class BoardUI : MonoBehaviour
         t_enemyArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
         t_enemySkill.text = enemyClass.Skill.SkillName;
         t_enemyMana.text = GameManager.Instance.enemy.currentMana.ToString() + "/" + GameManager.Instance.enemy.currentMaxMana.ToString();
+        slider_enemyHP.value = HP;
     }
 
     public void InitManaOnBeginTurn(int maxMana)
@@ -254,11 +258,13 @@ public class BoardUI : MonoBehaviour
         {
             t_playerHP.text = currentHP.ToString();
             t_playerArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
+            slider_playerHP.value = currentHP;
         }
         else if (receiver == Turn.ENEMY)
         {
             t_enemyHP.text = currentHP.ToString();
             t_enemyArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
+            slider_enemyHP.value = currentHP;
         }
     }
 
