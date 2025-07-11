@@ -6,14 +6,49 @@ public static class BoardCalculation
 {
     public static bool CalculateBoardValue(Queue<char> cards, out int result)
     {
-        EquationParser(cards, out List<string> terms, out List<char> operators);
-        List<int> values = new List<int>();
+        result = 0;
 
+        if (cards == null || cards.Count == 0)
+        {
+            Debug.LogWarning("Cards queue is null or empty");
+            return false;
+        }
+
+        EquationParser(cards, out List<string> terms, out List<char> operators);
+
+        if (terms.Count == 0)
+        {
+            Debug.LogWarning("No valid terms found");
+            return false;
+        }
+
+        List<int> values = new List<int>();
         Debug.Log(terms.Count);
+
         foreach (var term in terms)
         {
-            int value = Convert.ToInt32(term, 16);
-            values.Add(value);
+            Debug.Log(term);
+            if (string.IsNullOrEmpty(term))
+            {
+                Debug.LogError($"Empty term found in equation");
+                return false;
+            }
+
+            try
+            {
+                int value = Convert.ToInt32(term, 16);
+                values.Add(value);
+            }
+            catch(FormatException)
+            {
+                Debug.LogError($"Invalid hexadecimal term: '{term}'");
+                return false;
+            }
+            catch(OverflowException)
+            {
+                Debug.LogError($"Hexadecimal value too large: '{term}'");
+                return false;
+            }
         }
 
         result = values[0];

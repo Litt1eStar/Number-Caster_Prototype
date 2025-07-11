@@ -199,7 +199,7 @@ public class HandController : MonoBehaviour
                 }
                 else if (DeckHelper.ValidCardTypeOnBoard(card))
                 {
-                    SendCardToPlacementArea(draggedCard, cardCost);
+                    SendCardToPlacementArea(cardCost, draggedCard);
                 }
                 break;
             case false:
@@ -230,7 +230,7 @@ public class HandController : MonoBehaviour
         SendCardToUsedArea(card.transform);
         ReduceMana(TurnManager.Instance.currentTurn, cardCost);
     }
-    public void SendCardToPlacementArea(Transform objToSend = null, int cardCost = 0)
+    public void SendCardToPlacementArea(int cardCost, Transform objToSend = null)
     {
         if(objToSend == null)
         {
@@ -256,26 +256,6 @@ public class HandController : MonoBehaviour
         if (target == null) return;
 
         target.UseCard(cost);
-    }
-    //Enemy Use Card Logic
-    public void EnemyUseCard()
-    {
-        //In real logic, we would have to create another logic to create an AI to choose a card
-        int randomIndex = Random.Range(0, handOfEnemy.Count);
-        Transform cardToUse = handOfEnemy[randomIndex];
-        Card card = cardToUse.GetComponent<Card>();
-        RemoveCard(cardToUse.gameObject);
-
-        if(card.cardData.CardType == CardType.Skill)
-        {
-            UseSkillCard(card, card.cardData.cost);
-        }
-        else
-        {
-            placementArea.AddCard(cardToUse);
-            card.FlipCardToAnotherSide();
-            ReduceMana(Turn.ENEMY, card.cardData.cost);
-        }
     }
     void AnimateCardBackToHand()
     {

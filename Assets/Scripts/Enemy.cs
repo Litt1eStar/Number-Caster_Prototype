@@ -55,11 +55,12 @@ public class Enemy : Entity
         while (usedCard.Count > 0)
         {
             Card randomCard = usedCard[0].GetComponent<Card>();
-
+            Debug.LogWarning($"Playing card: {randomCard.cardData.cardName}, Cost: {randomCard.cardData.cost}");
+            
             if(GameManager.Instance.enemy.currentMana - randomCard.cardData.cost < 0)
             {
                 Debug.Log("Not enough mana to play card: " + randomCard.cardData.cardName);
-                usedCard.RemoveAt(0);
+                usedCard.RemoveAt(0); 
                 continue; // Skip this card if not enough mana
             }
 
@@ -67,6 +68,13 @@ public class Enemy : Entity
             float cardDelay = BotCardTimingLogic.CalculateCardPlayDelay(usedCard.Count, turnTimeRemaining, randomCard);
 
             Debug.Log($"Delay : {cardDelay}");
+
+            bool isEnoughMana = GameManager.Instance.enemy.currentMana >= randomCard.cardData.cost;
+            if (!isEnoughMana)
+            {
+                Debug.LogError($"Not enough Mana to play");
+                yield return null;
+            }
 
             if (GameManager.Instance.placementArea.IsBoardEmpty())
             {
@@ -152,16 +160,18 @@ public class Enemy : Entity
     }
     private void UseNumberCard(Card card)
     {
-        GameManager.Instance.handController.SendCardToPlacementArea(card.transform);
+        GameManager.Instance.handController.SendCardToPlacementArea(card.cardData.cost, card.transform);
         card.FlipCardToAnotherSide();
         currentCardNumberCount++;
+        GameManager.Instance.boardUI.DecreaseMana(card.cardData.cost);
     }
 
     private void UseOperatorCard(Card card)
     {
-        GameManager.Instance.handController.SendCardToPlacementArea(card.transform);
+        GameManager.Instance.handController.SendCardToPlacementArea(card.cardData.cost, card.transform);
         card.FlipCardToAnotherSide();
         currentCardNumberCount = 0;
+        GameManager.Instance.boardUI.DecreaseMana(card.cardData.cost);
     }
     public List<Transform> PickRandomCardOnHand(List<Transform> hands, int amountToPick)
     {

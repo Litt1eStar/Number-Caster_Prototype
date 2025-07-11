@@ -15,4 +15,4 @@ MonoBehaviour:
   ClassName: Claw Fighter
   ClassDescription: 
   Skill: {fileID: 11400000, guid: db97b1d531a94194aa621ad1dea980eb, type: 2}
-  ClassIcon: {fileID: 21300000, guid: ef9db69cbd0d50a479b6518151c12746, type: 3}
+  ClassIcon: {fileID: 764226864, guid: da2710bf50dceea4fa46cb7a6c2ac18e, type: 3}

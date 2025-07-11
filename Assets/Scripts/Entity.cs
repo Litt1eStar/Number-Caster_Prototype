@@ -23,6 +23,13 @@ public class Entity : MonoBehaviour
     {
         currentMaxMana += 1;
         currentMana = currentMaxMana;
+
+        GameManager.Instance.boardUI.InitManaOnBeginTurn(currentMaxMana);
+    }
+    public void IncreaseMana(int value)
+    {
+        currentMana += value;
+        GameManager.Instance.boardUI.IncreaseMana(value);
     }
     public void TakeDamage(int damage)
     {
@@ -73,6 +80,7 @@ public class Entity : MonoBehaviour
             currentMana -= mana;
         }
 
+        GameManager.Instance.boardUI.DecreaseMana(mana);
         Debug.Log("Mana Left : " + currentMana);
     }
 }

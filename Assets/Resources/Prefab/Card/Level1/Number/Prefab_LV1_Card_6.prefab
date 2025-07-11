@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3460136090670230312}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.14638227, y: 0, z: 1.4711891}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453443a4cf99f0d4cb6ce7ecc1ff6284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: 0
   cardData: {fileID: 11400000, guid: 2f01fe016b73a2a4faf1dd20c73c474c, type: 2}
 --- !u!65 &6843138188803947434
 BoxCollider:
