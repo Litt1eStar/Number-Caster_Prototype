@@ -762,7 +762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &694705745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1544,7 +1544,7 @@ GameObject:
   - component: {fileID: 1562234522}
   m_Layer: 0
   m_Name: MapController
-  m_TagString: Untagged
+  m_TagString: PVE_Map_Controller
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1561,6 +1561,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a5f8d9b2e3dbc46845797a1ab12700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyClass: {fileID: 0}
+  playerClass: {fileID: 11400000, guid: 1ec5ee1581b427144ad1926518620760, type: 2}
 --- !u!4 &1562234523
 Transform:
   m_ObjectHideFlags: 0

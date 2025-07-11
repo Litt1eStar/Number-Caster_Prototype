@@ -20,5 +20,6 @@ public class PVE_StageButton : MonoBehaviour, IPointerClickHandler
     {
         t_stageDetail.gameObject.SetActive(true);
         t_stageDetail.GetComponent<Image>().sprite = stageSprite;
+        GameObject.FindGameObjectWithTag("PVE_Map_Controller").GetComponent<PVE_Map_Controller>().enemyClass = enemyClass;
     }
 }

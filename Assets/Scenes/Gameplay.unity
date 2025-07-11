@@ -3363,6 +3363,7 @@ MonoBehaviour:
   moveDistance: 500
   shownDuration: 1.5
   img_player: {fileID: 1588294411}
+  img_playerSkill: {fileID: 816852578}
   t_playerClass: {fileID: 620273645}
   t_playerHP: {fileID: 1098506585}
   t_playerArmor: {fileID: 1403470784}
@@ -3371,6 +3372,7 @@ MonoBehaviour:
   playerDeckContainer: {fileID: 1607347678}
   manaContainer: {fileID: 1470907930}
   img_enemy: {fileID: 1028011004}
+  img_enemySkill: {fileID: 1930962595}
   t_enemyClass: {fileID: 1693098331}
   t_enemyHP: {fileID: 1424823434}
   t_enemyArmor: {fileID: 1964127758}
@@ -5085,15 +5087,15 @@ RectTransform:
   m_GameObject: {fileID: 1028011002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.42832, y: 0.42832, z: 0.42832}
+  m_LocalScale: {x: 0.12445082, y: 0.12445082, z: 0.12445082}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 825888850}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 169, y: 268}
+  m_AnchoredPosition: {x: 3.5, y: -3.5}
+  m_SizeDelta: {x: 1080, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1028011004
 MonoBehaviour:
@@ -5115,7 +5117,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -54209361, guid: da2710bf50dceea4fa46cb7a6c2ac18e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b92847a94601ce448a25017ff725336a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

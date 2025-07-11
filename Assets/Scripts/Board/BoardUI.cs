@@ -31,6 +31,7 @@ public class BoardUI : MonoBehaviour
 
     [Header("Player Settings")]
     [SerializeField] private Image img_player;
+    [SerializeField] private Image img_playerSkill;
     [SerializeField] private TextMeshProUGUI t_playerClass;
     [SerializeField] private TextMeshProUGUI t_playerHP;
     [SerializeField] private TextMeshProUGUI t_playerArmor;
@@ -42,6 +43,7 @@ public class BoardUI : MonoBehaviour
 
     [Header("Enemy Settings")]
     [SerializeField] private Image img_enemy;
+    [SerializeField] private Image img_enemySkill;
     [SerializeField] private TextMeshProUGUI t_enemyClass;
     [SerializeField] private TextMeshProUGUI t_enemyHP;
     [SerializeField] private TextMeshProUGUI t_enemyArmor;
@@ -149,6 +151,7 @@ public class BoardUI : MonoBehaviour
     {
         currentPlayerClass = playerClass;
         img_player.sprite = playerClass.ClassIcon;
+        img_playerSkill.sprite = playerClass.SkillIcon;
         t_playerClass.text = playerClass.ClassName;
         t_playerHP.text = HP.ToString();
         t_playerArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
@@ -159,6 +162,7 @@ public class BoardUI : MonoBehaviour
     {
         currentEnemyClass = enemyClass;
         img_enemy.sprite = enemyClass.ClassIcon;
+        img_enemySkill.sprite = enemyClass.SkillIcon;
         t_enemyClass.text = enemyClass.ClassName;
         t_enemyHP.text = HP.ToString();
         t_enemyArmor.text = ARMOR == 0 ? string.Empty : ARMOR.ToString();
