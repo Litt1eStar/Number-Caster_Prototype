@@ -1,12 +1,11 @@
 using UnityEngine;
 
-public enum Turn
+public class Player : Entity
 {
-    Player1,
-    Player2 
-}
-public class Player : MonoBehaviour
-{
-    public Transform handParent;
-    public Turn playerSide;
+    public override void SetUI()
+    {
+        base.SetUI();
+        GameManager.Instance.boardUI.SetPlayerUI(classSO, HP, ARMOR);
+        GameManager.Instance.boardUI.InitDeckOnBoard(deckSO, Turn.PLAYER);
+    }
 }

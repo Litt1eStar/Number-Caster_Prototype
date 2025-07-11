@@ -17,7 +17,7 @@ public class PlacementArea : MonoBehaviour
 
     [Header("Reference Setting")]
     [SerializeField] private LayerMask cardLayerMask = -1;
-    [SerializeField] private DeckLayoutManagement deckLayoutManagement;
+    [SerializeField] private HandController deckLayoutManagement;
 
     private BoardUI boardUI;
     private List<Transform> cardOnBoards = new List<Transform>();
@@ -208,10 +208,11 @@ public class PlacementArea : MonoBehaviour
     private void SendCardToUsedArea()
     {
         float yOffset = 0.01f;
+        Transform usedAreaParent = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.playerUsedArea : GameManager.Instance.enemyUsedArea;
 
         foreach (Transform card in cardOnBoards)
         {
-            card.SetParent(GameManager.Instance.usedCardParent);
+            card.SetParent(usedAreaParent);
 
             Vector3 targetPosition = new Vector3(0, GameManager.Instance.usedCardAreaYPosition, 0);
             card.DOLocalMove(targetPosition, GameManager.Instance.sendCardToUsedAreaAnimationSpeed);
@@ -220,15 +221,21 @@ public class PlacementArea : MonoBehaviour
 
         ResetBoard();
     }
-    private void SendCardBackToHand()
+    public void SendCardBackToHand(Transform targetCard = null)
     {
-        Card removedCard = draggedCard.GetComponent<Card>();
-        if (CanRemoveCard(draggedCard))
+        if(targetCard == null)
+            targetCard = draggedCard;
+        
+        if (CanRemoveCard(targetCard))
         {
             currentCardNumberCount = amountOfRemainingCards;
-            cardOnBoards.Remove(draggedCard);
+            int cardCost = targetCard.GetComponent<Card>().cardData.cost;
+            cardOnBoards.Remove(targetCard);
             cardQueue.Dequeue();
-            deckLayoutManagement.AddCard(draggedCard.gameObject);
+            deckLayoutManagement.AddCard(targetCard.gameObject, TurnManager.Instance.currentTurn);
+            
+            Entity currentEntity = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+            currentEntity.IncreaseMana(cardCost);
             ClearDraggedCardState();
         }
         else
@@ -314,6 +321,11 @@ public class PlacementArea : MonoBehaviour
             //Cap Value of result
             int cappedValue = ValueCapper.CapValue(result);
             //Use result to Attack Enemy
+            Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.enemy : GameManager.Instance.player;
+            Turn receiver = TurnManager.Instance.currentTurn == Turn.PLAYER ? Turn.ENEMY : Turn.PLAYER;
+            target.TakeDamage(cappedValue);
+
+            boardUI.EntityTakeDamage(receiver, target.HP, target.ARMOR);
             boardUI.ShowResult(result, cappedValue);
         }
     }
@@ -333,6 +345,10 @@ public class PlacementArea : MonoBehaviour
             //Cap Value of result
             int cappedValue = ValueCapper.CapValue(result);
             //Use result to Create Shield for Player
+            Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+            target.IncreaseShield(cappedValue);
+
+            boardUI.EntityGainShield(TurnManager.Instance.currentTurn, target.ARMOR);
             boardUI.ShowResult(result, cappedValue);
         }
     }
@@ -365,4 +381,7 @@ public class PlacementArea : MonoBehaviour
     }
 
     #endregion
+    public List<Transform> GetCardsOnBoard() => cardOnBoards;
+    public int MaxCardOnCardSequence() => maxCards;
+    public bool IsEmptyBorad() => cardOnBoards.Count <= 0;
 }

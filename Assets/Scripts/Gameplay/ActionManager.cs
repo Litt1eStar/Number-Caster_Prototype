@@ -21,6 +21,7 @@ public class ActionManager : MonoBehaviour
         }
     
     }
+
     public void EnterPlacementArea()
     {
         isInPlacementArea = true;

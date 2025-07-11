@@ -18,3 +18,4 @@ MonoBehaviour:
   cardLevel: 1
   cardValue: 67
   cardDescription: Card Number C
+  cost: 2
