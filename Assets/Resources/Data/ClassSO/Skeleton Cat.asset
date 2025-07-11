@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967771d61d6cf7646b0ff173a635727a, type: 3}
   m_Name: Skeleton Cat
   m_EditorClassIdentifier: 
-  ClassName: Shadow Seeker
+  ClassName: Skeleton Cat
   ClassDescription: 
   Skill: {fileID: 11400000, guid: 9628dc27fcf079548abb8621582fb2ed, type: 2}
   ClassIcon: {fileID: -680354317, guid: da2710bf50dceea4fa46cb7a6c2ac18e, type: 3}
