@@ -613,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e0ad87186bccc458b6b5b45a6e9e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destinationSceneName: PVE_MAP
+  destinationSceneName: TowerOfHonour
   hoverScale: 1.3
   duration: 0.2
 --- !u!1 &687073537

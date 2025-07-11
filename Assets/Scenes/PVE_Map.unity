@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: 337932120}
   - component: {fileID: 337932119}
   - component: {fileID: 337932118}
+  - component: {fileID: 337932121}
   m_Layer: 5
   m_Name: Stage-3
   m_TagString: Untagged
@@ -426,6 +427,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 337932116}
   m_CullTransparentMesh: 1
+--- !u!114 &337932121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 337932116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2873a412dc320947adcabb9df6ef8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyClass: {fileID: 0}
+  isClear: 0
+  stageLevel: 0
 --- !u!1 &391102267
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &694705745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1034,6 +1050,7 @@ GameObject:
   - component: {fileID: 952771580}
   - component: {fileID: 952771579}
   - component: {fileID: 952771578}
+  - component: {fileID: 952771581}
   m_Layer: 5
   m_Name: Stage-4
   m_TagString: Untagged
@@ -1142,6 +1159,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952771576}
   m_CullTransparentMesh: 1
+--- !u!114 &952771581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952771576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2873a412dc320947adcabb9df6ef8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyClass: {fileID: 0}
+  isClear: 0
+  stageLevel: 0
 --- !u!1 &1152347195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1186,7 @@ GameObject:
   - component: {fileID: 1152347199}
   - component: {fileID: 1152347198}
   - component: {fileID: 1152347197}
+  - component: {fileID: 1152347200}
   m_Layer: 5
   m_Name: Stage-1
   m_TagString: Untagged
@@ -1262,6 +1295,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152347195}
   m_CullTransparentMesh: 1
+--- !u!114 &1152347200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152347195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2873a412dc320947adcabb9df6ef8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyClass: {fileID: 0}
+  isClear: 0
+  stageLevel: 0
 --- !u!1 &1303690742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,6 +1322,7 @@ GameObject:
   - component: {fileID: 1303690746}
   - component: {fileID: 1303690745}
   - component: {fileID: 1303690744}
+  - component: {fileID: 1303690747}
   m_Layer: 5
   m_Name: Stage-5
   m_TagString: Untagged
@@ -1382,6 +1431,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303690742}
   m_CullTransparentMesh: 1
+--- !u!114 &1303690747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303690742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2873a412dc320947adcabb9df6ef8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyClass: {fileID: 0}
+  isClear: 0
+  stageLevel: 0
 --- !u!1 &1415042976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1867,7 @@ GameObject:
   - component: {fileID: 1930164528}
   - component: {fileID: 1930164527}
   - component: {fileID: 1930164526}
+  - component: {fileID: 1930164529}
   m_Layer: 5
   m_Name: Stage=6
   m_TagString: Untagged
@@ -1911,6 +1976,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1930164524}
   m_CullTransparentMesh: 1
+--- !u!114 &1930164529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930164524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2873a412dc320947adcabb9df6ef8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyClass: {fileID: 0}
+  isClear: 0
+  stageLevel: 0
 --- !u!1 &1997304328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1923,6 +2003,7 @@ GameObject:
   - component: {fileID: 1997304332}
   - component: {fileID: 1997304331}
   - component: {fileID: 1997304330}
+  - component: {fileID: 1997304333}
   m_Layer: 5
   m_Name: Stage-7
   m_TagString: Untagged
@@ -2031,6 +2112,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1997304328}
   m_CullTransparentMesh: 1
+--- !u!114 &1997304333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997304328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2873a412dc320947adcabb9df6ef8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyClass: {fileID: 0}
+  isClear: 0
+  stageLevel: 0
 --- !u!1 &2090281771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,6 +2139,7 @@ GameObject:
   - component: {fileID: 2090281775}
   - component: {fileID: 2090281774}
   - component: {fileID: 2090281773}
+  - component: {fileID: 2090281776}
   m_Layer: 5
   m_Name: Stage-2
   m_TagString: Untagged
@@ -2151,6 +2248,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090281771}
   m_CullTransparentMesh: 1
+--- !u!114 &2090281776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090281771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2873a412dc320947adcabb9df6ef8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyClass: {fileID: 0}
+  isClear: 0
+  stageLevel: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
