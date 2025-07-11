@@ -1,9 +1,11 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
-public class PlayMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class PlayMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    public string destinationSceneName = "PVE_MAP";
     public float hoverScale = 1.3f;
     public float duration = 0.2f;
 
@@ -22,5 +24,10 @@ public class PlayMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public void OnPointerExit(PointerEventData eventData)
     {
         transform.DOScale(originalScale, duration).SetEase(Ease.InOutSine);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        SceneManager.LoadScene(destinationSceneName);
     }
 }
