@@ -443,6 +443,7 @@ MonoBehaviour:
   isClear: 0
   stageLevel: 0
   stageSprite: {fileID: 1463299589, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
+  t_stageDetail: {fileID: 694705745}
 --- !u!1 &391102267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,6 +1177,7 @@ MonoBehaviour:
   isClear: 0
   stageLevel: 0
   stageSprite: {fileID: 1854827663, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
+  t_stageDetail: {fileID: 694705745}
 --- !u!1 &1152347195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,6 +1315,7 @@ MonoBehaviour:
   isClear: 0
   stageLevel: 0
   stageSprite: {fileID: -207335309, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
+  t_stageDetail: {fileID: 694705745}
 --- !u!1 &1303690742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1453,7 @@ MonoBehaviour:
   isClear: 0
   stageLevel: 0
   stageSprite: {fileID: 1209115937, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
+  t_stageDetail: {fileID: 694705745}
 --- !u!1 &1415042976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +2000,7 @@ MonoBehaviour:
   isClear: 0
   stageLevel: 1
   stageSprite: {fileID: 886886567, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
+  t_stageDetail: {fileID: 694705745}
 --- !u!1 &1997304328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,6 +2138,7 @@ MonoBehaviour:
   isClear: 0
   stageLevel: 2
   stageSprite: {fileID: -1972452776, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
+  t_stageDetail: {fileID: 694705745}
 --- !u!1 &2090281771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2270,6 +2276,7 @@ MonoBehaviour:
   isClear: 0
   stageLevel: 0
   stageSprite: {fileID: 1901421283, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
+  t_stageDetail: {fileID: 694705745}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
