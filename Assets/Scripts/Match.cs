@@ -12,12 +12,12 @@ public class Match : MonoBehaviour
     DeckSO playerDeck = null;
     DeckSO enemyDeck = null;
     
-    public void Init() //Init would have to recieve player class, enemy class, player deck
+    public void Init(ClassSO _playerClass, ClassSO _enemyClass) //Init would have to recieve player class, enemy class, player deck
     {
         LoadMockupDataFromResources();
 
-        playerClass = classes[0]; // AAssuming the first class is for the player
-        enemyClass = classes[1]; // Assuming the second class is for the enemy
+        playerClass = _playerClass; // AAssuming the first class is for the player
+        enemyClass = _enemyClass; // Assuming the second class is for the enemy
 
         playerDeck = decks[1]; // Assuming the second deck is for the player
         enemyDeck = decks[0]; // Assuming the first deck is for the enemy

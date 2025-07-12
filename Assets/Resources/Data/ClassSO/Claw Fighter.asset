@@ -16,3 +16,4 @@ MonoBehaviour:
   ClassDescription: 
   Skill: {fileID: 11400000, guid: db97b1d531a94194aa621ad1dea980eb, type: 2}
   ClassIcon: {fileID: 764226864, guid: da2710bf50dceea4fa46cb7a6c2ac18e, type: 3}
+  SkillIcon: {fileID: -1262828182, guid: da2710bf50dceea4fa46cb7a6c2ac18e, type: 3}

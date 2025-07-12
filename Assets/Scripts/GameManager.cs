@@ -45,9 +45,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Match match = new GameObject("Match").AddComponent<Match>();
+        ClassSO enemyClass = DataPersistance.Instance.enemyClass;
+        ClassSO playerClass = DataPersistance.Instance.playerClass;
+
         if (match != null)
         {
-            match.Init();
+            match.Init(playerClass, enemyClass);
         }
         else
         {
