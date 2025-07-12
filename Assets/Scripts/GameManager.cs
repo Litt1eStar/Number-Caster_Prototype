@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
         if (match != null)
         {
             match.Init(playerClass, enemyClass);
+            AudioManager.Instance.PlayMusic("Gameplay-BG");
         }
         else
         {

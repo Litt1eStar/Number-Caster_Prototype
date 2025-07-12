@@ -149,7 +149,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.45
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1161,10 +1161,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53130c2a483996340bccd4ce6cd6c039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSounds: []
+  musicSounds:
+  - name: Gameplay-BG
+    clip: {fileID: 8300000, guid: 882766e06a6812349bb90387e41042b4, type: 3}
+  - name: MainMenu-BG
+    clip: {fileID: 8300000, guid: dad55eb7e37cd4a4d87e8923bbbac158, type: 3}
   sfxSounds: []
   musicSource: {fileID: 21542010}
   sfxSource: {fileID: 1899152065}
+  transitionDuration: 2
 --- !u!1 &1255141088
 GameObject:
   m_ObjectHideFlags: 0
