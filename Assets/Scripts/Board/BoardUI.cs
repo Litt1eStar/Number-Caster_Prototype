@@ -8,6 +8,9 @@ public class BoardUI : MonoBehaviour
     [Header("Button Reference")]
     [SerializeField] private GameObject btnContainer;
 
+    [Header("Board Reference")]
+    [SerializeField] private SpriteRenderer backgroundImage;
+
     [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
     [SerializeField] private CanvasGroup resultCanvasGroup;
@@ -89,6 +92,8 @@ public class BoardUI : MonoBehaviour
             }
         }
         cardDetailCanvasGroup.alpha = 0f;
+
+        backgroundImage.sprite = DataPersistance.Instance.gameplayBackgroundSprite;
     }
     public void ShowButton()
     {

@@ -444,6 +444,7 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: 1463299589, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  gameplayBackgroundSprite: {fileID: -1939023042, guid: 5376d69718c8f2b42b41dbbbe0192a82, type: 3}
   hoverScale: 1.3
   duration: 0.6
 --- !u!1 &391102267
@@ -1192,6 +1193,7 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: 1854827663, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  gameplayBackgroundSprite: {fileID: -1939023042, guid: 5376d69718c8f2b42b41dbbbe0192a82, type: 3}
   hoverScale: 1.3
   duration: 0.6
 --- !u!1 &1152347195
@@ -1332,6 +1334,7 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: -207335309, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  gameplayBackgroundSprite: {fileID: -1939023042, guid: 5376d69718c8f2b42b41dbbbe0192a82, type: 3}
   hoverScale: 1.3
   duration: 0.6
 --- !u!1 &1303690742
@@ -1472,6 +1475,7 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: 1209115937, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  gameplayBackgroundSprite: {fileID: -1939023042, guid: 5376d69718c8f2b42b41dbbbe0192a82, type: 3}
   hoverScale: 1.3
   duration: 0.6
 --- !u!1 &1415042976
@@ -1584,6 +1588,7 @@ MonoBehaviour:
   enemyClass: {fileID: 0}
   playerClass: {fileID: 11400000, guid: 1ec5ee1581b427144ad1926518620760, type: 2}
   t_stageDetail: {fileID: 694705745}
+  gameplayBackgroundSprite: {fileID: 0}
   hoverScale: 1.3
   duration: 0.2
   isPanelOpen: 0
@@ -2039,6 +2044,7 @@ MonoBehaviour:
   stageLevel: 1
   stageSprite: {fileID: 886886567, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  gameplayBackgroundSprite: {fileID: 2046655129, guid: 5376d69718c8f2b42b41dbbbe0192a82, type: 3}
   hoverScale: 1.3
   duration: 0.6
 --- !u!1 &1997304328
@@ -2179,6 +2185,7 @@ MonoBehaviour:
   stageLevel: 2
   stageSprite: {fileID: -1972452776, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  gameplayBackgroundSprite: {fileID: -185726255, guid: 5376d69718c8f2b42b41dbbbe0192a82, type: 3}
   hoverScale: 1.3
   duration: 0.6
 --- !u!1 &2090281771
@@ -2319,6 +2326,7 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: 1901421283, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  gameplayBackgroundSprite: {fileID: -1939023042, guid: 5376d69718c8f2b42b41dbbbe0192a82, type: 3}
   hoverScale: 1.3
   duration: 0.6
 --- !u!1660057539 &9223372036854775807

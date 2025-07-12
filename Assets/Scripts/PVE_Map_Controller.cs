@@ -8,6 +8,7 @@ public class PVE_Map_Controller : MonoBehaviour
     public ClassSO enemyClass;
     public ClassSO playerClass;
     public Transform t_stageDetail;
+    public Sprite gameplayBackgroundSprite;
 
     public float hoverScale = 1.3f;
     public float duration = 0.2f;
@@ -25,6 +26,7 @@ public class PVE_Map_Controller : MonoBehaviour
     {
         DataPersistance.Instance.enemyClass = enemyClass;
         DataPersistance.Instance.playerClass = playerClass;
+        DataPersistance.Instance.gameplayBackgroundSprite = gameplayBackgroundSprite;
 
         SceneManager.LoadScene("Gameplay");
     }

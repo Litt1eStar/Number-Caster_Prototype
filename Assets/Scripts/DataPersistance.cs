@@ -6,6 +6,7 @@ public class DataPersistance : MonoBehaviour
 
     public ClassSO enemyClass;
     public ClassSO playerClass;
+    public Sprite gameplayBackgroundSprite;
     private void Awake()
     {
         if(Instance != null)

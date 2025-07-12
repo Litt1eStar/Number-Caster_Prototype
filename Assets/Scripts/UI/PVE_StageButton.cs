@@ -16,6 +16,7 @@ public class PVE_StageButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private StageLevel stageLevel;
     [SerializeField] private Sprite stageSprite;
     [SerializeField] private Transform t_stageDetail;
+    [SerializeField] private Sprite gameplayBackgroundSprite;
 
     public float hoverScale = 1.3f;
     public float duration = 0.2f;
@@ -35,8 +36,10 @@ public class PVE_StageButton : MonoBehaviour, IPointerClickHandler
         if (mapController.isPanelOpen) return;
 
         t_stageDetail.GetComponent<Image>().sprite = stageSprite;
-        GameObject.FindGameObjectWithTag("PVE_Map_Controller").GetComponent<PVE_Map_Controller>().enemyClass = enemyClass;
         t_stageDetail.DOScale(transform.localScale * hoverScale, duration).SetEase(Ease.OutBack).OnComplete(() => mapController.isPanelOpen = true);
         mapController.SetButtonInteractable(false);
+        
+        mapController.enemyClass = enemyClass;
+        mapController.gameplayBackgroundSprite = gameplayBackgroundSprite;
     }
 }
