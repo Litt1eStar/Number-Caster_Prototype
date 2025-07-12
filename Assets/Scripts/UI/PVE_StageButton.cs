@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,10 +17,26 @@ public class PVE_StageButton : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Sprite stageSprite;
     [SerializeField] private Transform t_stageDetail;
 
+    public float hoverScale = 1.3f;
+    public float duration = 0.2f;
+
+    private PVE_Map_Controller mapController;
+
+    private void Start()
+    {
+        mapController = FindFirstObjectByType<PVE_Map_Controller>();
+        if (mapController == null)
+        {
+            Debug.LogError("PVE_Map_Controller not found in the scene.");
+        }
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
-        t_stageDetail.gameObject.SetActive(true);
+        if (mapController.isPanelOpen) return;
+
         t_stageDetail.GetComponent<Image>().sprite = stageSprite;
         GameObject.FindGameObjectWithTag("PVE_Map_Controller").GetComponent<PVE_Map_Controller>().enemyClass = enemyClass;
+        t_stageDetail.DOScale(transform.localScale * hoverScale, duration).SetEase(Ease.OutBack).OnComplete(() => mapController.isPanelOpen = true);
+        mapController.SetButtonInteractable(false);
     }
 }

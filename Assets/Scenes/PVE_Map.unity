@@ -370,7 +370,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.7490196}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -444,6 +444,8 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: 1463299589, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  hoverScale: 1.3
+  duration: 0.6
 --- !u!1 &391102267
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +708,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 650939218}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1562234522}
+        m_TargetAssemblyTypeName: PVE_Map_Controller, Assembly-CSharp
+        m_MethodName: CloseStageDetailPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &650939218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,7 +776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &694705745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -772,8 +786,8 @@ RectTransform:
   m_GameObject: {fileID: 694705744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.911102, y: 0.911102, z: 0.911102}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 650939216}
   - {fileID: 755236954}
@@ -782,11 +796,11 @@ RectTransform:
   - {fileID: 1910790806}
   m_Father: {fileID: 1415042977}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -22, y: 546}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 609, y: 6}
   m_SizeDelta: {x: 706.21545, y: 1107}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &694705746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,7 +1118,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.7490196}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1178,6 +1192,8 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: 1854827663, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  hoverScale: 1.3
+  duration: 0.6
 --- !u!1 &1152347195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,7 +1258,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.7490196}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1316,6 +1332,8 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: -207335309, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  hoverScale: 1.3
+  duration: 0.6
 --- !u!1 &1303690742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,7 +1398,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.7490196}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1454,6 +1472,8 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: 1209115937, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  hoverScale: 1.3
+  duration: 0.6
 --- !u!1 &1415042976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,6 +1583,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyClass: {fileID: 0}
   playerClass: {fileID: 11400000, guid: 1ec5ee1581b427144ad1926518620760, type: 2}
+  t_stageDetail: {fileID: 694705745}
+  hoverScale: 1.3
+  duration: 0.2
+  isPanelOpen: 0
 --- !u!4 &1562234523
 Transform:
   m_ObjectHideFlags: 0
@@ -1941,7 +1965,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.7490196}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2015,6 +2039,8 @@ MonoBehaviour:
   stageLevel: 1
   stageSprite: {fileID: 886886567, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  hoverScale: 1.3
+  duration: 0.6
 --- !u!1 &1997304328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2079,7 +2105,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.7490196}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2153,6 +2179,8 @@ MonoBehaviour:
   stageLevel: 2
   stageSprite: {fileID: -1972452776, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  hoverScale: 1.3
+  duration: 0.6
 --- !u!1 &2090281771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2217,7 +2245,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.7490196}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2291,6 +2319,8 @@ MonoBehaviour:
   stageLevel: 0
   stageSprite: {fileID: 1901421283, guid: 8efd9ef44a24f424787d744398c07c38, type: 3}
   t_stageDetail: {fileID: 694705745}
+  hoverScale: 1.3
+  duration: 0.6
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
