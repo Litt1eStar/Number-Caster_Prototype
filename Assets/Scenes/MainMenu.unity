@@ -1171,6 +1171,16 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: dbb09c31b5f97864a892aab2f82822bf, type: 3}
   - name: Draw-Card
     clip: {fileID: 8300000, guid: 35cf633ef4b1aa24daf9ea919f694630, type: 3}
+  - name: Placing-Card
+    clip: {fileID: 8300000, guid: 1c41ef3e289c8814a99d9a3d1fd4a5c7, type: 3}
+  - name: Attack-Btn
+    clip: {fileID: 8300000, guid: 7cac19b9d9847034ea895d95c2a216b7, type: 3}
+  - name: Armor-Btn
+    clip: {fileID: 8300000, guid: 2fcff60f377c79f4abf92c4355c2d7ee, type: 3}
+  - name: Return-Btn
+    clip: {fileID: 8300000, guid: 03f07ce67cc134b4c9c25814daf24c6c, type: 3}
+  - name: Close-Btn
+    clip: {fileID: 8300000, guid: 06a4599a4b223e945972ef4abf32e6f6, type: 3}
   musicSource: {fileID: 21542010}
   sfxSource: {fileID: 1899152065}
   transitionDuration: 2

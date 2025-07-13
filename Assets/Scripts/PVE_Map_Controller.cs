@@ -14,6 +14,7 @@ public class PVE_Map_Controller : MonoBehaviour
     public float duration = 0.2f;
 
     public bool isPanelOpen = false;
+    [SerializeField] private string prevSceneName = "PlayMenu";
 
     private void Start()
     {
@@ -28,13 +29,19 @@ public class PVE_Map_Controller : MonoBehaviour
         DataPersistance.Instance.playerClass = playerClass;
         DataPersistance.Instance.gameplayBackgroundSprite = gameplayBackgroundSprite;
 
+        AudioManager.Instance.PlaySFX("Button-Click");
         SceneManager.LoadScene("Gameplay");
     }
-
+    public void NavigateToPrevScene()
+    {
+        SceneManager.LoadScene(prevSceneName);
+        AudioManager.Instance.PlaySFX("Return-Btn");
+    }
     public void CloseStageDetailPanel()
     {
         t_stageDetail.DOScale(Vector3.zero * hoverScale, duration).SetEase(Ease.InOutSine).OnComplete(() => isPanelOpen = false);
         SetButtonInteractable(true);
+        AudioManager.Instance.PlaySFX("Close-Btn");
     }
 
     public void SetButtonInteractable(bool isInteractable)

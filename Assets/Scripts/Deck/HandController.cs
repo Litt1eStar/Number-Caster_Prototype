@@ -81,7 +81,11 @@ public class HandController : MonoBehaviour
     public void DrawCard(Turn destination, Deck deckOfSender)
     {
         GameObject drawedCard = deckOfSender.DrawCard();
-        if (drawedCard != null) AddCard(drawedCard, destination);
+        if (drawedCard != null)
+        {
+            AudioManager.Instance.PlaySFX("Draw-Card");
+            AddCard(drawedCard, destination);
+        }
     }
     public void DrawCardToPlayer()
     {
@@ -175,6 +179,7 @@ public class HandController : MonoBehaviour
                 {
                     Debug.LogError("Not enough mana to play this card.");
                     AnimateCardBackToHand();
+                    AudioManager.Instance.PlaySFX("Invalid-Card");
                     return;
                 }
 
@@ -182,6 +187,7 @@ public class HandController : MonoBehaviour
                 {
                     AnimateCardBackToHand();
                     ErrorManager.Instance.SetErrorMessage("Card returned to hand - placement area full");
+                    AudioManager.Instance.PlaySFX("Invalid-Card");
                     return;
                 }
 
@@ -190,6 +196,7 @@ public class HandController : MonoBehaviour
                 {
                     AnimateCardBackToHand();
                     ErrorManager.Instance.SetErrorMessage("Cannot place Operator card here.");
+                    AudioManager.Instance.PlaySFX("Invalid-Card");
                     return;
                 }
 
@@ -247,6 +254,8 @@ public class HandController : MonoBehaviour
             placementArea.AddCard(temp);
             ReduceMana(TurnManager.Instance.currentTurn, cardCost);
         }
+
+        AudioManager.Instance.PlaySFX("Placing-Card");
 
     }
 
