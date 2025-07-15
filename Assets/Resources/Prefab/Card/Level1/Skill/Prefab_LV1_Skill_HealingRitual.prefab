@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453443a4cf99f0d4cb6ce7ecc1ff6284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardData: {fileID: 11400000, guid: b0e56a3efedfca644915b2685cc62965, type: 2}
+  cardData: {fileID: 11400000, guid: 2a1bb14e765a34140a945d28aed1394e, type: 2}
 --- !u!65 &-4714069069924432155
 BoxCollider:
   m_ObjectHideFlags: 0

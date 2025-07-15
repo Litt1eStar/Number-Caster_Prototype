@@ -10,6 +10,7 @@ public class BoardUI : MonoBehaviour
 
     [Header("Board Reference")]
     [SerializeField] private SpriteRenderer backgroundImage;
+    [SerializeField] private GameObject settingBox;
 
     [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
@@ -293,5 +294,15 @@ public class BoardUI : MonoBehaviour
         int seconds = Mathf.FloorToInt(val % 60f);
 
         t_timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void ToggleSetting()
+    {
+        settingBox.SetActive(true);
+    }
+
+    public void CloseSetting()
+    {
+        settingBox.SetActive(false);
     }
 }   

@@ -233,9 +233,27 @@ public class HandController : MonoBehaviour
     }
     public void UseSkillCard(Card card, int cardCost)
     {
-        Debug.Log("Use skill card");
+        switch (card.cardData.SkillName)
+        {
+            case "Mystical Discovery":
+                Debug.Log("Using Mystical Discovery skill");
+                StartCoroutine(MysticalDiscoverySkill());
+                break;
+            case "Healing Ritual":
+                Debug.Log("Using Healing Ritual skill");
+                break;
+        }
+
         SendCardToUsedArea(card.transform);
         ReduceMana(TurnManager.Instance.currentTurn, cardCost);
+    }
+    private IEnumerator MysticalDiscoverySkill()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            DrawCardToPlayer();
+            yield return new WaitForSeconds(0.5f);
+        }
     }
     public void SendCardToPlacementArea(int cardCost, Transform objToSend = null)
     {
