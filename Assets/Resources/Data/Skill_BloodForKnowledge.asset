@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Skill_BloodForKnowledge
   m_EditorClassIdentifier: 
   CardType: 2
-  cardImage: {fileID: 21300000, guid: d28e058cd4c5d264ebd99291b3810a28, type: 3}
+  cardImage: {fileID: 21300000, guid: 64975d1bb5f76fb40990d4fbd3279f41, type: 3}
   cardName: Blood For Knowledge
   cardLevel: 1
   cardValue: 48
   cardDescription: Increase Bit
   cost: 3
+  SkillName: 

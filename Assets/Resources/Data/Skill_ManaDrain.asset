@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Skill_ManaDrain
   m_EditorClassIdentifier: 
   CardType: 2
-  cardImage: {fileID: 21300000, guid: d28e058cd4c5d264ebd99291b3810a28, type: 3}
+  cardImage: {fileID: 21300000, guid: 882d4b7985f8d8949b03ecd7cbf8a462, type: 3}
   cardName: Mana Drain
   cardLevel: 1
   cardValue: 48
   cardDescription: Increase Bit
   cost: 3
+  SkillName: 

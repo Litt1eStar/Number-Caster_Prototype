@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: 3
   m_EditorClassIdentifier: 
   CardType: 0
-  cardImage: {fileID: 21300000, guid: 1475accdeed36d8428344847c73b942c, type: 3}
+  cardImage: {fileID: 21300000, guid: d7d3e1bd9df3c3d4185a4d5907749908, type: 3}
   cardName: 3
   cardLevel: 1
   cardValue: 51
   cardDescription: Card Number 3
   cost: 1
+  SkillName: 

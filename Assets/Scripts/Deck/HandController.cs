@@ -236,9 +236,11 @@ public class HandController : MonoBehaviour
         switch (card.cardData.SkillName)
         {
             case "Mystical Discovery":
+                StartCoroutine(ShownSkillCard(card));
                 StartCoroutine(MysticalDiscoverySkill());
                 break;
             case "Healing Ritual":
+                StartCoroutine(ShownSkillCard(card));
                 Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
                 target.Heal(2);
                 Debug.Log("Using Healing Ritual skill");
@@ -247,6 +249,12 @@ public class HandController : MonoBehaviour
 
         SendCardToUsedArea(card.transform);
         ReduceMana(TurnManager.Instance.currentTurn, cardCost);
+    }
+    private IEnumerator ShownSkillCard(Card card)
+    {
+        boardUI.ShowCardDetail(card);
+        yield return new WaitForSeconds(1f);
+        boardUI.HideCardDetail();
     }
     private IEnumerator MysticalDiscoverySkill()
     {
