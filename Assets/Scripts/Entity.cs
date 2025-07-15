@@ -83,4 +83,14 @@ public class Entity : MonoBehaviour
         GameManager.Instance.boardUI.DecreaseMana(mana);
         Debug.Log("Mana Left : " + currentMana);
     }
+
+    public void Heal(int val)
+    {
+        HP += val;
+        if (HP > 20) // Assuming 20 is the max HP
+        {
+            HP = 20;
+        }
+        Debug.Log($"{this.name} healed for {val}. Current HP: {HP}");
+    }
 }

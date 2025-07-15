@@ -236,10 +236,11 @@ public class HandController : MonoBehaviour
         switch (card.cardData.SkillName)
         {
             case "Mystical Discovery":
-                Debug.Log("Using Mystical Discovery skill");
                 StartCoroutine(MysticalDiscoverySkill());
                 break;
             case "Healing Ritual":
+                Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+                target.Heal(2);
                 Debug.Log("Using Healing Ritual skill");
                 break;
         }
