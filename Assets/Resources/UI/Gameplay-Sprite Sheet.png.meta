@@ -197,7 +197,7 @@ TextureImporter:
         width: 1917
         height: 1070
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -219,7 +219,7 @@ TextureImporter:
         width: 1919
         height: 1085
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -241,7 +241,7 @@ TextureImporter:
         width: 1919
         height: 1076
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -250,6 +250,116 @@ TextureImporter:
       bones: []
       spriteID: 3416372d2da3b61459118cff589a9244
       internalID: -185726255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameplay-Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2786
+        width: 1183
+        height: 989
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 515ccb472d4e6134888cf2a86712cef0
+      internalID: -867832491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameplay-Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 4364
+        y: 2982
+        width: 922
+        height: 567
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaf2661ac219813448ba74c5759a764e
+      internalID: -729687063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameplay-Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 2253
+        width: 293
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94d59c41916e65e4aae808eaf16da863
+      internalID: -375560063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameplay-Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 2251
+        width: 165
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13aba86a9dafc7347834a6e9ee53daba
+      internalID: 1548609625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameplay-Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 2253
+        width: 167
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca95863a315a2744899c176bb1bd7447
+      internalID: -991410652
       vertices: []
       indices: 
       edges: []
@@ -270,10 +380,15 @@ TextureImporter:
     nameFileIdTable:
       Gameplay-Sprite Sheet_0: 1879787237
       Gameplay-Sprite Sheet_1: 416218261
+      Gameplay-Sprite Sheet_10: -991410652
       Gameplay-Sprite Sheet_2: -699266987
       Gameplay-Sprite Sheet_3: -1939023042
       Gameplay-Sprite Sheet_4: 2046655129
       Gameplay-Sprite Sheet_5: -185726255
+      Gameplay-Sprite Sheet_6: -867832491
+      Gameplay-Sprite Sheet_7: -729687063
+      Gameplay-Sprite Sheet_8: -375560063
+      Gameplay-Sprite Sheet_9: 1548609625
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

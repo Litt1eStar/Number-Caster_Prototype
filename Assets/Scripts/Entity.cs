@@ -10,6 +10,10 @@ public class Entity : MonoBehaviour
     public int currentMaxMana = 0;
     public int currentMana = 0;
 
+    private void Update()
+    {
+        if (this.HP <= 0) GameManager.Instance.boardUI.ShowMatchResult();
+    }
     public void SetData(ClassSO _classSO, DeckSO _deckSO)
     {
         classSO = _classSO;

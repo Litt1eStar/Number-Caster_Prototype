@@ -175,6 +175,14 @@ public class HandController : MonoBehaviour
                 Entity entity = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
                 int cardCost = draggedCard.GetComponent<Card>().cardData.cost;
                 
+                if(TurnManager.Instance.currentTurn == Turn.ENEMY)
+                {
+                    AnimateCardBackToHand();
+                    AudioManager.Instance.PlaySFX("Invalid-Card");
+                    Debug.LogError("Cannot play card on enemy's turn.");
+                    return;
+                }
+
                 if (entity.currentMana - cardCost < 0)
                 {
                     Debug.LogError("Not enough mana to play this card.");

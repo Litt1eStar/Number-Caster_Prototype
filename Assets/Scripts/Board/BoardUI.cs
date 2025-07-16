@@ -11,6 +11,7 @@ public class BoardUI : MonoBehaviour
     [Header("Board Reference")]
     [SerializeField] private SpriteRenderer backgroundImage;
     [SerializeField] private GameObject settingBox;
+    [SerializeField] private Transform matchResutlContainer;
 
     [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
@@ -136,6 +137,10 @@ public class BoardUI : MonoBehaviour
         resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
 
         isCardDetailShown = true;
+    }
+    public void ShowMatchResult()
+    {
+        matchResutlContainer.gameObject.SetActive(true);
     }
     public void HideCardDetail()
     {
