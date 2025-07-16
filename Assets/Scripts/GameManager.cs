@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [Header("Match Settings")]
     public Player player { get; private set; } = null;
     public Enemy enemy { get; private set; } = null;
+    public bool isEndGame = false;
 
     private void Awake()
     {

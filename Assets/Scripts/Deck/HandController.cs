@@ -43,6 +43,8 @@ public class HandController : MonoBehaviour
     }
     void Update()
     {
+        if(GameManager.Instance.isEndGame) return;
+
         HandleRightClick();
         if (boardUI.isCardDetailShown) return;
 

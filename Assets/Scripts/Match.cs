@@ -22,24 +22,26 @@ public class Match : MonoBehaviour
         playerDeck = decks[1]; // Assuming the second deck is for the player
         enemyDeck = decks[0]; // Assuming the first deck is for the enemy
 
-        InitPlayerData(playerClass, playerDeck);
-        InitEnemyData(enemyClass, enemyDeck);
+        InitPlayerData(playerClass, playerDeck, 20);
+        InitEnemyData(enemyClass, enemyDeck, 1);
 
         TurnManager.Instance.InitTurnSystem();
     }
     
 
-    private void InitPlayerData(ClassSO _playerClass, DeckSO _playerDeck)
+    private void InitPlayerData(ClassSO _playerClass, DeckSO _playerDeck, int HP)
     {
         Player player = new GameObject("Player").AddComponent<Player>();
         GameManager.Instance.SetPlayer(player);
         player.SetData(_playerClass, _playerDeck);
         player.SetUI();
+        player.HP = HP;
     }
 
-    private void InitEnemyData(ClassSO _enemyClass, DeckSO _enemyDeck)
+    private void InitEnemyData(ClassSO _enemyClass, DeckSO _enemyDeck, int HP)
     {
         Enemy enemy = new GameObject("Enemy").AddComponent<Enemy>();
+        enemy.HP = HP;
         GameManager.Instance.SetEnemy(enemy);
         enemy.SetData(_enemyClass, _enemyDeck);
         enemy.SetUI();

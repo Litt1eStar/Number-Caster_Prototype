@@ -33,6 +33,8 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isEndGame) return;
+
         timer -= Time.deltaTime;
         GameManager.Instance.boardUI.UpdateTimerText(timer);
 

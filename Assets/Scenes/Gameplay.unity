@@ -2804,7 +2804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3153,7 +3153,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 639194176}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 785026508}
+        m_TargetAssemblyTypeName: BoardUI, Assembly-CSharp
+        m_MethodName: NavigateBackToPVEMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &639194176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3364,7 +3376,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 662246818}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 785026508}
+        m_TargetAssemblyTypeName: BoardUI, Assembly-CSharp
+        m_MethodName: NavigateBackToPVEMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &662246818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3796,7 +3820,7 @@ MonoBehaviour:
   btnContainer: {fileID: 1190297233}
   backgroundImage: {fileID: 309072146}
   settingBox: {fileID: 0}
-  matchResutlContainer: {fileID: 1530567754}
+  matchResutlContainer: {fileID: 788519568}
   highlightColor: {r: 0.9496855, g: 0.6775444, b: 0.17619947, a: 1}
   dehighlightColor: {r: 1, g: 1, b: 1, a: 1}
   resultTextContainer: {fileID: 1530567753}
@@ -3905,7 +3929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.047058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4313,7 +4337,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 844436853}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 785026508}
+        m_TargetAssemblyTypeName: BoardUI, Assembly-CSharp
+        m_MethodName: NavigateBackToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &844436853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6973,7 +7009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -11654,6 +11690,7 @@ MonoBehaviour:
   boardUI: {fileID: 785026508}
   placementArea: {fileID: 67568927}
   handController: {fileID: 1027425580}
+  isEndGame: 0
 --- !u!1 &2068440190
 GameObject:
   m_ObjectHideFlags: 0

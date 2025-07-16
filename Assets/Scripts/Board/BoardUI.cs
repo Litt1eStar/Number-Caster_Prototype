@@ -1,7 +1,8 @@
     using DG.Tweening;
     using TMPro;
     using UnityEngine;
-    using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BoardUI : MonoBehaviour
 {
@@ -103,7 +104,7 @@ public class BoardUI : MonoBehaviour
     }
     private void Update()
     {
-        if(TurnManager.Instance.currentTurn == Turn.ENEMY)
+        if (TurnManager.Instance.currentTurn == Turn.ENEMY)
         {
             //highlight enemy
             //dehighlight player
@@ -161,7 +162,19 @@ public class BoardUI : MonoBehaviour
     }
     public void ShowMatchResult()
     {
+        matchResutlContainer.transform.localScale = Vector3.zero;
+        matchResutlContainer.transform.rotation = Quaternion.Euler(0, 0, -10f);
+
         matchResutlContainer.gameObject.SetActive(true);
+
+        Sequence animSequence = DOTween.Sequence();
+
+        animSequence.Append(matchResutlContainer.transform.DOScale(Vector3.one, 1.4f)
+            .SetEase(Ease.OutBounce));
+
+        animSequence.Join(matchResutlContainer.transform.DORotate(Vector3.zero, 1.1f)
+            .SetEase(Ease.OutQuart));
+
     }
     public void HideCardDetail()
     {
@@ -288,9 +301,9 @@ public class BoardUI : MonoBehaviour
         obj.transform.localScale = Vector3.zero;*/
     }
 
-    public void EntityTakeDamage(Turn receiver,int currentHP, int currentShield)
+    public void EntityTakeDamage(Turn receiver, int currentHP, int currentShield)
     {
-        if(receiver == Turn.PLAYER)
+        if (receiver == Turn.PLAYER)
         {
             t_playerHP.text = currentHP.ToString();
             t_playerArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
@@ -304,12 +317,13 @@ public class BoardUI : MonoBehaviour
         }
     }
 
-    public void EntityGainShield (Turn receiver,int currentShield)
+    public void EntityGainShield(Turn receiver, int currentShield)
     {
-        if(receiver == Turn.PLAYER)
+        if (receiver == Turn.PLAYER)
         {
             t_playerArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
-        }else if(receiver == Turn.ENEMY)
+        }
+        else if (receiver == Turn.ENEMY)
         {
             t_enemyArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
         }
@@ -331,4 +345,14 @@ public class BoardUI : MonoBehaviour
     {
         settingBox.SetActive(false);
     }
-}   
+
+    public void NavigateBackToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void NavigateBackToPVEMap()
+    {
+        SceneManager.LoadScene("PVE_Map");
+    }
+}

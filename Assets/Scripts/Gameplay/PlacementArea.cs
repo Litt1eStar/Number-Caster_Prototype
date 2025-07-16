@@ -38,6 +38,8 @@ public class PlacementArea : MonoBehaviour
     }
     private void Update()
     {
+        if(GameManager.Instance.isEndGame) return;
+
         UpdateCardPositions();
         HandleDragAndDrop();
         UpdateButtonVisibility();

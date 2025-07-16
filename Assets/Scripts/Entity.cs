@@ -10,10 +10,6 @@ public class Entity : MonoBehaviour
     public int currentMaxMana = 0;
     public int currentMana = 0;
 
-    private void Update()
-    {
-        if (this.HP <= 0) GameManager.Instance.boardUI.ShowMatchResult();
-    }
     public void SetData(ClassSO _classSO, DeckSO _deckSO)
     {
         classSO = _classSO;
@@ -46,8 +42,7 @@ public class Entity : MonoBehaviour
             }
             else
             {
-                HP = 0;
-                Debug.Log($"{this.name} has been defeated!");
+                Die();
             }
         }
         else
@@ -66,12 +61,17 @@ public class Entity : MonoBehaviour
             }
             else
             {
-                HP = 0;
-                Debug.Log($"{this.name} has been defeated!");
+                Die();
             }
         }
     }
 
+    private void Die()
+    {
+        HP = 0;
+        GameManager.Instance.isEndGame = true;
+        GameManager.Instance.boardUI.ShowMatchResult();
+    }
     public void IncreaseShield(int value)
     {
         ARMOR += value;
