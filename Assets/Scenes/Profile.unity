@@ -1010,6 +1010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   profileName: 
   profileSprite: {fileID: 0}
+  profileImage: {fileID: 142374596}
 --- !u!4 &725939979
 Transform:
   m_ObjectHideFlags: 0
@@ -1550,7 +1551,7 @@ GameObject:
   - component: {fileID: 1882471054}
   - component: {fileID: 1882471053}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Left-btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1731,7 +1732,7 @@ GameObject:
   - component: {fileID: 2142249862}
   - component: {fileID: 2142249861}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Right-btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

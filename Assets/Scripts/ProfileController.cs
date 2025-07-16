@@ -1,11 +1,13 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProfileController : MonoBehaviour
 {
     public string profileName;
     public Sprite profileSprite;
-    
+    public Image profileImage;
+
     private bool isTransitioning = false;
     private Vector3 originalScale;
     private void Start()
@@ -20,6 +22,7 @@ public class ProfileController : MonoBehaviour
     public void UpdateSprite(Sprite s)
     {
         profileSprite = s;
+        profileImage.sprite = profileSprite;
     }
 
     public void Done()
