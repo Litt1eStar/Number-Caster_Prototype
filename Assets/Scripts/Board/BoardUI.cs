@@ -70,8 +70,12 @@ public class BoardUI : MonoBehaviour
     public bool isCardDetailShown { get; private set; } = false;
     private Vector3 originalPosition;
     private Vector3 hiddenPosition;
+    private Vector3 originalScale;
+    private bool isTransitioning = false;
+
     private void Start()
     {
+        originalScale = transform.localScale;
         btnContainer.SetActive(false);
 
         originalPosition = resultTextContainer.transform.localPosition;
@@ -346,13 +350,50 @@ public class BoardUI : MonoBehaviour
         settingBox.SetActive(false);
     }
 
+    public void PlayAgain()
+    {
+        AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("Gameplay", TransitionType.Fade);
+                });
+
+        }
+    }
     public void NavigateBackToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("MainMenu", TransitionType.Fade);
+                });
+
+        }
     }
 
     public void NavigateBackToPVEMap()
     {
-        SceneManager.LoadScene("PVE_Map");
+        AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("PVE_Map", TransitionType.Fade);
+                });
+
+        }
     }
 }

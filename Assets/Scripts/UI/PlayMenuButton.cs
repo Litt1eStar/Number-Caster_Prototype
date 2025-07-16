@@ -29,6 +29,7 @@ public class PlayMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        AudioManager.Instance.PlaySFX("Button-Click");
         if (!isTransitioning && SceneTransitionManager.Instance != null)
         {
             isTransitioning = true;
@@ -36,7 +37,7 @@ public class PlayMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 .SetEase(Ease.OutQuad)
                 .OnComplete(() => {
                     transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
-                    SceneTransitionManager.Instance.TransitionToScene(destinationSceneName);
+                    SceneTransitionManager.Instance.TransitionToScene(destinationSceneName, TransitionType.SlideRight);
                 });
 
         }

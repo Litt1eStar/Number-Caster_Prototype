@@ -15,6 +15,8 @@ public class PVE_Map_Controller : MonoBehaviour
 
     public bool isPanelOpen = false;
     [SerializeField] private string prevSceneName = "PlayMenu";
+    private bool isTransitioning = false;
+    private Vector3 originalScale;
 
     private void Start()
     {
@@ -22,6 +24,8 @@ public class PVE_Map_Controller : MonoBehaviour
         {
             Debug.LogError("Stage detail panel not assigned in the inspector.");
         }
+
+        originalScale = transform.localScale;
     }
     public void StartMatch()
     {
@@ -30,7 +34,19 @@ public class PVE_Map_Controller : MonoBehaviour
         DataPersistance.Instance.gameplayBackgroundSprite = gameplayBackgroundSprite;
 
         AudioManager.Instance.PlaySFX("Button-Click");
-        SceneManager.LoadScene("Gameplay");
+
+        AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("Gameplay", TransitionType.Fade);
+                });
+
+        }
     }
     public void NavigateToPrevScene()
     {

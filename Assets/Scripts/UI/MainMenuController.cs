@@ -26,7 +26,7 @@ public class MainMenuController : MonoBehaviour
                 .SetEase(Ease.OutQuad)
                 .OnComplete(() => {
                     transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
-                    SceneTransitionManager.Instance.TransitionToScene(playMenuSceneName);
+                    SceneTransitionManager.Instance.TransitionToScene(playMenuSceneName, TransitionType.SlideLeft);
                 });
 
         }
