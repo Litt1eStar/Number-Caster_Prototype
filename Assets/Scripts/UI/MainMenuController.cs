@@ -1,6 +1,8 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -9,12 +11,19 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private string shopSceneName = "Shop";
     [SerializeField] private string deckSceneName = "Deck";
 
+    [SerializeField] private Image profileImage;
+    [SerializeField] private TextMeshProUGUI playerNameText;
     private bool isTransitioning = false;
     private Vector3 originalScale;
 
     private void Start()
     {
         originalScale = transform.localScale;
+        if (DataPersistance.Instance != null)
+        {
+            playerNameText.text = DataPersistance.Instance.playerName;
+            profileImage.sprite = DataPersistance.Instance.playerProfileSprite;
+        }
     }
     public void NavigateToPlayMenu()
     {
