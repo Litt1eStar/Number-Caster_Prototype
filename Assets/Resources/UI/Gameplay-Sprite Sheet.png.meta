@@ -307,7 +307,7 @@ TextureImporter:
         width: 293
         height: 125
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -329,7 +329,7 @@ TextureImporter:
         width: 165
         height: 127
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -351,7 +351,7 @@ TextureImporter:
         width: 167
         height: 129
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -360,6 +360,50 @@ TextureImporter:
       bones: []
       spriteID: ca95863a315a2744899c176bb1bd7447
       internalID: -991410652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameplay-Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 5780
+        y: 5802
+        width: 1034
+        height: 268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bc636d116e54bb4ab2ff0db7fdc7411
+      internalID: 615066404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gameplay-Sprite Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 5799
+        y: 4938
+        width: 958
+        height: 344
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9120957737396734591bbd72e5139782
+      internalID: 1605654641
       vertices: []
       indices: 
       edges: []
@@ -381,6 +425,8 @@ TextureImporter:
       Gameplay-Sprite Sheet_0: 1879787237
       Gameplay-Sprite Sheet_1: 416218261
       Gameplay-Sprite Sheet_10: -991410652
+      Gameplay-Sprite Sheet_11: 615066404
+      Gameplay-Sprite Sheet_12: 1605654641
       Gameplay-Sprite Sheet_2: -699266987
       Gameplay-Sprite Sheet_3: -1939023042
       Gameplay-Sprite Sheet_4: 2046655129

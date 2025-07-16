@@ -12,6 +12,8 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private SpriteRenderer backgroundImage;
     [SerializeField] private GameObject settingBox;
     [SerializeField] private Transform matchResutlContainer;
+    [SerializeField] private Color highlightColor;
+    [SerializeField] private Color dehighlightColor;
 
     [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
@@ -44,6 +46,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private Slider slider_playerHP;
     [SerializeField] private Transform playerDeckContainer;
     [SerializeField] private Transform manaContainer;
+    [SerializeField] private Image playerHighlight;
     private ClassSO currentPlayerClass;
 
     [Header("Enemy Settings")]
@@ -56,6 +59,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_enemyMana;
     [SerializeField] private Slider slider_enemyHP;
     [SerializeField] private Transform enemyDeckContainer;
+    [SerializeField] private Image enemyHighlight;
     private ClassSO currentEnemyClass;
 
     [Header("Prefab Setting")]
@@ -96,6 +100,23 @@ public class BoardUI : MonoBehaviour
         cardDetailCanvasGroup.alpha = 0f;
 
         backgroundImage.sprite = DataPersistance.Instance.gameplayBackgroundSprite;
+    }
+    private void Update()
+    {
+        if(TurnManager.Instance.currentTurn == Turn.ENEMY)
+        {
+            //highlight enemy
+            //dehighlight player
+            enemyHighlight.color = highlightColor;
+            playerHighlight.color = dehighlightColor;
+        }
+        else if (TurnManager.Instance.currentTurn == Turn.PLAYER)
+        {
+            //highlight player
+            //dehighlight enemy
+            playerHighlight.color = highlightColor;
+            enemyHighlight.color = dehighlightColor;
+        }
     }
     public void ShowButton()
     {
