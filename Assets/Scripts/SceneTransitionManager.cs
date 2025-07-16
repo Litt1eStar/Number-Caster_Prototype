@@ -9,7 +9,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     [Header("Transition Settings")]
     public GameObject transitionPanel;
-    public float transitionDuration = 0.5f;
+    public float transitionDuration = 3f;
     public Ease transitionEase = Ease.InOutQuad;
 
     private CanvasGroup transitionCanvasGroup;

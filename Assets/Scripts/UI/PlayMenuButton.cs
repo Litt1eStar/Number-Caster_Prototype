@@ -9,6 +9,7 @@ public class PlayMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public float hoverScale = 1.3f;
     public float duration = 0.2f;
 
+    private bool isTransitioning = false;   
     private Vector3 originalScale;
 
     private void Start()
@@ -28,6 +29,16 @@ public class PlayMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        SceneManager.LoadScene(destinationSceneName);
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene(destinationSceneName);
+                });
+
+        }
     }
 }
