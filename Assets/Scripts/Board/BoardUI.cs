@@ -15,6 +15,8 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private Transform matchResutlContainer;
     [SerializeField] private Color highlightColor;
     [SerializeField] private Color dehighlightColor;
+    [SerializeField] private Transform leaderboardContainer;
+    [SerializeField] private TextMeshProUGUI t_playerOnLeaderBoard;
 
     [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
@@ -68,21 +70,27 @@ public class BoardUI : MonoBehaviour
 
     public bool onHidingPanel { get; private set; } = false;
     public bool isCardDetailShown { get; private set; } = false;
-    private Vector3 originalPosition;
+    private Vector3 result_originalPosition;
+    private Vector3 leaderboard_originalPosition;
+
     private Vector3 hiddenPosition;
-    private Vector3 originalScale;
+    private Vector3 result_originalScale;
+    private Vector3 leaderboard_originalScale;
     private bool isTransitioning = false;
 
     private void Start()
     {
-        originalScale = transform.localScale;
+        result_originalScale = transform.localScale;
         btnContainer.SetActive(false);
 
-        originalPosition = resultTextContainer.transform.localPosition;
-        hiddenPosition = new Vector3(originalPosition.x, originalPosition.y + moveDistance, originalPosition.z);
+        result_originalPosition = resultTextContainer.transform.localPosition;
+        leaderboard_originalPosition = leaderboardContainer.transform.localPosition;
+        hiddenPosition = new Vector3(result_originalPosition.x, result_originalPosition.y + moveDistance, result_originalPosition.z);
 
         resultTextContainer.transform.localPosition = hiddenPosition;
         resultTextContainer.SetActive(false);
+
+        leaderboardContainer.transform.localPosition = hiddenPosition;
 
         if (resultCanvasGroup == null)
         {
@@ -142,7 +150,7 @@ public class BoardUI : MonoBehaviour
 
         Sequence resultSequence = DOTween.Sequence();
 
-        resultSequence.Append(resultTextContainer.transform.DOLocalMove(originalPosition, fadeDuration).SetEase(Ease.OutFlash));
+        resultSequence.Append(resultTextContainer.transform.DOLocalMove(result_originalPosition, fadeDuration).SetEase(Ease.OutFlash));
         resultSequence.Join(resultCanvasGroup.DOFade(1f, fadeDuration).SetEase(Ease.OutQuad));
 
         resultSequence.AppendInterval(shownDuration);
@@ -350,16 +358,36 @@ public class BoardUI : MonoBehaviour
         settingBox.SetActive(false);
     }
 
+    public void ShowLeaderboard()
+    {
+        leaderboardContainer.transform.localPosition = hiddenPosition;
+
+        Sequence resultSequence = DOTween.Sequence();
+
+        resultSequence.Append(leaderboardContainer.transform.DOLocalMove(leaderboard_originalPosition, fadeDuration).SetEase(Ease.OutFlash));
+        resultSequence.AppendInterval(shownDuration);
+        //resultSequence.Append(leaderboardContainer.transform.DOLocalMove(hiddenPosition, fadeDuration * 0.7f).SetEase(Ease.InQuad));
+
+        resultSequence.OnComplete(() => resultTextContainer.SetActive(false));
+    }
+
+    public void HideLeaderboard()
+    {
+        Sequence resultSequence = DOTween.Sequence();   
+
+        resultSequence.Append(leaderboardContainer.transform.DOLocalMove(hiddenPosition, fadeDuration * 0.7f).SetEase(Ease.InQuad));
+    }
+
     public void PlayAgain()
     {
         AudioManager.Instance.PlaySFX("Button-Click");
         if (!isTransitioning && SceneTransitionManager.Instance != null)
         {
             isTransitioning = true;
-            transform.DOScale(originalScale * 0.9f, 0.1f)
+            transform.DOScale(result_originalScale * 0.9f, 0.1f)
                 .SetEase(Ease.OutQuad)
                 .OnComplete(() => {
-                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    transform.DOScale(result_originalScale, 0.1f).SetEase(Ease.OutQuad);
                     SceneTransitionManager.Instance.TransitionToScene("Gameplay", TransitionType.Fade);
                 });
 
@@ -371,10 +399,10 @@ public class BoardUI : MonoBehaviour
         if (!isTransitioning && SceneTransitionManager.Instance != null)
         {
             isTransitioning = true;
-            transform.DOScale(originalScale * 0.9f, 0.1f)
+            transform.DOScale(result_originalScale * 0.9f, 0.1f)
                 .SetEase(Ease.OutQuad)
                 .OnComplete(() => {
-                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    transform.DOScale(result_originalScale, 0.1f).SetEase(Ease.OutQuad);
                     SceneTransitionManager.Instance.TransitionToScene("MainMenu", TransitionType.Fade);
                 });
 
@@ -387,10 +415,10 @@ public class BoardUI : MonoBehaviour
         if (!isTransitioning && SceneTransitionManager.Instance != null)
         {
             isTransitioning = true;
-            transform.DOScale(originalScale * 0.9f, 0.1f)
+            transform.DOScale(result_originalScale * 0.9f, 0.1f)
                 .SetEase(Ease.OutQuad)
                 .OnComplete(() => {
-                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    transform.DOScale(result_originalScale, 0.1f).SetEase(Ease.OutQuad);
                     SceneTransitionManager.Instance.TransitionToScene("PVE_Map", TransitionType.Fade);
                 });
 
