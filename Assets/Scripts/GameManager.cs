@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [Header("Match Settings")]
     public Player player { get; private set; } = null;
     public Enemy enemy { get; private set; } = null;
+    public bool isEndGame = false;
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         if (match != null)
         {
             match.Init(playerClass, enemyClass);
+            AudioManager.Instance.PlayMusic("Gameplay-BG");
         }
         else
         {

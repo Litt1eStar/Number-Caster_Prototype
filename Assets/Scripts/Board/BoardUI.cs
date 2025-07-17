@@ -1,15 +1,25 @@
     using DG.Tweening;
     using TMPro;
     using UnityEngine;
-    using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BoardUI : MonoBehaviour
 {
     [Header("Button Reference")]
     [SerializeField] private GameObject btnContainer;
+    [SerializeField] private Button endTurnBtn;
 
     [Header("Board Reference")]
     [SerializeField] private SpriteRenderer backgroundImage;
+    [SerializeField] private Transform settingContainer;
+    [SerializeField] private Transform matchResutlContainer;
+    [SerializeField] private Color highlightColor;
+    [SerializeField] private Color dehighlightColor;
+    [SerializeField] private Transform leaderboardContainer;
+    [SerializeField] private TextMeshProUGUI t_playerOnLeaderBoard;
+    [SerializeField] private Transform tableCapContainer;
+    [SerializeField] private TextMeshProUGUI t_playerNameOnLeaderboard;
 
     [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
@@ -42,6 +52,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private Slider slider_playerHP;
     [SerializeField] private Transform playerDeckContainer;
     [SerializeField] private Transform manaContainer;
+    [SerializeField] private Image playerHighlight;
     private ClassSO currentPlayerClass;
 
     [Header("Enemy Settings")]
@@ -54,6 +65,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI t_enemyMana;
     [SerializeField] private Slider slider_enemyHP;
     [SerializeField] private Transform enemyDeckContainer;
+    [SerializeField] private Image enemyHighlight;
     private ClassSO currentEnemyClass;
 
     [Header("Prefab Setting")]
@@ -61,17 +73,37 @@ public class BoardUI : MonoBehaviour
 
     public bool onHidingPanel { get; private set; } = false;
     public bool isCardDetailShown { get; private set; } = false;
-    private Vector3 originalPosition;
+    private Vector3 result_originalPosition;
+    private Vector3 leaderboard_originalPosition;
+
     private Vector3 hiddenPosition;
+    private Vector3 result_originalScale;
+    private Vector3 leaderboard_originalScale;
+
+    [SerializeField] private float tableCap_offset = 30f;
+    [SerializeField] private Vector3 tableCap_shownPosition;
+    private Vector3 tableCap_hiddenPosition;
+    private float tableCap_moveDuration = 0.5f;
+
+    private bool isTransitioning = false;
+
     private void Start()
     {
+        t_playerOnLeaderBoard.text = DataPersistance.Instance.playerName;
+        tableCap_hiddenPosition = tableCapContainer.transform.localPosition;
+        tableCap_shownPosition = tableCap_hiddenPosition + new Vector3(tableCap_offset, 0f, 0f);
+
+        result_originalScale = transform.localScale;
         btnContainer.SetActive(false);
 
-        originalPosition = resultTextContainer.transform.localPosition;
-        hiddenPosition = new Vector3(originalPosition.x, originalPosition.y + moveDistance, originalPosition.z);
+        result_originalPosition = resultTextContainer.transform.localPosition;
+        leaderboard_originalPosition = leaderboardContainer.transform.localPosition;
+        hiddenPosition = new Vector3(result_originalPosition.x, result_originalPosition.y + moveDistance, result_originalPosition.z);
 
         resultTextContainer.transform.localPosition = hiddenPosition;
         resultTextContainer.SetActive(false);
+
+        leaderboardContainer.transform.localPosition = hiddenPosition;
 
         if (resultCanvasGroup == null)
         {
@@ -95,6 +127,25 @@ public class BoardUI : MonoBehaviour
 
         backgroundImage.sprite = DataPersistance.Instance.gameplayBackgroundSprite;
     }
+    private void Update()
+    {
+        if (TurnManager.Instance.currentTurn == Turn.ENEMY)
+        {
+            //highlight enemy
+            //dehighlight player
+            enemyHighlight.color = highlightColor;
+            playerHighlight.color = dehighlightColor;
+            endTurnBtn.interactable = false;
+        }
+        else if (TurnManager.Instance.currentTurn == Turn.PLAYER)
+        {
+            //highlight player
+            //dehighlight enemy
+            playerHighlight.color = highlightColor;
+            enemyHighlight.color = dehighlightColor;
+            endTurnBtn.interactable = true;
+        }
+    }
     public void ShowButton()
     {
         btnContainer.SetActive(true);
@@ -114,7 +165,7 @@ public class BoardUI : MonoBehaviour
 
         Sequence resultSequence = DOTween.Sequence();
 
-        resultSequence.Append(resultTextContainer.transform.DOLocalMove(originalPosition, fadeDuration).SetEase(Ease.OutFlash));
+        resultSequence.Append(resultTextContainer.transform.DOLocalMove(result_originalPosition, fadeDuration).SetEase(Ease.OutFlash));
         resultSequence.Join(resultCanvasGroup.DOFade(1f, fadeDuration).SetEase(Ease.OutQuad));
 
         resultSequence.AppendInterval(shownDuration);
@@ -135,6 +186,24 @@ public class BoardUI : MonoBehaviour
         resultSequence.Append(cardDetailCanvasGroup.DOFade(1f, fadeDuration)).SetEase(Ease.OutFlash);
 
         isCardDetailShown = true;
+    }
+    public void ShowMatchResult()
+    {
+        matchResutlContainer.transform.localScale = Vector3.zero;
+        matchResutlContainer.transform.rotation = Quaternion.Euler(0, 0, -10f);
+
+        matchResutlContainer.gameObject.SetActive(true);
+
+        AudioManager.Instance.PlaySFX("Match-Result");
+
+        Sequence animSequence = DOTween.Sequence();
+
+        animSequence.Append(matchResutlContainer.transform.DOScale(Vector3.one, 1.4f)
+            .SetEase(Ease.OutBounce));
+
+        animSequence.Join(matchResutlContainer.transform.DORotate(Vector3.zero, 1.1f)
+            .SetEase(Ease.OutQuart));
+
     }
     public void HideCardDetail()
     {
@@ -247,23 +316,11 @@ public class BoardUI : MonoBehaviour
         Transform deckParent = turn == Turn.PLAYER ? playerDeckContainer : enemyDeckContainer;
         deck.SetDeckParent(deckParent);
         deck.InitDeck(deckSO);
-
-        /*GameObject obj = deckSO.cards[0];
-        if (turn == Turn.PLAYER)
-        {
-            obj.transform.SetParent(playerDeckContainer);
-        }
-        else
-        {
-            obj.transform.SetParent(enemyDeckContainer);
-        }
-
-        obj.transform.localScale = Vector3.zero;*/
     }
 
-    public void EntityTakeDamage(Turn receiver,int currentHP, int currentShield)
+    public void EntityTakeDamage(Turn receiver, int currentHP, int currentShield)
     {
-        if(receiver == Turn.PLAYER)
+        if (receiver == Turn.PLAYER)
         {
             t_playerHP.text = currentHP.ToString();
             t_playerArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
@@ -277,12 +334,13 @@ public class BoardUI : MonoBehaviour
         }
     }
 
-    public void EntityGainShield (Turn receiver,int currentShield)
+    public void EntityGainShield(Turn receiver, int currentShield)
     {
-        if(receiver == Turn.PLAYER)
+        if (receiver == Turn.PLAYER)
         {
             t_playerArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
-        }else if(receiver == Turn.ENEMY)
+        }
+        else if (receiver == Turn.ENEMY)
         {
             t_enemyArmor.text = currentShield == 0 ? string.Empty : currentShield.ToString();
         }
@@ -294,4 +352,94 @@ public class BoardUI : MonoBehaviour
 
         t_timer.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-}   
+
+    public void ToggleSetting()
+    {
+        settingContainer.gameObject.SetActive(true);
+    }
+
+    public void CloseSetting()
+    {
+        settingContainer.gameObject.SetActive(false);
+    }
+
+    public void ShowLeaderboard()
+    {
+        leaderboardContainer.transform.localPosition = hiddenPosition;
+
+        Sequence resultSequence = DOTween.Sequence();
+
+        resultSequence.Append(leaderboardContainer.transform.DOLocalMove(leaderboard_originalPosition, fadeDuration).SetEase(Ease.OutFlash));
+        resultSequence.AppendInterval(shownDuration);
+        //resultSequence.Append(leaderboardContainer.transform.DOLocalMove(hiddenPosition, fadeDuration * 0.7f).SetEase(Ease.InQuad));
+
+        resultSequence.OnComplete(() => resultTextContainer.SetActive(false));
+    }
+
+    public void HideLeaderboard()
+    {
+        Sequence resultSequence = DOTween.Sequence();   
+
+        resultSequence.Append(leaderboardContainer.transform.DOLocalMove(hiddenPosition, fadeDuration * 0.7f).SetEase(Ease.InQuad));
+    }
+
+    public void PlayAgain()
+    {
+        AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(result_originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(result_originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("Gameplay", TransitionType.Fade);
+                });
+
+        }
+    }
+    public void NavigateBackToMainMenu()
+    {
+        AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(result_originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(result_originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("MainMenu", TransitionType.Fade);
+                });
+
+        }
+    }
+
+    public void NavigateBackToPVEMap()
+    {
+        AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(result_originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(result_originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("PVE_Map", TransitionType.Fade);
+                });
+
+        }
+    }
+
+    public void ShownTableCap()
+    {
+        tableCapContainer.DOLocalMove(tableCap_shownPosition, tableCap_moveDuration)
+        .SetEase(Ease.OutQuad);
+    }
+
+    public void HideTableCap()
+    {
+        tableCapContainer.DOLocalMove(tableCap_hiddenPosition, tableCap_moveDuration)
+            .SetEase(Ease.InQuad);
+    }
+
+}

@@ -42,8 +42,7 @@ public class Entity : MonoBehaviour
             }
             else
             {
-                HP = 0;
-                Debug.Log($"{this.name} has been defeated!");
+                Die();
             }
         }
         else
@@ -62,12 +61,17 @@ public class Entity : MonoBehaviour
             }
             else
             {
-                HP = 0;
-                Debug.Log($"{this.name} has been defeated!");
+                Die();
             }
         }
     }
 
+    private void Die()
+    {
+        HP = 0;
+        GameManager.Instance.isEndGame = true;
+        GameManager.Instance.boardUI.ShowMatchResult();
+    }
     public void IncreaseShield(int value)
     {
         ARMOR += value;
@@ -82,5 +86,15 @@ public class Entity : MonoBehaviour
 
         GameManager.Instance.boardUI.DecreaseMana(mana);
         Debug.Log("Mana Left : " + currentMana);
+    }
+
+    public void Heal(int val)
+    {
+        HP += val;
+        if (HP > 20) // Assuming 20 is the max HP
+        {
+            HP = 20;
+        }
+        Debug.Log($"{this.name} healed for {val}. Current HP: {HP}");
     }
 }

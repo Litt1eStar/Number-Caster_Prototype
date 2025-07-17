@@ -17,4 +17,6 @@ public class CardSO : ScriptableObject
     public char cardValue;
     public string cardDescription;
     public int cost;
+
+    public string SkillName;
 }

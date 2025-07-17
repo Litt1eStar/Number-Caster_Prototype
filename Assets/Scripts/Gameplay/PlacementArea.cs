@@ -38,6 +38,8 @@ public class PlacementArea : MonoBehaviour
     }
     private void Update()
     {
+        if(GameManager.Instance.isEndGame) return;
+
         UpdateCardPositions();
         HandleDragAndDrop();
         UpdateButtonVisibility();
@@ -325,6 +327,7 @@ public class PlacementArea : MonoBehaviour
             Turn receiver = TurnManager.Instance.currentTurn == Turn.PLAYER ? Turn.ENEMY : Turn.PLAYER;
             target.TakeDamage(cappedValue);
 
+            AudioManager.Instance.PlaySFX("Attack-Btn");
             boardUI.EntityTakeDamage(receiver, target.HP, target.ARMOR);
             boardUI.ShowResult(result, cappedValue);
         }
@@ -348,6 +351,7 @@ public class PlacementArea : MonoBehaviour
             Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
             target.IncreaseShield(cappedValue);
 
+            AudioManager.Instance.PlaySFX("Armor-Btn");
             boardUI.EntityGainShield(TurnManager.Instance.currentTurn, target.ARMOR);
             boardUI.ShowResult(result, cappedValue);
         }

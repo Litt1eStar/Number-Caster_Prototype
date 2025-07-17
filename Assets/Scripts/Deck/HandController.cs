@@ -43,6 +43,8 @@ public class HandController : MonoBehaviour
     }
     void Update()
     {
+        if(GameManager.Instance.isEndGame) return;
+
         HandleRightClick();
         if (boardUI.isCardDetailShown) return;
 
@@ -81,7 +83,11 @@ public class HandController : MonoBehaviour
     public void DrawCard(Turn destination, Deck deckOfSender)
     {
         GameObject drawedCard = deckOfSender.DrawCard();
-        if (drawedCard != null) AddCard(drawedCard, destination);
+        if (drawedCard != null)
+        {
+            AudioManager.Instance.PlaySFX("Draw-Card");
+            AddCard(drawedCard, destination);
+        }
     }
     public void DrawCardToPlayer()
     {
@@ -171,10 +177,19 @@ public class HandController : MonoBehaviour
                 Entity entity = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
                 int cardCost = draggedCard.GetComponent<Card>().cardData.cost;
                 
+                if(TurnManager.Instance.currentTurn == Turn.ENEMY)
+                {
+                    AnimateCardBackToHand();
+                    AudioManager.Instance.PlaySFX("Invalid-Card");
+                    Debug.LogError("Cannot play card on enemy's turn.");
+                    return;
+                }
+
                 if (entity.currentMana - cardCost < 0)
                 {
                     Debug.LogError("Not enough mana to play this card.");
                     AnimateCardBackToHand();
+                    AudioManager.Instance.PlaySFX("Invalid-Card");
                     return;
                 }
 
@@ -182,6 +197,7 @@ public class HandController : MonoBehaviour
                 {
                     AnimateCardBackToHand();
                     ErrorManager.Instance.SetErrorMessage("Card returned to hand - placement area full");
+                    AudioManager.Instance.PlaySFX("Invalid-Card");
                     return;
                 }
 
@@ -190,6 +206,7 @@ public class HandController : MonoBehaviour
                 {
                     AnimateCardBackToHand();
                     ErrorManager.Instance.SetErrorMessage("Cannot place Operator card here.");
+                    AudioManager.Instance.PlaySFX("Invalid-Card");
                     return;
                 }
 
@@ -226,9 +243,36 @@ public class HandController : MonoBehaviour
     }
     public void UseSkillCard(Card card, int cardCost)
     {
-        Debug.Log("Use skill card");
+        switch (card.cardData.SkillName)
+        {
+            case "Mystical Discovery":
+                StartCoroutine(ShownSkillCard(card));
+                StartCoroutine(MysticalDiscoverySkill());
+                break;
+            case "Healing Ritual":
+                StartCoroutine(ShownSkillCard(card));
+                Entity target = TurnManager.Instance.currentTurn == Turn.PLAYER ? GameManager.Instance.player : GameManager.Instance.enemy;
+                target.Heal(2);
+                Debug.Log("Using Healing Ritual skill");
+                break;
+        }
+
         SendCardToUsedArea(card.transform);
         ReduceMana(TurnManager.Instance.currentTurn, cardCost);
+    }
+    private IEnumerator ShownSkillCard(Card card)
+    {
+        boardUI.ShowCardDetail(card);
+        yield return new WaitForSeconds(1f);
+        boardUI.HideCardDetail();
+    }
+    private IEnumerator MysticalDiscoverySkill()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            DrawCardToPlayer();
+            yield return new WaitForSeconds(0.5f);
+        }
     }
     public void SendCardToPlacementArea(int cardCost, Transform objToSend = null)
     {
@@ -247,6 +291,8 @@ public class HandController : MonoBehaviour
             placementArea.AddCard(temp);
             ReduceMana(TurnManager.Instance.currentTurn, cardCost);
         }
+
+        AudioManager.Instance.PlaySFX("Placing-Card");
 
     }
 
