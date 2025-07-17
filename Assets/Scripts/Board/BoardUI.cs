@@ -19,6 +19,7 @@ public class BoardUI : MonoBehaviour
     [SerializeField] private Transform leaderboardContainer;
     [SerializeField] private TextMeshProUGUI t_playerOnLeaderBoard;
     [SerializeField] private Transform tableCapContainer;
+    [SerializeField] private TextMeshProUGUI t_playerNameOnLeaderboard;
 
     [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
@@ -88,6 +89,7 @@ public class BoardUI : MonoBehaviour
 
     private void Start()
     {
+        t_playerOnLeaderBoard.text = DataPersistance.Instance.playerName;
         tableCap_hiddenPosition = tableCapContainer.transform.localPosition;
         tableCap_shownPosition = tableCap_hiddenPosition + new Vector3(tableCap_offset, 0f, 0f);
 
@@ -191,6 +193,8 @@ public class BoardUI : MonoBehaviour
         matchResutlContainer.transform.rotation = Quaternion.Euler(0, 0, -10f);
 
         matchResutlContainer.gameObject.SetActive(true);
+
+        AudioManager.Instance.PlaySFX("Match-Result");
 
         Sequence animSequence = DOTween.Sequence();
 

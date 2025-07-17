@@ -1185,6 +1185,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 06a4599a4b223e945972ef4abf32e6f6, type: 3}
   - name: Invalid-Card
     clip: {fileID: 8300000, guid: 07beb0881a66fec4987437f42c33ae32, type: 3}
+  - name: Match-Result
+    clip: {fileID: 8300000, guid: 056d54741fe23384e933ef1b5c3820bb, type: 3}
   musicSource: {fileID: 21542010}
   sfxSource: {fileID: 1899152065}
   transitionDuration: 2

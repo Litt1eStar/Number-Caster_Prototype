@@ -7525,6 +7525,7 @@ MonoBehaviour:
   leaderboardContainer: {fileID: 1979202443}
   t_playerOnLeaderBoard: {fileID: 117704497}
   tableCapContainer: {fileID: 1445102404}
+  t_playerNameOnLeaderboard: {fileID: 0}
   resultTextContainer: {fileID: 1530567753}
   resultCanvasGroup: {fileID: 1530567758}
   t_rawValue: {fileID: 1204541550}
@@ -18202,7 +18203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1979202443
 RectTransform:
   m_ObjectHideFlags: 0
