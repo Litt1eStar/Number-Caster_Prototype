@@ -8,15 +8,17 @@ public class BoardUI : MonoBehaviour
 {
     [Header("Button Reference")]
     [SerializeField] private GameObject btnContainer;
+    [SerializeField] private Button endTurnBtn;
 
     [Header("Board Reference")]
     [SerializeField] private SpriteRenderer backgroundImage;
-    [SerializeField] private GameObject settingBox;
+    [SerializeField] private Transform settingContainer;
     [SerializeField] private Transform matchResutlContainer;
     [SerializeField] private Color highlightColor;
     [SerializeField] private Color dehighlightColor;
     [SerializeField] private Transform leaderboardContainer;
     [SerializeField] private TextMeshProUGUI t_playerOnLeaderBoard;
+    [SerializeField] private Transform tableCapContainer;
 
     [Header("Result Text Reference")]
     [SerializeField] private GameObject resultTextContainer;
@@ -76,10 +78,19 @@ public class BoardUI : MonoBehaviour
     private Vector3 hiddenPosition;
     private Vector3 result_originalScale;
     private Vector3 leaderboard_originalScale;
+
+    [SerializeField] private float tableCap_offset = 30f;
+    [SerializeField] private Vector3 tableCap_shownPosition;
+    private Vector3 tableCap_hiddenPosition;
+    private float tableCap_moveDuration = 0.5f;
+
     private bool isTransitioning = false;
 
     private void Start()
     {
+        tableCap_hiddenPosition = tableCapContainer.transform.localPosition;
+        tableCap_shownPosition = tableCap_hiddenPosition + new Vector3(tableCap_offset, 0f, 0f);
+
         result_originalScale = transform.localScale;
         btnContainer.SetActive(false);
 
@@ -122,6 +133,7 @@ public class BoardUI : MonoBehaviour
             //dehighlight player
             enemyHighlight.color = highlightColor;
             playerHighlight.color = dehighlightColor;
+            endTurnBtn.interactable = false;
         }
         else if (TurnManager.Instance.currentTurn == Turn.PLAYER)
         {
@@ -129,6 +141,7 @@ public class BoardUI : MonoBehaviour
             //dehighlight enemy
             playerHighlight.color = highlightColor;
             enemyHighlight.color = dehighlightColor;
+            endTurnBtn.interactable = true;
         }
     }
     public void ShowButton()
@@ -299,18 +312,6 @@ public class BoardUI : MonoBehaviour
         Transform deckParent = turn == Turn.PLAYER ? playerDeckContainer : enemyDeckContainer;
         deck.SetDeckParent(deckParent);
         deck.InitDeck(deckSO);
-
-        /*GameObject obj = deckSO.cards[0];
-        if (turn == Turn.PLAYER)
-        {
-            obj.transform.SetParent(playerDeckContainer);
-        }
-        else
-        {
-            obj.transform.SetParent(enemyDeckContainer);
-        }
-
-        obj.transform.localScale = Vector3.zero;*/
     }
 
     public void EntityTakeDamage(Turn receiver, int currentHP, int currentShield)
@@ -350,12 +351,12 @@ public class BoardUI : MonoBehaviour
 
     public void ToggleSetting()
     {
-        settingBox.SetActive(true);
+        settingContainer.gameObject.SetActive(true);
     }
 
     public void CloseSetting()
     {
-        settingBox.SetActive(false);
+        settingContainer.gameObject.SetActive(false);
     }
 
     public void ShowLeaderboard()
@@ -424,4 +425,17 @@ public class BoardUI : MonoBehaviour
 
         }
     }
+
+    public void ShownTableCap()
+    {
+        tableCapContainer.DOLocalMove(tableCap_shownPosition, tableCap_moveDuration)
+        .SetEase(Ease.OutQuad);
+    }
+
+    public void HideTableCap()
+    {
+        tableCapContainer.DOLocalMove(tableCap_hiddenPosition, tableCap_moveDuration)
+            .SetEase(Ease.InQuad);
+    }
+
 }
