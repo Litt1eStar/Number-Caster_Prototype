@@ -48,10 +48,32 @@ public class MainMenuController : MonoBehaviour
     public void NavigateToShop()
     {
         AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("Undermaintenance", TransitionType.SlideLeft);
+                });
+
+        }
     }
 
     public void NavigateToDeck()
     {
         AudioManager.Instance.PlaySFX("Button-Click");
+        if (!isTransitioning && SceneTransitionManager.Instance != null)
+        {
+            isTransitioning = true;
+            transform.DOScale(originalScale * 0.9f, 0.1f)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() => {
+                    transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
+                    SceneTransitionManager.Instance.TransitionToScene("Undermaintenance", TransitionType.SlideRight);
+                });
+
+        }
     }
 }

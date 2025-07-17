@@ -36,7 +36,7 @@ public class ProfileController : MonoBehaviour
                 .SetEase(Ease.OutQuad)
                 .OnComplete(() => {
                     transform.DOScale(originalScale, 0.1f).SetEase(Ease.OutQuad);
-                    SceneTransitionManager.Instance.TransitionToScene("MainMenu", TransitionType.Scale);
+                    SceneTransitionManager.Instance.TransitionToScene("MainMenu", TransitionType.Fade);
                 });
 
         }

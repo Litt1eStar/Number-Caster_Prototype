@@ -23,7 +23,7 @@ public class Match : MonoBehaviour
         enemyDeck = decks[0]; // Assuming the first deck is for the enemy
 
         InitPlayerData(playerClass, playerDeck, 20);
-        InitEnemyData(enemyClass, enemyDeck, 1);
+        InitEnemyData(enemyClass, enemyDeck, 20);
 
         TurnManager.Instance.InitTurnSystem();
     }
