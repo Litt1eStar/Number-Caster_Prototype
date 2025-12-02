@@ -1,0 +1,613 @@
+fileFormatVersion: 2
+guid: 8efd9ef44a24f424787d744398c07c38
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 4321
+        width: 269
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e6c7709e9d34d47b4dd3a8f32ed0f5
+      internalID: -919093173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 4276
+        width: 352
+        height: 267
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d62c40a82ded2c44b07ba47f87da108
+      internalID: 340986995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1645
+        y: 4351
+        width: 344
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad16244426096544a970cf0bb49a5445
+      internalID: 1460127081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 2357
+        y: 4348
+        width: 158
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 644b677afc7dacb4ba3178bd26b26ef3
+      internalID: -145739444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 3924
+        width: 352
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf3acd671998b434d9e4f494d81a5b58
+      internalID: -799940135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 3924
+        width: 352
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 093b39aaa5de05d4baa6b09246ee4627
+      internalID: -1801150991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1677
+        y: 3924
+        width: 352
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1ea555219fc0ea48836c62921120e52
+      internalID: -1721223688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 2293
+        y: 3924
+        width: 355
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5de380dacc5d4724eacdc4abc14f8207
+      internalID: 49693047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 3537
+        width: 352
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa82442a9adbe77498cb97b8af548cd0
+      internalID: -545288396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 3537
+        width: 352
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 509ca4808d032f74d8ba5ec6a604f3be
+      internalID: 430802114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1677
+        y: 3537
+        width: 352
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6487f8191442b14c906c1952cbb5efd
+      internalID: 2051814686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 3022
+        width: 162
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 415b37d7ea1c3c54897100c065972c92
+      internalID: -857749084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 3025
+        width: 165
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b98bffe833a2814791096c8867327bc
+      internalID: 2145794550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 1472
+        width: 706
+        height: 1105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db769c3def6eaa14db873c45d2946b9a
+      internalID: 1901421283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_24
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 1472
+        width: 704
+        height: 1105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ea9264797fb2e74d9bb8181c5d42b58
+      internalID: -1972452776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_25
+      rect:
+        serializedVersion: 2
+        x: 1971
+        y: 1472
+        width: 704
+        height: 1105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c433bce164232f4eb008c8534f922ca
+      internalID: -207335309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_26
+      rect:
+        serializedVersion: 2
+        x: 2869
+        y: 1472
+        width: 707
+        height: 1105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f5484cc9edbf0449b4d74c75da0610f
+      internalID: 1463299589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_27
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 133
+        width: 706
+        height: 1107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fdcb10f7ccb71e44bf9942d67d1980a
+      internalID: 1854827663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_28
+      rect:
+        serializedVersion: 2
+        x: 1187
+        y: 133
+        width: 704
+        height: 1107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1797c2e7b2d9a7c4896f2b41fe95bad5
+      internalID: 1209115937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PVE-Sprite Sheet_29
+      rect:
+        serializedVersion: 2
+        x: 2227
+        y: 133
+        width: 706
+        height: 1107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec38dc2d5f3b11a4b8e2cdd0b1449e83
+      internalID: 886886567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 2df2c3ec2312a934bbee435369165734
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      PVE-Sprite Sheet_0: -919093173
+      PVE-Sprite Sheet_1: 340986995
+      PVE-Sprite Sheet_10: 2051814686
+      PVE-Sprite Sheet_11: -857749084
+      PVE-Sprite Sheet_12: -1948088453
+      PVE-Sprite Sheet_13: -1771869681
+      PVE-Sprite Sheet_14: -627360071
+      PVE-Sprite Sheet_15: 1359111330
+      PVE-Sprite Sheet_16: 2145794550
+      PVE-Sprite Sheet_17: 1756858304
+      PVE-Sprite Sheet_18: 821982954
+      PVE-Sprite Sheet_19: 1543368506
+      PVE-Sprite Sheet_2: 1460127081
+      PVE-Sprite Sheet_20: -590350273
+      PVE-Sprite Sheet_21: 974172306
+      PVE-Sprite Sheet_22: -710592139
+      PVE-Sprite Sheet_23: 1901421283
+      PVE-Sprite Sheet_24: -1972452776
+      PVE-Sprite Sheet_25: -207335309
+      PVE-Sprite Sheet_26: 1463299589
+      PVE-Sprite Sheet_27: 1854827663
+      PVE-Sprite Sheet_28: 1209115937
+      PVE-Sprite Sheet_29: 886886567
+      PVE-Sprite Sheet_3: -145739444
+      PVE-Sprite Sheet_4: -799940135
+      PVE-Sprite Sheet_5: -1801150991
+      PVE-Sprite Sheet_6: -1721223688
+      PVE-Sprite Sheet_7: 49693047
+      PVE-Sprite Sheet_8: -545288396
+      PVE-Sprite Sheet_9: 430802114
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
